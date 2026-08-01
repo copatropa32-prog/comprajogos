@@ -6,34 +6,47 @@
   <style>
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
+      font-family: 'Segoe UI', Arial, sans-serif;
       background-color: #0d0d0d;
       color: #f2f2f2;
     }
     header {
-      background-color: #1a1a1a;
+      background: linear-gradient(90deg, #111, #222);
       padding: 20px;
       text-align: center;
-      border-bottom: 2px solid #00ffcc;
+      border-bottom: 3px solid #00ffcc;
     }
     header h1 {
       margin: 0;
       color: #00ffcc;
+      font-size: 2.5em;
     }
     nav {
       display: flex;
       justify-content: center;
-      background-color: #111;
-      padding: 10px;
+      background-color: #1a1a1a;
+      padding: 15px;
     }
     nav a {
       color: #f2f2f2;
       text-decoration: none;
-      margin: 0 15px;
+      margin: 0 20px;
       font-weight: bold;
+      transition: color 0.3s;
     }
     nav a:hover {
       color: #00ffcc;
+    }
+    .banner {
+      background: url('https://via.placeholder.com/1200x300') center/cover no-repeat;
+      padding: 80px 20px;
+      text-align: center;
+      color: #fff;
+    }
+    .banner h2 {
+      font-size: 2em;
+      margin: 0;
+      text-shadow: 2px 2px 5px #000;
     }
     .catalogo {
       display: grid;
@@ -47,7 +60,7 @@
       border-radius: 8px;
       padding: 20px;
       text-align: center;
-      transition: transform 0.2s;
+      transition: transform 0.2s, border-color 0.2s;
     }
     .jogo:hover {
       transform: scale(1.05);
@@ -74,6 +87,7 @@
       font-weight: bold;
       border-radius: 5px;
       text-decoration: none;
+      transition: background-color 0.3s;
     }
     .botao:hover {
       background-color: #00cca3;
@@ -82,7 +96,7 @@
       background-color: #111;
       text-align: center;
       padding: 20px;
-      border-top: 2px solid #00ffcc;
+      border-top: 3px solid #00ffcc;
       margin-top: 40px;
     }
   </style>
@@ -90,7 +104,7 @@
 <body>
   <header>
     <h1>CompraJogos</h1>
-    <p>Seu portal de jogos digitais com promoções exclusivas!</p>
+    <p>Promoções exclusivas e jogos digitais com a Nuuvem!</p>
   </header>
   <nav>
     <a href="#">Home</a>
@@ -98,6 +112,9 @@
     <a href="#">Promoções</a>
     <a href="#">Contato</a>
   </nav>
+  <section class="banner">
+    <h2>Grandes ofertas para gamers!</h2>
+  </section>
   <section class="catalogo">
     <div class="jogo">
       <img src="https://via.placeholder.com/250x150" alt="Jogo Exemplo">
