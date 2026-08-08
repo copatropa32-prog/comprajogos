@@ -1,5 +1,265 @@
-<nav>
-  <a href="index.html">Home</a>
-  <a href="promocoes.html">Promoções</a>
-  <a href="contato.html">Contato</a>
-</nav>
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>CompraJogos — Promoções e Keys</title>
+  <meta name="description" content="CompraJogos — ofertas e keys em tempo real" />
+  <!-- Tailwind Play CDN for quick prototyping -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Neon accent */
+    :root { --neon: #00f0ff; --accent: #a855f7; }
+    .neon-text { text-shadow: 0 0 6px rgba(0,240,255,0.6); }
+    .glass {
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      backdrop-filter: blur(6px);
+      border: 1px solid rgba(255,255,255,0.04);
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-b from-gray-900 via-black to-gray-900 text-gray-100 min-h-screen">
+  <!-- Top nav -->
+  <header class="fixed w-full z-30">
+    <nav class="glass max-w-7xl mx-auto px-4 py-3 rounded-b-md flex items-center justify-between">
+      <div class="flex items-center gap-4">
+        <a href="/" class="flex items-center gap-2">
+          <div class="w-10 h-10 bg-gradient-to-r from-purple-600 to-cyan-400 rounded-md flex items-center justify-center text-black font-bold">CJ</div>
+          <span class="font-semibold text-lg neon-text">CompraJogos</span>
+        </a>
+        <ul class="hidden md:flex gap-4 ml-6 text-sm">
+          <li><a href="/" class="hover:text-white">Início</a></li>
+          <li><a href="/jogos-gratis.html" class="hover:text-white">Jogos Grátis</a></li>
+          <li><a href="/promocoes.html" class="hover:text-white">Promoções</a></li>
+          <li><a href="/parceiros.html" class="hover:text-white">Parceiros</a></li>
+          <li><a href="/contato.html" class="hover:text-white">Contato</a></li>
+        </ul>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <div class="relative hidden md:block">
+          <input id="search" type="search" placeholder="Procurar jogo, plataforma..." class="px-3 py-2 rounded-md bg-transparent border border-gray-700 focus:border-cyan-400 outline-none text-sm w-64" />
+        </div>
+        <a href="/login" class="px-3 py-2 bg-gradient-to-r from-purple-600 to-cyan-400 text-black rounded-md text-sm font-medium">Entrar</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="pt-28 max-w-7xl mx-auto px-4">
+    <!-- Hero / Destaques -->
+    <section class="mb-10">
+      <div class="rounded-lg overflow-hidden relative">
+        <div class="h-56 md:h-96 bg-[url('https://images.unsplash.com/photo-1606312619550-2370d4b1f6f5?auto=format&fit=crop&w=1600&q=60')] bg-cover bg-center flex items-center">
+          <div class="bg-black/50 p-6 md:p-12 rounded-md ml-4 md:ml-12">
+            <h1 class="text-3xl md:text-5xl font-extrabold neon-text">Ofertas em tempo real</h1>
+            <p class="mt-2 text-sm md:text-lg text-gray-200 max-w-xl">Descubra promoções, keys e jogos grátis — atualizações automáticas via API de parceiros.</p>
+            <div class="mt-4 flex gap-3">
+              <a href="#promocoes" class="px-4 py-2 bg-gradient-to-r from-cyan-400 to-blue-400 text-black rounded-md">Ver promoções</a>
+              <a href="/jogos-gratis.html" class="px-4 py-2 border border-gray-600 rounded-md">Jogos grátis</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Promoções Relâmpago -->
+    <section id="promocoes-relampago" class="mb-10">
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="text-2xl font-semibold">Promoções Relâmpago</h2>
+        <div class="flex items-center gap-3">
+          <div id="flash-countdown" class="text-sm px-3 py-1 bg-gray-800 rounded-md font-mono">—:—:—</div>
+          <button id="refresh-btn" class="px-3 py-1 bg-gray-800 rounded-md text-sm">Atualizar</button>
+        </div>
+      </div>
+
+      <div class="overflow-x-auto">
+        <ul id="flash-list" class="flex gap-4 pb-2">
+          <!-- Flash cards (rendered by JS) -->
+        </ul>
+      </div>
+    </section>
+
+    <!-- Grid de produtos (vitrine) -->
+    <section id="promocoes" class="mb-16">
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="text-2xl font-semibold">Promoções</h2>
+        <div class="text-sm text-gray-400">Filtre por plataforma ou ordene por preço</div>
+      </div>
+
+      <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <!-- Cards renderizados pelo script -->
+      </div>
+
+      <div class="mt-6 text-center">
+        <button id="load-more" class="px-4 py-2 bg-gradient-to-r from-purple-600 to-cyan-400 text-black rounded-md">Carregar mais</button>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="mt-12 py-8 border-t border-gray-800">
+    <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-start gap-4">
+      <div>
+        <div class="flex items-center gap-2">
+          <div class="w-10 h-10 bg-gradient-to-r from-purple-600 to-cyan-400 rounded-md flex items-center justify-center text-black font-bold">CJ</div>
+          <div>
+            <div class="font-semibold">CompraJogos</div>
+            <div class="text-sm text-gray-400">Promoções, keys e downloads.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-sm text-gray-400">
+        © <span id="year"></span> CompraJogos. Todos os direitos reservados.
+      </div>
+    </div>
+  </footer>
+
+  <!-- Template for a product card (hidden) -->
+  <template id="card-template">
+    <article class="bg-gradient-to-b from-gray-900 to-gray-800 rounded-lg shadow-md overflow-hidden glass">
+      <div class="relative">
+        <img class="w-full h-40 object-cover" src="" alt="Capa do jogo" loading="lazy">
+        <div class="absolute top-3 left-3 px-2 py-1 bg-red-600 text-xs font-semibold rounded">-25%</div>
+      </div>
+      <div class="p-3">
+        <h3 class="font-semibold text-sm leading-tight">Título do Jogo</h3>
+        <p class="text-xs text-gray-400 mt-1">Plataforma • Editora</p>
+        <div class="mt-3 flex items-end justify-between">
+          <div>
+            <div class="text-xs line-through text-gray-500">R$ 99,99</div>
+            <div class="text-lg font-bold text-white">R$ 24,99</div>
+          </div>
+          <div class="flex flex-col items-end gap-2">
+            <a class="buy-btn px-3 py-1 bg-gradient-to-r from-purple-600 to-cyan-400 text-black rounded text-sm" target="_blank" rel="noopener">Comprar</a>
+            <button class="details-btn text-xs text-gray-300">Detalhes</button>
+          </div>
+        </div>
+      </div>
+    </article>
+  </template>
+
+  <script>
+    // Small helpers and placeholders
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Example products (replace by API fetch)
+    const sampleProducts = [
+      { id:1, title:'Cyber Racer: Neon Edition', platform:'PC', cover:'https://picsum.photos/seed/1/600/400', price:24.99, oldPrice:59.99, discount:58, affiliateUrl:'#' },
+      { id:2, title:'Dungeon Quest', platform:'Steam', cover:'https://picsum.photos/seed/2/600/400', price:9.99, oldPrice:39.99, discount:75, affiliateUrl:'#' },
+      { id:3, title:'Space Odyssey', platform:'Epic', cover:'https://picsum.photos/seed/3/600/400', price:14.99, oldPrice:49.99, discount:70, affiliateUrl:'#' },
+      { id:4, title:'RPG Legends', platform:'PC', cover:'https://picsum.photos/seed/4/600/400', price:19.99, oldPrice:79.99, discount:75, affiliateUrl:'#' },
+      { id:5, title:'Stealth Ops', platform:'Steam', cover:'https://picsum.photos/seed/5/600/400', price:4.99, oldPrice:19.99, discount:75, affiliateUrl:'#' },
+      { id:6, title:'BuilderCraft', platform:'Epic', cover:'https://picsum.photos/seed/6/600/400', price:2.99, oldPrice:14.99, discount:80, affiliateUrl:'#' }
+    ];
+
+    function renderProducts(products, containerEl) {
+      const template = document.getElementById('card-template');
+      containerEl.innerHTML = '';
+      for (const p of products) {
+        const node = template.content.cloneNode(true);
+        const img = node.querySelector('img');
+        img.src = p.cover;
+        img.alt = p.title;
+        node.querySelector('h3').textContent = p.title;
+        node.querySelector('p').textContent = p.platform;
+        node.querySelector('.line-through').textContent = p.oldPrice ? `R$ ${p.oldPrice.toFixed(2).replace('.',',')}` : '';
+        node.querySelector('.text-lg').textContent = `R$ ${p.price.toFixed(2).replace('.',',')}`;
+        node.querySelector('.buy-btn').href = p.affiliateUrl || '#';
+        const discountTag = node.querySelector('.absolute > div, .absolute');
+        if (p.discount) {
+          // replace discount badge text
+          const badge = node.querySelector('.absolute > div') || node.querySelector('.absolute');
+          if (badge) badge.textContent = `-${p.discount}%`;
+        }
+        containerEl.appendChild(node);
+      }
+    }
+
+    // Initial render (sample). In produção: fetch from backend / partner API.
+    const grid = document.getElementById('product-grid');
+    renderProducts(sampleProducts, grid);
+
+    // Load more (example)
+    document.getElementById('load-more').addEventListener('click', () => {
+      // In real app, fetch next page from API
+      const more = sampleProducts.map(p => ({...p, id: p.id + Math.random()}));
+      renderProducts(sampleProducts.concat(more), grid);
+    });
+
+    // FLASH DEALS: countdown sample
+    // Set a future date for demonstration. In production, get end time from API per deal.
+    const flashEndTime = new Date(Date.now() + 1000 * 60 * 60 * 2); // now + 2h
+    function updateCountdown() {
+      const diff = flashEndTime - Date.now();
+      const el = document.getElementById('flash-countdown');
+      if (diff <= 0) {
+        el.textContent = '00:00:00';
+        // optionally fetch next flash deals
+        return;
+      }
+      const h = Math.floor(diff / (1000*60*60));
+      const m = Math.floor((diff % (1000*60*60)) / (1000*60));
+      const s = Math.floor((diff % (1000*60)) / 1000);
+      el.textContent = `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+    }
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+
+    // Flash list example
+    const flashListEl = document.getElementById('flash-list');
+    function renderFlashList(items) {
+      flashListEl.innerHTML = '';
+      for (const f of items) {
+        const li = document.createElement('li');
+        li.className = 'min-w-[260px] bg-gradient-to-b from-gray-900 to-gray-800 rounded-lg p-3 glass';
+        li.innerHTML = `
+          <div class="flex gap-3">
+            <img src="${f.cover}" alt="${f.title}" class="w-20 h-20 object-cover rounded">
+            <div>
+              <div class="font-semibold text-sm">${f.title}</div>
+              <div class="text-xs text-gray-400">${f.platform}</div>
+              <div class="mt-2 text-sm font-bold">R$ ${f.price.toFixed(2).replace('.',',')}</div>
+            </div>
+          </div>
+        `;
+        flashListEl.appendChild(li);
+      }
+    }
+    renderFlashList(sampleProducts.slice(0,3));
+
+    // Placeholder: Fetch promotions from your backend or partner API
+    async function fetchPromotionsFromApi() {
+      try {
+        // Exemplo: chamar seu endpoint que agrega dados de Kinguin / Epic / outros
+        // const res = await fetch('/api/promocoes?page=1');
+        // const data = await res.json();
+        // renderProducts(data.items, grid);
+        //
+        // Para integrar Kinguin/afiliados: faça requisições server-side para esconder chaves e credenciais.
+      } catch (err) {
+        console.error('Erro ao buscar promoções', err);
+      }
+    }
+
+    // Refresh button (demo)
+    document.getElementById('refresh-btn').addEventListener('click', () => {
+      // Em produção: re-fetch data
+      fetchPromotionsFromApi();
+      // visual feedback simples:
+      document.getElementById('refresh-btn').textContent = 'Atualizando...';
+      setTimeout(() => document.getElementById('refresh-btn').textContent = 'Atualizar', 900);
+    });
+
+    /* =========================
+       INTEGRAÇÃO COM PARCEIROS
+       - Para Kinguin e plataformas que exigem chave/assinatura:
+         * Faça as chamadas na camada server-side (Node/Serverless/Firebase function) para manter credenciais secretas.
+         * Seu server pode agregar e normalizar preços e expor um endpoint público para o front:
+             GET /api/promocoes -> [{id, title, platform, price, oldPrice, discount, affiliateUrl, cover}]
+         * O front simplesmente consome /api/promocoes.
+       - Para feeds públicos (ex.: Epic freebies), você pode agendar jobs para consultar e salvar em DB (cron/serverless).
+       ========================= */
+  </script>
+</body>
+</html>
