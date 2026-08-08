@@ -1,5 +1,200 @@
-<nav>
-  <a href="index.html">Home</a>
-  <a href="promocoes.html">Promoções</a>
-  <a href="contato.html">Contato</a>
-</nav>
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>CompraJogos — Contato</title>
+  <meta name="description" content="Contato — CompraJogos: suporte, parcerias e API" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root { --neon: #00f0ff; --accent: #a855f7; }
+    .neon-text { text-shadow: 0 0 6px rgba(0,240,255,0.6); }
+    .glass {
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      backdrop-filter: blur(6px);
+      border: 1px solid rgba(255,255,255,0.04);
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-b from-gray-900 via-black to-gray-900 text-gray-100 min-h-screen">
+  <!-- Top nav (copiado do index.html para consistência) -->
+  <header class="fixed w-full z-30">
+    <nav class="glass max-w-7xl mx-auto px-4 py-3 rounded-b-md flex items-center justify-between">
+      <div class="flex items-center gap-4">
+        <a href="/" class="flex items-center gap-2">
+          <div class="w-10 h-10 bg-gradient-to-r from-purple-600 to-cyan-400 rounded-md flex items-center justify-center text-black font-bold">CJ</div>
+          <span class="font-semibold text-lg neon-text">CompraJogos</span>
+        </a>
+        <ul class="hidden md:flex gap-4 ml-6 text-sm">
+          <li><a href="/" class="hover:text-white">Início</a></li>
+          <li><a href="/jogos-gratis.html" class="hover:text-white">Jogos Grátis</a></li>
+          <li><a href="/promocoes.html" class="hover:text-white">Promoções</a></li>
+          <li><a href="/parceiros.html" class="hover:text-white">Parceiros</a></li>
+          <li><a href="/contato.html" class="hover:text-white">Contato</a></li>
+        </ul>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <div class="relative hidden md:block">
+          <input id="search" type="search" placeholder="Procurar jogo, plataforma..." class="px-3 py-2 rounded-md bg-transparent border border-gray-700 focus:border-cyan-400 outline-none text-sm w-64" />
+        </div>
+        <a href="/login" class="px-3 py-2 bg-gradient-to-r from-purple-600 to-cyan-400 text-black rounded-md text-sm font-medium">Entrar</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="pt-28 max-w-4xl mx-auto px-4">
+    <section class="mb-8">
+      <div class="rounded-lg overflow-hidden relative">
+        <div class="h-44 md:h-64 bg-[url('https://images.unsplash.com/photo-1606312619550-2370d4b1f6f5?auto=format&fit=crop&w=1600&q=60')] bg-cover bg-center flex items-center">
+          <div class="bg-black/50 p-6 md:p-10 rounded-md ml-4 md:ml-12 max-w-3xl">
+            <h1 class="text-3xl md:text-4xl font-extrabold neon-text">Fale conosco</h1>
+            <p class="mt-2 text-sm md:text-base text-gray-200 max-w-xl">Tem uma dúvida, sugestão ou quer integrar sua API? Envie uma mensagem e nossa equipe responderá o mais rápido possível.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <!-- Formulário de contato -->
+      <div class="glass rounded-lg p-6">
+        <h2 class="text-xl font-semibold mb-3">Formulário de Contato</h2>
+        <form id="contact-form" class="flex flex-col gap-3" onsubmit="return false;">
+          <label class="text-sm text-gray-300">Nome
+            <input id="nome" name="nome" type="text" required class="mt-1 w-full px-3 py-2 rounded-md bg-transparent border border-gray-700 focus:border-cyan-400 outline-none" placeholder="Seu nome completo" />
+          </label>
+
+          <label class="text-sm text-gray-300">E-mail
+            <input id="email" name="email" type="email" required class="mt-1 w-full px-3 py-2 rounded-md bg-transparent border border-gray-700 focus:border-cyan-400 outline-none" placeholder="seu@exemplo.com" />
+          </label>
+
+          <label class="text-sm text-gray-300">Assunto
+            <input id="assunto" name="assunto" type="text" required class="mt-1 w-full px-3 py-2 rounded-md bg-transparent border border-gray-700 focus:border-cyan-400 outline-none" placeholder="Ex: Problema com compra" />
+          </label>
+
+          <label class="text-sm text-gray-300">Mensagem
+            <textarea id="mensagem" name="mensagem" rows="6" required class="mt-1 w-full px-3 py-2 rounded-md bg-transparent border border-gray-700 focus:border-cyan-400 outline-none" placeholder="Descreva sua dúvida ou solicitação..."></textarea>
+          </label>
+
+          <div class="flex items-center justify-between mt-2">
+            <div class="text-xs text-gray-400">Resposta estimada: 24–48 horas</div>
+            <div class="flex items-center gap-2">
+              <button id="send-btn" type="submit" class="px-4 py-2 bg-gradient-to-r from-purple-600 to-cyan-400 text-black rounded-md font-medium">Enviar</button>
+              <button id="clear-btn" type="button" class="px-3 py-2 border border-gray-700 rounded-md text-sm text-gray-300">Limpar</button>
+            </div>
+          </div>
+
+          <div id="form-feedback" class="text-sm mt-2"></div>
+        </form>
+      </div>
+
+      <!-- Informações de suporte / parcerias / API -->
+      <aside class="glass rounded-lg p-6 flex flex-col gap-4">
+        <h3 class="text-lg font-semibold">Suporte e canais</h3>
+
+        <div>
+          <div class="text-sm text-gray-300">Suporte geral</div>
+          <a href="mailto:suporte@comprajogos.com" class="text-cyan-300 font-medium">suporte@comprajogos.com</a>
+          <div class="text-xs text-gray-400 mt-1">Para problemas com compras, cobranças ou contas.</div>
+        </div>
+
+        <div>
+          <div class="text-sm text-gray-300">Parcerias</div>
+          <a href="mailto:parcerias@comprajogos.com" class="text-cyan-300 font-medium">parcerias@comprajogos.com</a>
+          <div class="text-xs text-gray-400 mt-1">Se você representa um marketplace, distribuidor ou quer integrar promoções.</div>
+        </div>
+
+        <div>
+          <div class="text-sm text-gray-300">Desenvolvedores / API</div>
+          <a href="mailto:devs@comprajogos.com" class="text-cyan-300 font-medium">devs@comprajogos.com</a>
+          <div class="text-xs text-gray-400 mt-1">Para acesso a feeds, documentação e chaves de teste. Consulte também: <a href="/docs/api" class="text-purple-300">/docs/api</a></div>
+        </div>
+
+        <div class="pt-2 border-t border-gray-800 mt-2 text-sm text-gray-400">
+          <strong class="text-white">Dicas rápidas para integrar:</strong>
+          <ul class="list-disc ml-5 mt-2 text-xs text-gray-400">
+            <li>Recomendamos chamadas server-side para esconder chaves.</li>
+            <li>Oferecemos endpoints paginados e filtros por plataforma.</li>
+            <li>Para parceiros com afiliados, fornecemos parâmetros de rastreamento.</li>
+          </ul>
+        </div>
+
+      </aside>
+    </section>
+
+    <section class="mt-6">
+      <div class="glass rounded-lg p-4">
+        <h4 class="text-sm font-semibold">Privacidade</h4>
+        <p class="text-xs text-gray-400 mt-1">Ao enviar, você concorda que usamos seus dados de contato para responder à solicitação. Consulte nossa <a href="/politica-privacidade.html" class="text-purple-300">Política de Privacidade</a> para mais informações.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer (mesma estrutura do index.html) -->
+  <footer class="mt-12 py-8 border-t border-gray-800">
+    <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-start gap-4">
+      <div>
+        <div class="flex items-center gap-2">
+          <div class="w-10 h-10 bg-gradient-to-r from-purple-600 to-cyan-400 rounded-md flex items-center justify-center text-black font-bold">CJ</div>
+          <div>
+            <div class="font-semibold">CompraJogos</div>
+            <div class="text-sm text-gray-400">Promoções, keys e downloads.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-sm text-gray-400">
+        © <span id="year"></span> CompraJogos. Todos os direitos reservados.
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Form interactions (cliente apenas - substitua por integração server-side)
+    const form = document.getElementById('contact-form');
+    const feedback = document.getElementById('form-feedback');
+    const sendBtn = document.getElementById('send-btn');
+    const clearBtn = document.getElementById('clear-btn');
+
+    clearBtn.addEventListener('click', () => {
+      form.reset();
+      feedback.textContent = '';
+    });
+
+    sendBtn.addEventListener('click', async () => {
+      // Validação simples
+      const nome = document.getElementById('nome').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const assunto = document.getElementById('assunto').value.trim();
+      const mensagem = document.getElementById('mensagem').value.trim();
+
+      if (!nome || !email || !assunto || !mensagem) {
+        feedback.textContent = 'Por favor preencha todos os campos.';
+        feedback.className = 'text-sm text-red-400';
+        return;
+      }
+
+      // Simulação de envio: em produção faça POST para /api/contact ou serviço de e-mail
+      try {
+        sendBtn.disabled = true;
+        sendBtn.textContent = 'Enviando...';
+        // Exemplo: await fetch('/api/contact', { method:'POST', body: JSON.stringify({ nome, email, assunto, mensagem }) })
+        await new Promise(r => setTimeout(r, 900)); // simula delay
+        feedback.textContent = 'Mensagem enviada! Responderemos em até 48 horas.';
+        feedback.className = 'text-sm text-green-300';
+        form.reset();
+      } catch (err) {
+        console.error(err);
+        feedback.textContent = 'Ocorreu um erro ao enviar. Tente novamente mais tarde.';
+        feedback.className = 'text-sm text-red-400';
+      } finally {
+        sendBtn.disabled = false;
+        sendBtn.textContent = 'Enviar';
+      }
+    });
+  </script>
+</body>
+</html>
