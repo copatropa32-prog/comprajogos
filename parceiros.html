@@ -1,0 +1,421 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>CompraJogos — Parceiros</title>
+  <meta name="description" content="Conheça nossos parceiros e como funcionam nossas integrações com APIs oficiais" />
+  <!-- Tailwind Play CDN for quick prototyping -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Neon accent */
+    :root { --neon: #00f0ff; --accent: #a855f7; }
+    .neon-text { text-shadow: 0 0 6px rgba(0,240,255,0.6); }
+    .glass {
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      backdrop-filter: blur(6px);
+      border: 1px solid rgba(255,255,255,0.04);
+    }
+    .card-hover {
+      transition: all 0.3s ease;
+    }
+    .card-hover:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 25px rgba(0, 240, 255, 0.1);
+      border-color: rgba(0, 240, 255, 0.3);
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-b from-gray-900 via-black to-gray-900 text-gray-100 min-h-screen">
+  <!-- Top nav (same as index.html) -->
+  <header class="fixed w-full z-30">
+    <nav class="glass max-w-7xl mx-auto px-4 py-3 rounded-b-md flex items-center justify-between">
+      <div class="flex items-center gap-4">
+        <a href="/" class="flex items-center gap-2">
+          <div class="w-10 h-10 bg-gradient-to-r from-purple-600 to-cyan-400 rounded-md flex items-center justify-center text-black font-bold">CJ</div>
+          <span class="font-semibold text-lg neon-text">CompraJogos</span>
+        </a>
+        <ul class="hidden md:flex gap-4 ml-6 text-sm">
+          <li><a href="/" class="hover:text-white">Início</a></li>
+          <li><a href="/jogos-gratis.html" class="hover:text-white">Jogos Grátis</a></li>
+          <li><a href="/promocoes.html" class="hover:text-white">Promoções</a></li>
+          <li><a href="/parceiros.html" class="hover:text-white">Parceiros</a></li>
+          <li><a href="/contato.html" class="hover:text-white">Contato</a></li>
+        </ul>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <div class="relative hidden md:block">
+          <input id="search" type="search" placeholder="Procurar loja, parceiro..." class="px-3 py-2 rounded-md bg-transparent border border-gray-700 focus:border-cyan-400 outline-none text-sm w-64" />
+        </div>
+        <a href="/login" class="px-3 py-2 bg-gradient-to-r from-purple-600 to-cyan-400 text-black rounded-md text-sm font-medium">Entrar</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="pt-28 max-w-7xl mx-auto px-4">
+    <!-- Hero -->
+    <section class="mb-12">
+      <div class="rounded-lg overflow-hidden relative">
+        <div class="h-44 md:h-72 bg-[url('https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1600&q=60')] bg-cover bg-center flex items-center">
+          <div class="bg-black/50 p-6 md:p-10 rounded-md ml-4 md:ml-12">
+            <h1 class="text-3xl md:text-4xl font-extrabold neon-text">Nossos Parceiros</h1>
+            <p class="mt-2 text-sm md:text-base text-gray-200 max-w-xl">Trabalhamos com as maiores plataformas de games do mundo para oferecer conteúdo legítimo e atualizado. Transparência e segurança são nossa prioridade.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Como funcionam nossas parcerias -->
+    <section class="mb-16">
+      <h2 class="text-3xl font-bold mb-8 neon-text">Como Funcionam Nossas Parcerias</h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+        <!-- Card 1 -->
+        <div class="glass rounded-lg p-6 card-hover border border-transparent">
+          <div class="flex items-center justify-center w-12 h-12 rounded-lg bg-gradient-to-r from-cyan-400 to-blue-500 mb-4">
+            <svg class="w-6 h-6 text-black" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M10.5 1.5H2.5A1 1 0 001.5 2.5v15a1 1 0 001 1h15a1 1 0 001-1v-12M1.5 6h17M7 1v4M13 1v4"/>
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold mb-2">APIs Oficiais</h3>
+          <p class="text-sm text-gray-300">Utilizamos exclusivamente APIs oficiais das plataformas parceiras para garantir dados autênticos, atualizados em tempo real e conformidade total com os termos de serviço.</p>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="glass rounded-lg p-6 card-hover border border-transparent">
+          <div class="flex items-center justify-center w-12 h-12 rounded-lg bg-gradient-to-r from-purple-400 to-pink-500 mb-4">
+            <svg class="w-6 h-6 text-black" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z M4 5a2 2 0 012-2 1 1 0 000 2H4zm12 0a1 1 0 100-2 2 2 0 00-2 2h2zM4 13a1 1 0 100 2h12a1 1 0 100-2H4z"/>
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold mb-2">Transparência Total</h3>
+          <p class="text-sm text-gray-300">Cada chave, desconto e oferta vem diretamente da loja oficial. Você nunca precisa se preocupar com ativações duvidosas ou problemas de revogação.</p>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="glass rounded-lg p-6 card-hover border border-transparent">
+          <div class="flex items-center justify-center w-12 h-12 rounded-lg bg-gradient-to-r from-green-400 to-emerald-500 mb-4">
+            <svg class="w-6 h-6 text-black" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M5.5 13a3.5 3.5 0 01-.369-6.98 4 4 0 117.753-1.3A4.5 4.5 0 1113.5 13H11V9.413l1.293 1.293a1 1 0 001.414-1.414l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 001.414 1.414L9 9.414V13H5.5z"/>
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold mb-2">Integração Segura</h3>
+          <p class="text-sm text-gray-300">Nossas integrações passam por auditorias rigorosas. Os dados de usuários e transações são protegidos com os mais altos padrões de segurança da indústria.</p>
+        </div>
+      </div>
+
+      <!-- Info box -->
+      <div class="glass rounded-lg p-6 border border-cyan-500/20 bg-gradient-to-r from-cyan-500/5 to-purple-500/5">
+        <h3 class="text-lg font-semibold mb-3 flex items-center gap-2">
+          <svg class="w-5 h-5 text-cyan-400" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M18 5v8a2 2 0 01-2 2h-5l-5 4v-4H4a2 2 0 01-2-2V5a2 2 0 012-2h12a2 2 0 012 2zm-11-1a1 1 0 11-2 0 1 1 0 012 0z" clip-rule="evenodd"/>
+          </svg>
+          Compromisso com Qualidade
+        </h3>
+        <p class="text-sm text-gray-300 mb-2">Nós nos comprometemos a listar apenas ofertas verificadas, atualizadas e legítimas. Cada parceria é estabelecida com contratos formais que garantem a legalidade de todas as transações.</p>
+      </div>
+    </section>
+
+    <!-- Nossas Lojas Parceiras -->
+    <section class="mb-16">
+      <h2 class="text-3xl font-bold mb-8 neon-text">Nossas Lojas Parceiras</h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Epic Games -->
+        <div class="glass rounded-lg overflow-hidden card-hover border border-transparent">
+          <div class="h-32 bg-gradient-to-r from-blue-600 to-blue-800 flex items-center justify-center">
+            <div class="text-center">
+              <div class="text-4xl font-bold text-white">EPIC</div>
+              <div class="text-sm text-blue-100">Games Store</div>
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-lg font-semibold mb-2">Epic Games Store</h3>
+            <p class="text-sm text-gray-300 mb-4">A maior plataforma de distribuição de games com promoções semanais e acesso a títulos exclusivos. Oferece jogos grátis toda semana.</p>
+            <div class="flex gap-2">
+              <a href="https://www.epicgames.com" target="_blank" rel="noopener" class="flex-1 px-4 py-2 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-md text-sm font-medium text-center hover:shadow-lg hover:shadow-blue-500/50 transition">Ir para a Loja</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Steam -->
+        <div class="glass rounded-lg overflow-hidden card-hover border border-transparent">
+          <div class="h-32 bg-gradient-to-r from-blue-400 to-cyan-600 flex items-center justify-center">
+            <div class="text-center">
+              <div class="text-4xl font-bold text-white">STEAM</div>
+              <div class="text-sm text-blue-100">Community</div>
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-lg font-semibold mb-2">Steam</h3>
+            <p class="text-sm text-gray-300 mb-4">A maior plataforma de PC gaming com milhões de títulos. Steam oferece promoções sazonais e jogos grátis com frequência.</p>
+            <div class="flex gap-2">
+              <a href="https://www.steampowered.com" target="_blank" rel="noopener" class="flex-1 px-4 py-2 bg-gradient-to-r from-cyan-500 to-blue-600 text-white rounded-md text-sm font-medium text-center hover:shadow-lg hover:shadow-cyan-500/50 transition">Ir para a Loja</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- GOG -->
+        <div class="glass rounded-lg overflow-hidden card-hover border border-transparent">
+          <div class="h-32 bg-gradient-to-r from-purple-600 to-purple-800 flex items-center justify-center">
+            <div class="text-center">
+              <div class="text-4xl font-bold text-white">GOG</div>
+              <div class="text-sm text-purple-100">Galaxy</div>
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-lg font-semibold mb-2">GOG (Good Old Games)</h3>
+            <p class="text-sm text-gray-300 mb-4">Plataforma especializada em games clássicos e indie. Oferece DRM-free, sem aplicativos obrigatórios e promoções regulares.</p>
+            <div class="flex gap-2">
+              <a href="https://www.gog.com" target="_blank" rel="noopener" class="flex-1 px-4 py-2 bg-gradient-to-r from-purple-500 to-purple-600 text-white rounded-md text-sm font-medium text-center hover:shadow-lg hover:shadow-purple-500/50 transition">Ir para a Loja</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Xbox Game Pass -->
+        <div class="glass rounded-lg overflow-hidden card-hover border border-transparent">
+          <div class="h-32 bg-gradient-to-r from-green-600 to-green-800 flex items-center justify-center">
+            <div class="text-center">
+              <div class="text-4xl font-bold text-white">XBOX</div>
+              <div class="text-sm text-green-100">Game Pass</div>
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-lg font-semibold mb-2">Xbox Game Pass</h3>
+            <p class="text-sm text-gray-300 mb-4">Serviço de assinatura com acesso a centenas de títulos. Disponível em PC, console e cloud gaming com novos jogos adicionados mensalmente.</p>
+            <div class="flex gap-2">
+              <a href="https://www.xbox.com/gamepass" target="_blank" rel="noopener" class="flex-1 px-4 py-2 bg-gradient-to-r from-green-500 to-green-600 text-white rounded-md text-sm font-medium text-center hover:shadow-lg hover:shadow-green-500/50 transition">Ir para a Loja</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- PlayStation Store -->
+        <div class="glass rounded-lg overflow-hidden card-hover border border-transparent">
+          <div class="h-32 bg-gradient-to-r from-blue-900 to-indigo-900 flex items-center justify-center">
+            <div class="text-center">
+              <div class="text-4xl font-bold text-white">PS</div>
+              <div class="text-sm text-blue-100">PlayStation Store</div>
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-lg font-semibold mb-2">PlayStation Store</h3>
+            <p class="text-sm text-gray-300 mb-4">Loja oficial dos jogos PlayStation. Oferece PS Plus com games grátis mensais, promoções exclusivas e acesso a títulos indie e AAA.</p>
+            <div class="flex gap-2">
+              <a href="https://store.playstation.com" target="_blank" rel="noopener" class="flex-1 px-4 py-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-md text-sm font-medium text-center hover:shadow-lg hover:shadow-indigo-500/50 transition">Ir para a Loja</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Humble Bundle -->
+        <div class="glass rounded-lg overflow-hidden card-hover border border-transparent">
+          <div class="h-32 bg-gradient-to-r from-red-600 to-orange-600 flex items-center justify-center">
+            <div class="text-center">
+              <div class="text-4xl font-bold text-white">HB</div>
+              <div class="text-sm text-red-100">Humble Bundle</div>
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-lg font-semibold mb-2">Humble Bundle</h3>
+            <p class="text-sm text-gray-300 mb-4">Bundles temáticos com desconto massivo onde você define o preço. Parte dos valores vai para caridade. Ofertas semanais e eventos especiais.</p>
+            <div class="flex gap-2">
+              <a href="https://www.humblebundle.com" target="_blank" rel="noopener" class="flex-1 px-4 py-2 bg-gradient-to-r from-red-500 to-orange-600 text-white rounded-md text-sm font-medium text-center hover:shadow-lg hover:shadow-red-500/50 transition">Ir para a Loja</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Programa de Afiliados / API -->
+    <section class="mb-16">
+      <h2 class="text-3xl font-bold mb-8 neon-text">Programa de Afiliados & Integração API</h2>
+      
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <!-- Afiliados -->
+        <div class="glass rounded-lg p-8 border border-transparent card-hover">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="flex items-center justify-center w-10 h-10 rounded-lg bg-gradient-to-r from-cyan-400 to-blue-500">
+              <svg class="w-6 h-6 text-black" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M13 7H7v6h6V7z"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold">Programa de Afiliados</h3>
+          </div>
+          
+          <p class="text-sm text-gray-300 mb-6">Ganhe comissões compartilhando nossas ofertas. Se você tem um blog, canal no YouTube ou comunidade, nosso programa oferece comissões competitivas por cada compra realizada através do seu link.</p>
+          
+          <div class="space-y-3 mb-6">
+            <div class="flex gap-3">
+              <svg class="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+              </svg>
+              <span class="text-sm">Comissões a partir de 5% por venda</span>
+            </div>
+            <div class="flex gap-3">
+              <svg class="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+              </svg>
+              <span class="text-sm">Dashboard em tempo real com estatísticas</span>
+            </div>
+            <div class="flex gap-3">
+              <svg class="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+              </svg>
+              <span class="text-sm">Suporte dedicado e materiais de marketing</span>
+            </div>
+            <div class="flex gap-3">
+              <svg class="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+              </svg>
+              <span class="text-sm">Pagamento mensal via diversas plataformas</span>
+            </div>
+          </div>
+          
+          <a href="/contato.html?tipo=afiliado" class="inline-block px-6 py-2 bg-gradient-to-r from-cyan-400 to-blue-400 text-black rounded-md font-medium text-sm hover:shadow-lg hover:shadow-cyan-500/50 transition">Quero ser Afiliado</a>
+        </div>
+
+        <!-- API Integration -->
+        <div class="glass rounded-lg p-8 border border-transparent card-hover">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="flex items-center justify-center w-10 h-10 rounded-lg bg-gradient-to-r from-purple-400 to-pink-500">
+              <svg class="w-6 h-6 text-black" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M10.5 1.5H2.5A1 1 0 001.5 2.5v15a1 1 0 001 1h15a1 1 0 001-1v-12"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold">API CompraJogos</h3>
+          </div>
+          
+          <p class="text-sm text-gray-300 mb-6">Integre nossas APIs em sua plataforma, app ou serviço. Acesse dados em tempo real de promoções, jogos grátis e informações de parceiros com documentação completa e suporte técnico.</p>
+          
+          <div class="space-y-3 mb-6">
+            <div class="flex gap-3">
+              <svg class="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+              </svg>
+              <span class="text-sm">REST API com documentação Swagger</span>
+            </div>
+            <div class="flex gap-3">
+              <svg class="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+              </svg>
+              <span class="text-sm">SDKs para Node.js, Python e Go</span>
+            </div>
+            <div class="flex gap-3">
+              <svg class="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+              </svg>
+              <span class="text-sm">Rate limits generosos para planos B2B</span>
+            </div>
+            <div class="flex gap-3">
+              <svg class="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+              </svg>
+              <span class="text-sm">Suporte técnico 24/7 para parceiros</span>
+            </div>
+          </div>
+          
+          <a href="https://api.comprajogos.local/docs" target="_blank" rel="noopener" class="inline-block px-6 py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-md font-medium text-sm hover:shadow-lg hover:shadow-purple-500/50 transition">Ver Documentação da API</a>
+        </div>
+      </div>
+
+      <!-- API Pricing (opcional) -->
+      <div class="mt-8 glass rounded-lg p-8 border border-purple-500/20 bg-gradient-to-r from-purple-500/5 to-pink-500/5">
+        <h3 class="text-lg font-semibold mb-4">Planos de Integração API</h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="border border-gray-700 rounded-lg p-4">
+            <div class="font-semibold mb-2">Starter</div>
+            <div class="text-sm text-gray-300">
+              <p class="mb-2">Ideal para desenvolvimento</p>
+              <ul class="text-xs space-y-1 text-gray-400">
+                <li>✓ 1.000 req/mês</li>
+                <li>✓ Acesso gratuito</li>
+                <li>✓ Suporte por email</li>
+              </ul>
+            </div>
+          </div>
+          <div class="border border-cyan-400/50 rounded-lg p-4 bg-cyan-500/5">
+            <div class="font-semibold mb-2 text-cyan-400">Professional</div>
+            <div class="text-sm text-gray-300">
+              <p class="mb-2">Para aplicações médias</p>
+              <ul class="text-xs space-y-1 text-gray-400">
+                <li>✓ 100.000 req/mês</li>
+                <li>✓ R$ 299/mês</li>
+                <li>✓ Suporte prioritário</li>
+              </ul>
+            </div>
+          </div>
+          <div class="border border-gray-700 rounded-lg p-4">
+            <div class="font-semibold mb-2">Enterprise</div>
+            <div class="text-sm text-gray-300">
+              <p class="mb-2">Solução customizada</p>
+              <ul class="text-xs space-y-1 text-gray-400">
+                <li>✓ Requisições ilimitadas</li>
+                <li>✓ Contrato dedicado</li>
+                <li>✓ Gestor de contas</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="mb-16">
+      <div class="glass rounded-lg p-8 md:p-12 border border-cyan-500/20 bg-gradient-to-r from-cyan-500/10 to-blue-500/10">
+        <div class="text-center">
+          <h2 class="text-2xl md:text-3xl font-bold mb-4 neon-text">Quer Fazer Parte do CompraJogos?</h2>
+          <p class="text-gray-300 mb-6 max-w-2xl mx-auto">Seja você um criador de conteúdo, desenvolvedor ou grande empresa, temos oportunidades para colaborar. Entre em contato conosco para discutir possibilidades de parceria.</p>
+          <a href="/contato.html" class="inline-block px-8 py-3 bg-gradient-to-r from-cyan-400 to-blue-400 text-black rounded-md font-medium hover:shadow-lg hover:shadow-cyan-500/50 transition">Entrar em Contato</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer (same as index.html) -->
+  <footer class="mt-12 py-8 border-t border-gray-800">
+    <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-start gap-4">
+      <div>
+        <div class="flex items-center gap-2">
+          <div class="w-10 h-10 bg-gradient-to-r from-purple-600 to-cyan-400 rounded-md flex items-center justify-center text-black font-bold">CJ</div>
+          <div>
+            <div class="font-semibold">CompraJogos</div>
+            <div class="text-sm text-gray-400">Promoções, keys e downloads.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-sm text-gray-400">
+        © <span id="year"></span> CompraJogos. Todos os direitos reservados.
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Search functionality (placeholder)
+    const searchInput = document.getElementById('search');
+    if (searchInput) {
+      searchInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+          const query = searchInput.value;
+          // Em produção: redirecionar para página de busca
+          console.log('Buscar:', query);
+        }
+      });
+    }
+
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    });
+  </script>
+</body>
+</html>

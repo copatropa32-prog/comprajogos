@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>CompraJogos — Jogos Grátis</title>
+  <meta name="description" content="CompraJogos — jogos grátis da semana" />
+  <!-- Tailwind Play CDN for quick prototyping -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Neon accent */
+    :root { --neon: #00f0ff; --accent: #a855f7; }
+    .neon-text { text-shadow: 0 0 6px rgba(0,240,255,0.6); }
+    .glass {
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      backdrop-filter: blur(6px);
+      border: 1px solid rgba(255,255,255,0.04);
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-b from-gray-900 via-black to-gray-900 text-gray-100 min-h-screen">
+  <!-- Top nav (same as index.html) -->
+  <header class="fixed w-full z-30">
+    <nav class="glass max-w-7xl mx-auto px-4 py-3 rounded-b-md flex items-center justify-between">
+      <div class="flex items-center gap-4">
+        <a href="/" class="flex items-center gap-2">
+          <div class="w-10 h-10 bg-gradient-to-r from-purple-600 to-cyan-400 rounded-md flex items-center justify-center text-black font-bold">CJ</div>
+          <span class="font-semibold text-lg neon-text">CompraJogos</span>
+        </a>
+        <ul class="hidden md:flex gap-4 ml-6 text-sm">
+          <li><a href="/" class="hover:text-white">Início</a></li>
+          <li><a href="/jogos-gratis.html" class="hover:text-white">Jogos Grátis</a></li>
+          <li><a href="/promocoes.html" class="hover:text-white">Promoções</a></li>
+          <li><a href="/parceiros.html" class="hover:text-white">Parceiros</a></li>
+          <li><a href="/contato.html" class="hover:text-white">Contato</a></li>
+        </ul>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <div class="relative hidden md:block">
+          <input id="search" type="search" placeholder="Procurar jogo, plataforma..." class="px-3 py-2 rounded-md bg-transparent border border-gray-700 focus:border-cyan-400 outline-none text-sm w-64">
+        </div>
+        <a href="/login" class="px-3 py-2 bg-gradient-to-r from-purple-600 to-cyan-400 text-black rounded-md text-sm font-medium">Entrar</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="pt-28 max-w-7xl mx-auto px-4">
+    <!-- Hero -->
+    <section class="mb-8">
+      <div class="rounded-lg overflow-hidden relative">
+        <div class="h-44 md:h-72 bg-[url('https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=1600&q=60')] bg-cover bg-center flex items-center">
+          <div class="bg-black/50 p-6 md:p-10 rounded-md ml-4 md:ml-12">
+            <h1 class="text-3xl md:text-4xl font-extrabold neon-text">Jogos Grátis da Semana</h1>
+            <p class="mt-2 text-sm md:text-base text-gray-200 max-w-xl">Fique de olho nos jogos gratuitos oferecidos por lojas como Epic Games e Steam. Resgate enquanto durar a oferta.</p>
+            <div class="mt-4 flex gap-3">
+              <a href="#list" class="px-4 py-2 bg-gradient-to-r from-cyan-400 to-blue-400 text-black rounded-md">Ver jogos grátis</a>
+              <a href="/promocoes.html" class="px-4 py-2 border border-gray-600 rounded-md">Promoções</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Free games list -->
+    <section id="list" class="mb-16">
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="text-2xl font-semibold">Jogos Grátis Esta Semana</h2>
+        <div class="text-sm text-gray-400">Atualizado automaticamente — verifique disponibilidade na loja</div>
+      </div>
+
+      <div id="free-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <!-- Cards renderizados por JS -->
+      </div>
+
+      <div class="mt-6 text-center text-sm text-gray-400">
+        As ofertas são fornecidas pelas lojas parceiras. Sempre verifique os termos na página da loja.
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer (same as index.html) -->
+  <footer class="mt-12 py-8 border-t border-gray-800">
+    <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-start gap-4">
+      <div>
+        <div class="flex items-center gap-2">
+          <div class="w-10 h-10 bg-gradient-to-r from-purple-600 to-cyan-400 rounded-md flex items-center justify-center text-black font-bold">CJ</div>
+          <div>
+            <div class="font-semibold">CompraJogos</div>
+            <div class="text-sm text-gray-400">Promoções, keys e downloads.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-sm text-gray-400">
+        © <span id="year"></span> CompraJogos. Todos os direitos reservados.
+      </div>
+    </div>
+  </footer>
+
+  <!-- Template for a free-game card (hidden) -->
+  <template id="free-template">
+    <article class="bg-gradient-to-b from-gray-900 to-gray-800 rounded-lg shadow-md overflow-hidden glass">
+      <div class="relative">
+        <img class="w-full h-44 object-cover" src="" alt="Capa do jogo" loading="lazy">
+        <div class="absolute top-3 left-3 px-2 py-1 bg-green-600 text-xs font-semibold rounded">GRÁTIS</div>
+      </div>
+      <div class="p-3">
+        <h3 class="font-semibold text-sm leading-tight">Título do Jogo</h3>
+        <p class="text-xs text-gray-400 mt-1">Plataforma • Origem</p>
+        <div class="mt-3 flex items-end justify-between">
+          <div class="text-sm text-green-400 font-bold">Disponível agora</div>
+          <div class="flex flex-col items-end gap-2">
+            <a class="redeem-btn px-3 py-1 bg-gradient-to-r from-green-400 to-cyan-400 text-black rounded text-sm" target="_blank" rel="noopener">Resgatar Grátis</a>
+            <button class="details-btn text-xs text-gray-300">Ver detalhes</button>
+          </div>
+        </div>
+      </div>
+    </article>
+  </template>
+
+  <script>
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Exemplo de jogos grátis semanais (substitua por fetch para produção)
+    const freeGames = [
+      { id: 1, title: 'Galactic Frontier', platform: 'Epic Games', cover: 'https://picsum.photos/seed/fg1/600/400', redeemUrl: '#', note: 'Disponível até 13/08' },
+      { id: 2, title: 'Mystic Tales', platform: 'Steam', cover: 'https://picsum.photos/seed/fg2/600/400', redeemUrl: '#', note: 'Oferta por tempo limitado' },
+      { id: 3, title: 'Rogue Skies', platform: 'Epic Games', cover: 'https://picsum.photos/seed/fg3/600/400', redeemUrl: '#', note: 'Resgate via loja' },
+      { id: 4, title: 'Puzzle Manor', platform: 'Steam', cover: 'https://picsum.photos/seed/fg4/600/400', redeemUrl: '#', note: 'Grátis por tempo limitado' },
+      { id: 5, title: 'Retro Racer', platform: 'Epic Games', cover: 'https://picsum.photos/seed/fg5/600/400', redeemUrl: '#', note: 'Últimas horas' },
+      { id: 6, title: 'Hidden Depths', platform: 'Steam', cover: 'https://picsum.photos/seed/fg6/600/400', redeemUrl: '#', note: 'Verifique requisitos' }
+    ];
+
+    function renderFreeGames(items, container) {
+      const template = document.getElementById('free-template');
+      container.innerHTML = '';
+      for (const g of items) {
+        const node = template.content.cloneNode(true);
+        const img = node.querySelector('img');
+        img.src = g.cover;
+        img.alt = g.title;
+        node.querySelector('h3').textContent = g.title;
+        node.querySelector('p').textContent = g.platform + (g.note ? ' • ' + g.note : '');
+        node.querySelector('.redeem-btn').href = g.redeemUrl || '#';
+        // details button — you can hook a modal or link
+        const detailsBtn = node.querySelector('.details-btn');
+        detailsBtn.addEventListener('click', () => {
+          alert(g.title + ' — ' + g.platform + '\n' + (g.note || 'Sem observações'));
+        });
+        container.appendChild(node);
+      }
+    }
+
+    const grid = document.getElementById('free-grid');
+    renderFreeGames(freeGames, grid);
+
+    // Placeholder: Em produção, busque de API server-side para evitar rate limits
+    async function fetchFreeGamesFromApi() {
+      try {
+        // const res = await fetch('/api/jogos-gratis');
+        // const data = await res.json();
+        // renderFreeGames(data.items, grid);
+      } catch (err) {
+        console.error('Erro ao buscar jogos grátis', err);
+      }
+    }
+
+    // Accessibility: keyboard focus styles for redeem buttons
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Tab') document.body.classList.add('user-tabbing');
+    });
+
+  </script>
+</body>
+</html>
