@@ -31,9 +31,9 @@
             </div>
             <div class="produto-info">
                 <h1 id="tituloJogo">Carregando...</h1>
-                <p id="descJogo">Chave digital de ativação oficial para a plataforma Steam. Envio instantâneo após a confirmação do pagamento via Pix.</p>
+                <p id="descJogo">Chave digital de ativação oficial para a plataforma Steam. Envio instantâneo após a confirmação.</p>
                 <div class="preco" id="precoJogo">R$ 0,00</div>
-                <a href="#" class="btn-comprar-grande">Comprar Agora (Pix)</a>
+                <a id="btnComprar" href="#" target="_blank" class="btn-comprar-grande">Comprar na Loja Parceira</a>
             </div>
         </div>
     </main>
@@ -44,11 +44,13 @@
         const titulo = params.get('titulo');
         const preco = params.get('preco');
         const img = params.get('img');
+        const link = params.get('link');
 
         if (titulo) {
             document.getElementById('tituloJogo').innerText = titulo;
             document.getElementById('precoJogo').innerText = preco;
             document.getElementById('imgJogo').src = img;
+            document.getElementById('btnComprar').href = link || "https://www.kinguin.net/";
             document.title = titulo + " - CompraJogos";
         } else {
             document.getElementById('tituloJogo').innerText = "Jogo não encontrado";

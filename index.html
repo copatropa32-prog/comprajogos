@@ -35,23 +35,23 @@
 
     <script>
         const jogos = [
-            { titulo: "Counter-Strike 2", preco: "Gratuito", img: "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=500" },
-            { titulo: "Grand Theft Auto V", preco: "R$ 83,60", img: "https://images.unsplash.com/photo-1533850595775-f8f39423e67d?w=500" },
-            { titulo: "Cyberpunk 2077", preco: "R$ 199,90", img: "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?w=500" },
-            { titulo: "Elden Ring", preco: "R$ 229,90", img: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=500" },
-            { titulo: "Baldur's Gate 3", preco: "R$ 199,90", img: "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=500" },
-            { titulo: "Red Dead Redemption 2", preco: "R$ 299,99", img: "https://images.unsplash.com/photo-1560253023-3ec5d502959f?w=500" },
-            { titulo: "Hogwarts Legacy", preco: "R$ 249,99", img: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=500" },
-            { titulo: "EA SPORTS FC 25", preco: "R$ 319,00", img: "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=500" },
-            { titulo: "God of War", preco: "R$ 199,90", img: "https://images.unsplash.com/photo-1579373903781-fd5c0c30c4cd?w=500" },
-            { titulo: "Spider-Man Remastered", preco: "R$ 249,90", img: "https://images.unsplash.com/photo-1635863138275-d9b33299680b?w=500" },
-            { titulo: "Terraria", preco: "R$ 32,99", img: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=500" },
-            { titulo: "Stardew Valley", preco: "R$ 24,99", img: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=500" },
-            { titulo: "Hollow Knight", preco: "R$ 46,99", img: "https://images.unsplash.com/photo-1579546929518-9e396f3cc809?w=500" },
-            { titulo: "Hades", preco: "R$ 47,49", img: "https://images.unsplash.com/photo-1612287233202-b51b36671c5d?w=500" },
-            { titulo: "The Witcher 3: Wild Hunt", preco: "R$ 150,00", img: "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=500" },
-            { titulo: "Weird Worlds: Return to Infinite Space", preco: "R$ 29,90", img: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=500" },
-            { titulo: "Word Rescue", preco: "R$ 19,90", img: "https://images.unsplash.com/photo-1612287233202-b51b36671c5d?w=500" }
+            { titulo: "Counter-Strike 2", preco: "Gratuito", img: "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=500", link: "https://store.steampowered.com/app/730/CounterStrike_2/" },
+            { titulo: "Grand Theft Auto V", preco: "R$ 83,60", img: "https://images.unsplash.com/photo-1533850595775-f8f39423e67d?w=500", link: "https://www.kinguin.net/" },
+            { titulo: "Cyberpunk 2077", preco: "R$ 199,90", img: "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?w=500", link: "https://www.kinguin.net/" },
+            { titulo: "Elden Ring", preco: "R$ 229,90", img: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=500", link: "https://www.kinguin.net/" },
+            { titulo: "Baldur's Gate 3", preco: "R$ 199,90", img: "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=500", link: "https://www.kinguin.net/" },
+            { titulo: "Red Dead Redemption 2", preco: "R$ 299,99", img: "https://images.unsplash.com/photo-1560253023-3ec5d502959f?w=500", link: "https://www.kinguin.net/" },
+            { titulo: "Hogwarts Legacy", preco: "R$ 249,99", img: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=500", link: "https://www.kinguin.net/" },
+            { titulo: "EA SPORTS FC 25", preco: "R$ 319,00", img: "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=500", link: "https://www.kinguin.net/" },
+            { titulo: "God of War", preco: "R$ 199,90", img: "https://images.unsplash.com/photo-1579373903781-fd5c0c30c4cd?w=500", link: "https://www.kinguin.net/" },
+            { titulo: "Spider-Man Remastered", preco: "R$ 249,90", img: "https://images.unsplash.com/photo-1635863138275-d9b33299680b?w=500", link: "https://www.kinguin.net/" },
+            { titulo: "Terraria", preco: "R$ 32,99", img: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=500", link: "https://www.kinguin.net/" },
+            { titulo: "Stardew Valley", preco: "R$ 24,99", img: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=500", link: "https://www.kinguin.net/" },
+            { titulo: "Hollow Knight", preco: "R$ 46,99", img: "https://images.unsplash.com/photo-1579546929518-9e396f3cc809?w=500", link: "https://www.kinguin.net/" },
+            { titulo: "Hades", preco: "R$ 47,49", img: "https://images.unsplash.com/photo-1612287233202-b51b36671c5d?w=500", link: "https://www.kinguin.net/" },
+            { titulo: "The Witcher 3: Wild Hunt", preco: "R$ 150,00", img: "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=500", link: "https://www.kinguin.net/" },
+            { titulo: "Weird Worlds: Return to Infinite Space", preco: "R$ 29,90", img: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=500", link: "https://www.kinguin.net/" },
+            { titulo: "Word Rescue", preco: "R$ 19,90", img: "https://images.unsplash.com/photo-1612287233202-b51b36671c5d?w=500", link: "https://www.kinguin.net/" }
         ];
 
         function exibirJogos(lista) {
@@ -60,7 +60,7 @@
             lista.forEach(jogo => {
                 const card = document.createElement("div");
                 card.className = "card-jogo";
-                const linkDetalhes = `produto.html?titulo=${encodeURIComponent(jogo.titulo)}&preco=${encodeURIComponent(jogo.preco)}&img=${encodeURIComponent(jogo.img)}`;
+                const linkDetalhes = `produto.html?titulo=${encodeURIComponent(jogo.titulo)}&preco=${encodeURIComponent(jogo.preco)}&img=${encodeURIComponent(jogo.img)}&link=${encodeURIComponent(jogo.link)}`;
                 card.innerHTML = `
                     <img src="${jogo.img}" alt="${jogo.titulo}">
                     <div class="card-conteudo">
