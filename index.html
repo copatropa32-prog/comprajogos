@@ -3,13 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CompraJogos - Início</title>
+    <title>CompraJogos - Chaves de Ativação Steam e Jogos Digitais</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        .busca-container { margin-bottom: 25px; text-align: center; }
+        .busca-container input { width: 100%; max-width: 500px; padding: 12px 15px; font-size: 16px; border: 1px solid #ccc; border-radius: 6px; outline: none; }
+        .preco-tag { font-size: 16px; color: #66c0f4; font-weight: bold; margin-bottom: 15px; }
+    </style>
 </head>
 <body>
     <header>
         <h1>CompraJogos</h1>
-        <p>Sua loja digital de chaves Steam</p>
+        <p>Sua loja digital de chaves Steam com entrega instantânea</p>
         <div class="nav-links">
             <a href="index.html">Início</a>
             <a href="quem-somos.html">Quem Somos</a>
@@ -17,25 +22,98 @@
         </div>
     </header>
     <main class="container">
-        <section class="grid-catalogo">
-            <div class="card-jogo">
-                <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=500" alt="Weird Worlds">
-                <div class="card-conteudo">
-                    <h2>Weird Worlds</h2>
-                    <p>Estratégia roguelike espacial.</p>
-                    <a href="produto.html" class="btn-comprar">Ver Detalhes</a>
-                </div>
-            </div>
-            <div class="card-jogo">
-                <img src="https://images.unsplash.com/photo-1612287233202-b51b36671c5d?w=500" alt="Word Rescue">
-                <div class="card-conteudo">
-                    <h2>Word Rescue</h2>
-                    <p>Clássico jogo de plataforma.</p>
-                    <a href="wordrescue.html" class="btn-comprar">Ver Detalhes</a>
-                </div>
-            </div>
+        <div class="busca-container">
+            <input type="text" id="searchInput" placeholder="Pesquisar jogo..." onkeyup="filtrarJogos()">
+        </div>
+        <section class="grid-catalogo" id="catalogo">
+            <!-- Os jogos serão carregados dinamicamente via JavaScript -->
         </section>
     </main>
-    <footer><p>&copy; 2026 CompraJogos. Todos os direitos reservados.</p></footer>
+    <footer>
+        <p>&copy; 2026 CompraJogos. Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+        const jogos = [
+            { titulo: "Counter-Strike 2", preco: "Gratuito", img: "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=500" },
+            { titulo: "Grand Theft Auto V", preco: "R$ 83,60", img: "https://images.unsplash.com/photo-1533850595775-f8f39423e67d?w=500" },
+            { titulo: "Cyberpunk 2077", preco: "R$ 199,90", img: "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?w=500" },
+            { titulo: "Elden Ring", preco: "R$ 229,90", img: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=500" },
+            { titulo: "Baldur's Gate 3", preco: "R$ 199,90", img: "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=500" },
+            { titulo: "Red Dead Redemption 2", preco: "R$ 299,99", img: "https://images.unsplash.com/photo-1560253023-3ec5d502959f?w=500" },
+            { titulo: "Hogwarts Legacy", preco: "R$ 249,99", img: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=500" },
+            { titulo: "EA SPORTS FC 25", preco: "R$ 319,00", img: "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=500" },
+            { titulo: "God of War", preco: "R$ 199,90", img: "https://images.unsplash.com/photo-1579373903781-fd5c0c30c4cd?w=500" },
+            { titulo: "Spider-Man Remastered", preco: "R$ 249,90", img: "https://images.unsplash.com/photo-1635863138275-d9b33299680b?w=500" },
+            { titulo: "Terraria", preco: "R$ 32,99", img: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=500" },
+            { titulo: "Stardew Valley", preco: "R$ 24,99", img: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=500" },
+            { titulo: "Hollow Knight", preco: "R$ 46,99", img: "https://images.unsplash.com/photo-1579546929518-9e396f3cc809?w=500" },
+            { titulo: "Hades", preco: "R$ 47,49", img: "https://images.unsplash.com/photo-1612287233202-b51b36671c5d?w=500" },
+            { titulo: "The Witcher 3: Wild Hunt", preco: "R$ 150,00", img: "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=500" },
+            { titulo: "Monster Hunter: World", preco: "R$ 99,90", img: "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=500" },
+            { titulo: "Resident Evil 4 Remake", preco: "R$ 249,00", img: "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?w=500" },
+            { titulo: "Palworld", preco: "R$ 88,99", img: "https://images.unsplash.com/photo-1563089145-599997674d42?w=500" },
+            { titulo: "Helldivers 2", preco: "R$ 199,50", img: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=500" },
+            { titulo: "Lethal Company", preco: "R$ 27,49", img: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=500" },
+            { titulo: "Portal 2", preco: "R$ 32,99", img: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=500" },
+            { titulo: "Left 4 Dead 2", preco: "R$ 32,99", img: "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=500" },
+            { titulo: "Skyrim Special Edition", preco: "R$ 149,00", img: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=500" },
+            { titulo: "Fallout 4", preco: "R$ 89,90", img: "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=500" },
+            { titulo: "Euro Truck Simulator 2", preco: "R$ 59,99", img: "https://images.unsplash.com/photo-1508974239320-0a029497e820?w=500" },
+            { titulo: "American Truck Simulator", preco: "R$ 59,99", img: "https://images.unsplash.com/photo-1519003722824-194d4455a60c?w=500" },
+            { titulo: "Cities: Skylines", preco: "R$ 95,99", img: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=500" },
+            { titulo: "Subnautica", preco: "R$ 59,99", img: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=500" },
+            { titulo: "The Forest", preco: "R$ 37,99", img: "https://images.unsplash.com/photo-1448375240586-882707db888b?w=500" },
+            { titulo: "Sons of the Forest", preco: "R$ 88,99", img: "https://images.unsplash.com/photo-1511447333015-45b65e60f6d5?w=500" },
+            { titulo: "Rust", preco: "R$ 135,99", img: "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=500" },
+            { titulo: "ARK: Survival Ascended", preco: "R$ 159,00", img: "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=500" },
+            { titulo: "Dead Cells", preco: "R$ 47,49", img: "https://images.unsplash.com/photo-1579546929518-9e396f3cc809?w=500" },
+            { titulo: "Slay the Spire", preco: "R$ 59,99", img: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=500" },
+            { titulo: "Risk of Rain 2", preco: "R$ 73,99", img: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=500" },
+            { titulo: "Deep Rock Galactic", preco: "R$ 88,99", img: "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=500" },
+            { titulo: "Valheim", preco: "R$ 37,99", img: "https://images.unsplash.com/photo-1448375240586-882707db888b?w=500" },
+            { titulo: "Phasmophobia", preco: "R$ 46,99", img: "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?w=500" },
+            { titulo: "Among Us", preco: "R$ 10,89", img: "https://images.unsplash.com/photo-1612287233202-b51b36671c5d?w=500" },
+            { titulo: "Cuphead", preco: "R$ 37,99", img: "https://images.unsplash.com/photo-1579373903781-fd5c0c30c4cd?w=500" },
+            { titulo: "Celeste", preco: "R$ 59,99", img: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=500" },
+            { titulo: "Undertale", preco: "R$ 28,99", img: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=500" },
+            { titulo: "Factorio", preco: "R$ 130,00", img: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=500" },
+            { titulo: "RimWorld", preco: "R$ 85,99", img: "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=500" },
+            { titulo: "Kerbal Space Program", preco: "R$ 72,99", img: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=500" },
+            { titulo: "Garry's Mod", preco: "R$ 32,99", img: "https://images.unsplash.com/photo-1533850595775-f8f39423e67d?w=500" },
+            { titulo: "Civilization VI", preco: "R$ 129,90", img: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=500" },
+            { titulo: "Age of Empires II: DE", preco: "R$ 79,00", img: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=500" },
+            { titulo: "Total War: WARHAMMER III", preco: "R$ 299,00", img: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=500" },
+            { titulo: "Dark Souls III", preco: "R$ 257,90", img: "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=500" },
+            { titulo: "Weird Worlds: Return to Infinite Space", preco: "R$ 29,90", img: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=500" },
+            { titulo: "Word Rescue", preco: "R$ 19,90", img: "https://images.unsplash.com/photo-1612287233202-b51b36671c5d?w=500" }
+        ];
+
+        function exibirJogos(lista) {
+            const catalogo = document.getElementById("catalogo");
+            catalogo.innerHTML = "";
+            lista.forEach(jogo => {
+                const card = document.createElement("div");
+                card.className = "card-jogo";
+                card.innerHTML = `
+                    <img src="${jogo.img}" alt="${jogo.titulo}">
+                    <div class="card-conteudo">
+                        <h2>${jogo.titulo}</h2>
+                        <div class="preco-tag">${jogo.preco}</div>
+                        <a href="produto.html" class="btn-comprar">Ver Detalhes</a>
+                    </div>
+                `;
+                catalogo.appendChild(card);
+            });
+        }
+
+        function filtrarJogos() {
+            const termo = document.getElementById("searchInput").value.toLowerCase();
+            const filtrados = jogos.filter(j => j.titulo.toLowerCase().includes(termo));
+            exibirJogos(filtrados);
+        }
+
+        exibirJogos(jogos);
+    </script>
 </body>
 </html>
