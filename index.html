@@ -6,6 +6,19 @@
     <title>CompraJogos - Chaves de Ativação Steam</title>
     <link rel="stylesheet" href="style.css">
     <style>
+        .carousel-destaque {
+            background: linear-gradient(135deg, #1b2838, #2a475e);
+            color: #fff;
+            border-radius: 8px;
+            padding: 30px;
+            margin-bottom: 30px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        .carousel-destaque h2 { font-size: 28px; color: #66c0f4; margin-bottom: 10px; }
+        .carousel-destaque p { font-size: 16px; color: #c7d5e0; margin-bottom: 20px; }
+        .btn-destaque { background-color: #5c7e10; color: #fff; padding: 12px 25px; border-radius: 4px; text-decoration: none; font-weight: bold; display: inline-block; transition: background 0.2s; }
+        .btn-destaque:hover { background-color: #7da515; }
         .busca-container { margin-bottom: 25px; text-align: center; }
         .busca-container input { width: 100%; max-width: 500px; padding: 12px 15px; font-size: 16px; border: 1px solid #ccc; border-radius: 6px; outline: none; }
         .preco-tag { font-size: 16px; color: #66c0f4; font-weight: bold; margin-bottom: 15px; }
@@ -22,6 +35,13 @@
         </div>
     </header>
     <main class="container">
+        <!-- Carrossel / Destaque Principal -->
+        <div class="carousel-destaque">
+            <h2>Destaque da Semana: Baldur's Gate 3</h2>
+            <p>Mergulhe na aclamada obra-prima do RPG com entrega imediata da chave digital.</p>
+            <a href="produto.html?titulo=Baldur's%20Gate%203&preco=R%24%20199%2C90&img=https://images.unsplash.com/photo-1538481199705-c710c4e965fc%3Fw%3D500&link=https://www.kinguin.net/" class="btn-destaque">Ver Destaque</a>
+        </div>
+
         <div class="busca-container">
             <input type="text" id="searchInput" placeholder="Pesquisar jogo..." onkeyup="filtrarJogos()">
         </div>
