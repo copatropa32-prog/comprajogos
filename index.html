@@ -1,35 +1,28 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-    <meta charset="UTF-8"><title>CompraJogos</title>
-    <link rel="stylesheet" href="style.css">
-</head>
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>CompraJogos</title><link rel="stylesheet" href="style.css"></head>
 <body>
     <header><h1>CompraJogos</h1><div class="nav-links"><a href="index.html">Início</a></div></header>
-    <main class="container">
-        <div class="categorias" id="categorias">
-            <button class="cat-btn active" onclick="filtrar('Todos')">Todos</button>
-            <button class="cat-btn" onclick="filtrar('Ação')">Ação</button>
-            <button class="cat-btn" onclick="filtrar('RPG')">RPG</button>
-            <button class="cat-btn" onclick="filtrar('Indie')">Indie</button>
-        </div>
+    <div class="categorias">
+        <button class="cat-btn" onclick="filtrar('Todos')">Todos</button>
+        <button class="cat-btn" onclick="filtrar('Ação')">Ação</button>
+        <button class="cat-btn" onclick="filtrar('RPG')">RPG</button>
+    </div>
+    <div class="container">
         <section class="grid-catalogo" id="catalogo"></section>
-    </main>
+    </div>
     <script>
         const jogos = [
             { titulo: "Cyberpunk 2077", preco: "R$ 199,90", img: "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?w=500", cat: "Ação" },
             { titulo: "Baldur's Gate 3", preco: "R$ 199,90", img: "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=500", cat: "RPG" },
-            { titulo: "Hollow Knight", preco: "R$ 46,99", img: "https://images.unsplash.com/photo-1579546929518-9e396f3cc809?w=500", cat: "Indie" },
-            { titulo: "Elden Ring", preco: "R$ 229,90", img: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=500", cat: "RPG" }
+            { titulo: "Hollow Knight", preco: "R$ 46,99", img: "https://images.unsplash.com/photo-1579546929518-9e396f3cc809?w=500", cat: "Indie" }
         ];
         function exibir(lista) {
             document.getElementById("catalogo").innerHTML = lista.map(j => `
                 <div class="card-jogo">
                     <img src="${j.img}">
                     <div class="card-conteudo">
-                        <h2>${j.titulo}</h2>
-                        <p>${j.preco}</p>
-                        <a href="produto.html?titulo=${encodeURIComponent(j.titulo)}&preco=${encodeURIComponent(j.preco)}&img=${encodeURIComponent(j.img)}" style="color:#66c0f4; text-decoration:none; font-weight:bold;">Ver Detalhes</a>
+                        <h2>${j.titulo}</h2><p>${j.preco}</p>
                     </div>
                 </div>
             `).join('');
