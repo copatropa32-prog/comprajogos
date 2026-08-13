@@ -26,22 +26,23 @@
                 <h1 class="text-2xl font-black tracking-tighter text-white">COMPRAJOGOS</h1>
             </div>
 
-            <!-- Área da Direita: Login do Google Customizado e Carrinho -->
+            <!-- Área da Direita: Login do Google e Carrinho -->
             <div class="flex items-center gap-4">
                 
-                <!-- Google Login Initialization -->
+                <!-- Google Login Config -->
                 <div id="g_id_onload"
                      data-client_id="75702393897-88uv9hvhq0gi23n0vqk75m3.apps.googleusercontent.com"
                      data-callback="handleCredentialResponse"
                      data-auto_prompt="false">
                 </div>
-
-                <!-- Botão customizado com as cores do site (Indigo/Glass) -->
+                
+                <!-- Botão de Login do Google -->
                 <div id="google-login-btn" class="g_id_signin" data-type="standard" data-shape="pill" data-theme="filled_black" data-text="signin_with" data-size="large"></div>
                 
                 <!-- Saudação do Usuário Logado -->
                 <div id="user-info" class="text-white text-sm font-bold hidden flex items-center gap-2 bg-slate-900 px-4 py-2 rounded-full border border-indigo-500/30"></div>
 
+                <!-- Carrinho -->
                 <button onclick="toggleCart()" class="relative p-2 hover:bg-slate-800 rounded-full transition-all">
                     🛒
                     <span id="cartCount" class="absolute -top-1 -right-1 bg-indigo-600 text-[10px] w-5 h-5 flex items-center justify-center rounded-full">0</span>
@@ -50,49 +51,73 @@
         </div>
     </header>
 
-    <!-- Corpo Principal (Catálogo Dinâmico de Jogos) -->
+    <!-- Corpo Principal (Filtros e Catálogo Completo) -->
     <main class="max-w-6xl mx-auto px-4 pt-28 pb-12">
-        <div class="mb-8 flex flex-col md:flex-row gap-4 justify-between items-center">
-            <input type="text" id="searchInput" placeholder="Buscar nome..." oninput="filtrarJogos()" class="w-full md:w-1/3 bg-slate-900 border border-slate-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-indigo-500">
+        
+        <!-- Barra de Filtros e Pesquisa -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+            <input type="text" id="searchInput" placeholder="Buscar nome..." oninput="filtrarJogos()" class="bg-slate-900 border border-slate-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-indigo-500">
+            
+            <select id="genreFilter" onchange="filtrarJogos()" class="bg-slate-900 border border-slate-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-indigo-500">
+                <option value="">Todos os Gêneros</option>
+                <option value="FPS">FPS</option>
+                <option value="MOBA">MOBA</option>
+                <option value="RPG">RPG</option>
+                <option value="Indie">Indie</option>
+                <option value="Esportes">Esportes</option>
+            </select>
+
+            <select id="priceFilter" onchange="filtrarJogos()" class="bg-slate-900 border border-slate-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-indigo-500">
+                <option value="">Preço: Todos</option>
+                <option value="free">Gratuito</option>
+                <option value="paid">Pago</option>
+            </select>
         </div>
 
-        <div id="games-grid" class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-8">
-            <!-- Os jogos serão injetados dinamicamente via JavaScript -->
+        <!-- Grade de Jogos -->
+        <div id="games-grid" class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            <!-- Os jogos são injetados dinamicamente via JS -->
         </div>
     </main>
 
-    <!-- Scripts de Integração -->
+    <!-- Scripts de Funcionalidade e Integrações -->
     <script>
-        // Lista completa de jogos simulando o catálogo da API / banco de dados
+        // Catálogo completo preservado
         const catalogoJogos = [
-            { id: 1, title: "Weird Worlds: Return to Infinite Space", price: 19.90, category: "RPG", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/11260/header.jpg" },
-            { id: 2, title: "Word Rescue", price: 9.90, category: "Indie", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/358260/header.jpg" },
-            { id: 3, title: "Counter-Strike 2", price: 0.00, category: "FPS", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/730/header.jpg" },
-            { id: 4, title: "Dota 2", price: 0.00, category: "MOBA", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/570/header.jpg" },
-            { id: 5, title: "Team Fortress 2", price: 0.00, category: "FPS", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/440/header.jpg" },
-            { id: 6, title: "Warframe", price: 0.00, category: "RPG", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/230410/header.jpg" },
-            { id: 7, title: "Destiny 2", price: 0.00, category: "FPS", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1085660/header.jpg" },
-            { id: 8, title: "Rocket League", price: 0.00, category: "Esportes", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/252950/header.jpg" }
+            { id: 1, title: "Counter-Strike 2", price: 0.00, category: "FPS", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/730/header.jpg" },
+            { id: 2, title: "Dota 2", price: 0.00, category: "MOBA", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/570/header.jpg" },
+            { id: 3, title: "Team Fortress 2", price: 0.00, category: "FPS", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/440/header.jpg" },
+            { id: 4, title: "Warframe", price: 0.00, category: "RPG", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/230410/header.jpg" },
+            { id: 5, title: "Path of Exile", price: 0.00, category: "RPG", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/238960/header.jpg" },
+            { id: 6, title: "Destiny 2", price: 0.00, category: "FPS", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1085660/header.jpg" },
+            { id: 7, title: "Rocket League", price: 0.00, category: "Esportes", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/252950/header.jpg" },
+            { id: 8, title: "Weird Worlds: Return to Infinite Space", price: 19.90, category: "RPG", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/11260/header.jpg" },
+            { id: 9, title: "Word Rescue", price: 9.90, category: "Indie", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/358260/header.jpg" }
         ];
 
         function renderizarJogos(jogos) {
             const grid = document.getElementById('games-grid');
             grid.innerHTML = '';
 
+            if (jogos.length === 0) {
+                grid.innerHTML = `<p class="text-slate-400 col-span-full text-center py-8">Nenhum jogo encontrado.</p>`;
+                return;
+            }
+
             jogos.forEach(jogo => {
                 const precoFormatado = jogo.price === 0 ? 'Gratuito' : `R$ ${jogo.price.toFixed(2).replace('.', ',')}`;
                 const card = document.createElement('div');
-                card.className = "glass p-5 rounded-2xl flex flex-col justify-between gap-4";
+                card.className = "glass p-4 rounded-2xl flex flex-col justify-between gap-4";
                 card.innerHTML = `
                     <div>
-                        <img src="${jogo.image}" alt="${jogo.title}" class="rounded-xl w-full h-36 object-cover mb-3">
-                        <span class="text-xs bg-indigo-500/20 text-indigo-400 px-2 py-1 rounded-md font-semibold">${jogo.category}</span>
-                        <h2 class="text-lg font-bold mt-2 text-white line-clamp-1">${jogo.title}</h2>
-                        <p class="text-slate-400 text-xs mt-1">Chave Steam Global</p>
+                        <img src="${jogo.image}" alt="${jogo.title}" class="rounded-xl w-full h-32 object-cover mb-3">
+                        <span class="text-[10px] bg-indigo-500/20 text-indigo-400 px-2 py-1 rounded-md font-semibold">${jogo.category}</span>
+                        <h2 class="text-base font-bold mt-2 text-white line-clamp-1">${jogo.title}</h2>
+                        <p class="text-slate-400 text-xs mt-0.5">${jogo.price === 0 ? 'Grátis na Steam' : 'Chave Steam Global'}</p>
                     </div>
                     <div>
-                        <p class="text-xl font-black text-indigo-400 mb-3">${precoFormatado}</p>
-                        <button onclick="comprarJogo('${jogo.title}', ${jogo.price})" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-2.5 px-4 rounded-xl transition-all shadow-lg shadow-indigo-600/20">
+                        <p class="text-lg font-black text-indigo-400 mb-3">${precoFormatado}</p>
+                        <button onclick="comprarJogo('${jogo.title}', ${jogo.price})" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-2 px-4 rounded-xl transition-all shadow-lg shadow-indigo-600/20 text-sm">
                             ${jogo.price === 0 ? 'Resgatar' : 'Comprar'}
                         </button>
                     </div>
@@ -103,11 +128,23 @@
 
         function filtrarJogos() {
             const termo = document.getElementById('searchInput').value.toLowerCase();
-            const filtrados = catalogoJogos.filter(j => j.title.toLowerCase().includes(termo));
+            const genero = document.getElementById('genreFilter').value;
+            const precoTipo = document.getElementById('priceFilter').value;
+
+            const filtrados = catalogoJogos.filter(jogo => {
+                const matchNome = jogo.title.toLowerCase().includes(termo);
+                const matchGenero = genero === "" || jogo.category === genero;
+                let matchPreco = true;
+                if (precoTipo === "free") matchPreco = jogo.price === 0;
+                if (precoTipo === "paid") matchPreco = jogo.price > 0;
+
+                return matchNome && matchGenero && matchPreco;
+            });
+
             renderizarJogos(filtrados);
         }
 
-        // 1. Processar Login do Google
+        // Login do Google
         function handleCredentialResponse(response) {
             fetch('/api/auth/google', {
                 method: 'POST',
@@ -126,7 +163,6 @@
             .catch(err => console.error('Erro na requisição de login:', err));
         }
 
-        // 2. Atualizar o Menu com Estilo
         function mostrarUsuarioLogado(user) {
             const infoDiv = document.getElementById('user-info');
             infoDiv.innerHTML = `👤 <span class="text-indigo-400">${user.name}</span>`;
@@ -136,10 +172,10 @@
             if(btnLogin) btnLogin.style.display = 'none';
         }
 
-        // 3. Processar Pagamento
+        // Pagamento / Resgate
         function comprarJogo(nomeJogo, precoJogo) {
             if (precoJogo === 0) {
-                alert(`🎮 ${nomeJogo} resgatado com sucesso! Sua chave será enviada por email.`);
+                alert(`🎮 ${nomeJogo} resgatado com sucesso!`);
                 return;
             }
 
@@ -165,7 +201,6 @@
             .catch(err => console.error('Erro na requisição de pagamento:', err));
         }
 
-        // 4. Inicialização ao carregar
         window.onload = function() {
             renderizarJogos(catalogoJogos);
             const usuarioSalvo = localStorage.getItem('usuario');
