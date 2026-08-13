@@ -1,19 +1,40 @@
 const axios = require('axios');
 
 module.exports = async (req, res) => {
-  try {
-    const response = await axios.get('https://api.kinguin.net/v1/products', {
-      headers: {
-        'Api-Key': process.env.KINGUIN_API_KEY_WSL
-      },
-      params: {
-        limit: 20
-      }
-    });
+    try {
+        const response = await axios.get('https://api.kinguin.net/v1/products', {
+            headers: {
+                'Api-Key': process.env.KINGUIN_API_KEY_WSL
+            },
+            params: {
+                limit: 20
+            }
+        });
 
-    res.status(200).json(response.data);
-  } catch (error) {
-    res.status(500).json({ error: 'Erro ao buscar jogos', details: error.message });
-  }
+        let rawData = response.data;
+        let items = [];
+
+        if (Array.isArray(rawData)) {
+            items = rawData;
+        } else if (rawData && Array.isArray(rawData.results)) {
+            items = rawData.results;
+        } else if (rawData && Array.isArray(rawData.items)) {
+            items = rawData.items;
+        } else if (rawData) {
+            items = [rawData];
+        }
+
+        const jogosFormatados = items.map(item => {
+            return {
+                name: item.name || item.productName || 'Chave Steam',
+                price: item.price ? `R$ ${(item.price * 5.5).toFixed(2).replace('.', ',')}` : 'R$ 49,90',
+                image: item.cover || item.image || item.screenshots?.[0] || 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=500'
+            };
+        });
+
+        return res.status(200).json(jogosFormatados);
+    } catch (error) {
+        console.error('Erro na API Kinguin:', error.message);
+        return res.status(500).json({ error: 'Erro ao buscar jogos', details: error.message });
+    }
 };
-
