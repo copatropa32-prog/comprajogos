@@ -3,223 +3,153 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CompraJogos - Chaves Steam com Melhor Preço</title>
+    <title>Comprajogos - Chaves Steam com Entrega Instantânea</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background-color: #0b0e14; color: #c7d5e0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background-color: #0b0e14; color: #fff; }
         header { background: #171a21; color: white; padding: 24px 20px; text-align: center; border-bottom: 1px solid #2a475e; }
         header h1 { color: #66c0f4; font-size: 28px; }
         header p { color: #8f98a0; font-size: 14px; margin-top: 6px; }
         
-        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        .search-container { margin-top: 15px; }
+        .search-container input {
+            width: 100%; max-width: 400px; padding: 10px 15px; border-radius: 4px; border: 1px solid #2a475e;
+            background: #1b2838; color: white; font-size: 14px; outline: none;
+        }
+        .search-container input:focus { border-color: #66c0f4; }
 
-        /* Carrossel Interativo de Destaques */
-        .carrossel { 
-            position: relative; 
-            background: linear-gradient(135deg, #1b2838, #2a475e); 
-            color: white; 
-            border-radius: 12px; 
-            margin-bottom: 25px; 
-            box-shadow: 0 4px 15px rgba(0,0,0,0.4); 
-            border: 1px solid #325578; 
+        main { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        .catalog h2 { font-size: 22px; margin-bottom: 20px; color: #c7d5e0; border-bottom: 2px solid #2a475e; padding-bottom: 8px; }
+
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .game-card {
+            background: #16202d;
+            border-radius: 8px;
             overflow: hidden;
-        }
-        .carrossel-inner { display: flex; transition: transform 0.4s ease-in-out; }
-        .carrossel-item { min-width: 100%; padding: 35px 60px; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-        .carrossel-item h2 { font-size: 24px; color: #66c0f4; margin-bottom: 8px; }
-        .carrossel-item p { font-size: 14px; color: #c7d5e0; margin-bottom: 15px; max-width: 600px; }
-        .btn-carrossel { background-color: #5c7e10; color: white; padding: 10px 22px; border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 14px; transition: background 0.2s; display: inline-block; }
-        .btn-carrossel:hover { background-color: #6e9413; }
-        
-        .carrossel-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.3); color: white; border: none; padding: 12px 16px; cursor: pointer; font-size: 18px; border-radius: 4px; transition: background 0.2s; z-index: 10; }
-        .carrossel-btn:hover { background: rgba(0,0,0,0.7); color: #66c0f4; }
-        .prev { left: 10px; }
-        .next { right: 10px; }
-
-        /* Busca e Filtros */
-        .busca-box { margin-bottom: 20px; text-align: center; }
-        .busca-box input { width: 100%; max-width: 600px; padding: 12px 16px; font-size: 15px; background: #16202d; color: white; border: 1px solid #2a475e; border-radius: 8px; outline: none; box-shadow: 0 2px 6px rgba(0,0,0,0.2); }
-        .busca-box input::placeholder { color: #8f98a0; }
-        
-        .categorias { display: flex; justify-content: center; overflow-x: auto; padding-bottom: 10px; gap: 10px; margin-bottom: 25px; }
-        .cat-btn { padding: 8px 18px; border: 1px solid #2a475e; border-radius: 20px; background: #16202d; color: #66c0f4; font-weight: bold; font-size: 14px; cursor: pointer; white-space: nowrap; flex-shrink: 0; transition: all 0.2s; }
-        .cat-btn:hover, .cat-btn.active { background: #66c0f4; color: #171a21; border-color: #66c0f4; }
-
-        /* Grid Responsivo de Jogos */
-        .grid-catalogo { 
-            display: grid; 
-            grid-template-columns: repeat(2, 1fr); 
-            gap: 15px; 
+            border: 1px solid #2a475e;
+            transition: transform 0.2s;
+            display: flex;
+            flex-direction: column;
         }
 
-        @media (min-width: 600px) {
-            .grid-catalogo { grid-template-columns: repeat(3, 1fr); gap: 18px; }
-        }
-        @media (min-width: 900px) {
-            .grid-catalogo { grid-template-columns: repeat(4, 1fr); gap: 20px; }
-        }
-        @media (min-width: 1200px) {
-            .grid-catalogo { grid-template-columns: repeat(5, 1fr); gap: 20px; }
+        .game-card:hover { transform: translateY(-4px); border-color: #66c0f4; }
+
+        .game-card img {
+            width: 100%;
+            height: 140px;
+            object-fit: cover;
         }
 
-        .card-jogo { background: #16202d; border: 1px solid #2a475e; border-radius: 10px; padding: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); display: flex; flex-direction: column; justify-content: space-between; transition: transform 0.2s, box-shadow 0.2s; }
-        .card-jogo:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.5); border-color: #66c0f4; }
-        .card-jogo img { width: 100%; height: 130px; object-fit: cover; border-radius: 6px; }
-        .card-conteudo h2 { font-size: 14px; margin: 8px 0 4px 0; color: #ffffff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .card-conteudo .preco { font-size: 14px; color: #66c0f4; font-weight: bold; margin-bottom: 10px; }
-        .btn-comprar { background-color: #2a475e; color: white; text-align: center; padding: 8px; border-radius: 6px; text-decoration: none; font-size: 13px; font-weight: bold; display: block; transition: background 0.2s; }
-        .btn-comprar:hover { background-color: #66c0f4; color: #171a21; }
+        .game-info {
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            justify-content: space-between;
+        }
 
-        footer { text-align: center; padding: 30px; color: #8f98a0; font-size: 13px; margin-top: 30px; border-top: 1px solid #1f2c39; }
+        .game-info h3 { font-size: 16px; margin-bottom: 8px; color: #ffffff; }
+        .price { font-size: 16px; font-weight: bold; color: #a4d007; margin-bottom: 12px; }
+
+        .btn-comprar {
+            display: block;
+            text-align: center;
+            background: linear-gradient(to bottom, #75b126 5%, #528212 100%);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .btn-comprar:hover { background: linear-gradient(to bottom, #8cd730 5%, #629c15 100%); }
     </style>
 </head>
 <body>
     <header>
-        <h1>CompraJogos</h1>
+        <h1>Comprajogos</h1>
         <p>Chaves Steam com entrega instantânea</p>
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Pesquisar por jogos..." onkeyup="filtrarJogos()">
+        </div>
     </header>
 
-    <div class="container">
-        <!-- Carrossel Interativo de Destaques -->
-        <div class="carrossel">
-            <button class="carrossel-btn prev" onclick="mudarSlide(-1)">&#10094;</button>
-            <button class="carrossel-btn next" onclick="mudarSlide(1)">&#10095;</button>
-            <div class="carrossel-inner" id="carrosselInner">
-                <div class="carrossel-item">
-                    <h2>Destaque: Baldur's Gate 3</h2>
-                    <p>Viva a melhor experiência de RPG da atualidade com o menor preço garantido.</p>
-                    <a href="https://www.kinguin.net/" target="_blank" class="btn-carrossel">Garantir Chave</a>
-                </div>
-                <div class="carrossel-item">
-                    <h2>Cyberpunk 2077</h2>
-                    <p>Explore a megalópole de Night City com descontos exclusivos em chaves Steam.</p>
-                    <a href="https://www.kinguin.net/" target="_blank" class="btn-carrossel">Ver Oferta</a>
-                </div>
-                <div class="carrossel-item">
-                    <h2>Elden Ring</h2>
-                    <p>Enfrente os desafios das Terras Intermédias economizando na sua chave de ativação.</p>
-                    <a href="https://www.kinguin.net/" target="_blank" class="btn-carrossel">Aproveitar Desconto</a>
-                </div>
+    <main>
+        <section class="catalog">
+            <h2>Catálogo em Destaque</h2>
+            <div id="games-grid" class="games-grid">
+                <p style="text-align: center; color: #888;">Carregando jogos...</p>
             </div>
-        </div>
-
-        <!-- Barra de Pesquisa -->
-        <div class="busca-box">
-            <input type="text" id="searchInput" placeholder="Pesquisar entre os 50 jogos..." onkeyup="filtrarJogos()">
-        </div>
-
-        <!-- Categorias -->
-        <div class="categorias">
-            <button class="cat-btn active" onclick="filtrarCat('Todos', this)">Todos</button>
-            <button class="cat-btn" onclick="filtrarCat('Ação', this)">Ação</button>
-            <button class="cat-btn" onclick="filtrarCat('RPG', this)">RPG</button>
-            <button class="cat-btn" onclick="filtrarCat('Indie', this)">Indie</button>
-            <button class="cat-btn" onclick="filtrarCat('Esportes', this)">Esportes</button>
-        </div>
-
-        <!-- Catálogo Dinâmico -->
-        <section class="grid-catalogo" id="catalogo"></section>
-    </div>
-
-    <footer>
-        <p>&copy; 2026 CompraJogos. Todos os direitos reservados.</p>
-    </footer>
+        </section>
+    </main>
 
     <script>
-        let slideAtual = 0;
-        const totalSlides = 3;
-
-        function mudarSlide(direcao) {
-            slideAtual = (slideAtual + direcao + totalSlides) % totalSlides;
-            const inner = document.getElementById("carrosselInner");
-            inner.style.transform = `translateX(-${slideAtual * 100}%)`;
-        }
-
-        setInterval(() => {
-            mudarSlide(1);
-        }, 5000);
-
-        const jogos = [
-            { titulo: "Cyberpunk 2077", preco: "R$ 199,90", cat: "Ação", img: "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?w=500", link: "https://www.kinguin.net/" },
-            { titulo: "Baldur's Gate 3", preco: "R$ 199,90", cat: "RPG", img: "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=500", link: "https://www.kinguin.net/" },
-            { titulo: "Hollow Knight", preco: "R$ 46,99", cat: "Indie", img: "https://images.unsplash.com/photo-1579546929518-9e396f3cc809?w=500", link: "https://www.kinguin.net/" },
-            { titulo: "Elden Ring", preco: "R$ 229,90", cat: "RPG", img: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=500", link: "https://www.kinguin.net/" },
-            { titulo: "Counter-Strike 2", preco: "Gratuito", cat: "Ação", img: "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=500", link: "https://store.steampowered.com/app/730/CounterStrike_2/" },
-            { titulo: "Grand Theft Auto V", preco: "R$ 83,60", cat: "Ação", img: "https://images.unsplash.com/photo-1533850595775-f8f39423e67d?w=500", link: "https://www.kinguin.net/" },
-            { titulo: "Red Dead Redemption 2", preco: "R$ 299,99", cat: "Ação", img: "https://images.unsplash.com/photo-1560253023-3ec5d502959f?w=500", link: "https://www.kinguin.net/" },
-            { titulo: "Hogwarts Legacy", preco: "R$ 249,99", cat: "RPG", img: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=500", link: "https://www.kinguin.net/" },
-            { titulo: "EA SPORTS FC 25", preco: "R$ 319,00", cat: "Esportes", img: "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=500", link: "https://www.kinguin.net/" },
-            { titulo: "God of War", preco: "R$ 199,90", cat: "Ação", img: "https://images.unsplash.com/photo-1579373903781-fd5c0c30c4cd?w=500", link: "https://www.kinguin.net/" },
-            { titulo: "Spider-Man Remastered", preco: "R$ 249,90", cat: "Ação", img: "https://images.unsplash.com/photo-1635863138275-d9b33299680b?w=500", link: "https://www.kinguin.net/" },
-            { titulo: "Terraria", preco: "R$ 32,99", cat: "Indie", img: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=500", link: "https://www.kinguin.net/" },
-            { titulo: "Stardew Valley", preco: "R$ 24,99", cat: "Indie", img: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=500", link: "https://www.kinguin.net/" },
-            { titulo: "Hades", preco: "R$ 47,49", cat: "Indie", img: "https://images.unsplash.com/photo-1612287233202-b51b36671c5d?w=500", link: "https://www.kinguin.net/" },
-            { titulo: "The Witcher 3", preco: "R$ 150,00", cat: "RPG", img: "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=500", link: "https://www.kinguin.net/" },
-            { titulo: "Weird Worlds", preco: "R$ 29,90", cat: "Indie", img: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=500", link: "https://www.kinguin.net/" },
-            { titulo: "Word Rescue", preco: "R$ 19,90", cat: "Indie", img: "https://images.unsplash.com/photo-1612287233202-b51b36671c5d?w=500", link: "https://www.kinguin.net/" },
-            { titulo: "Resident Evil 4", preco: "R$ 249,00", cat: "Ação", img: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=500", link: "https://www.kinguin.net/" },
-            { titulo: "Monster Hunter World", preco: "R$ 99,90", cat: "RPG", img: "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=500", link: "https://www.kinguin.net/" },
-            { titulo: "Dark Souls III", preco: "R$ 159,90", cat: "RPG", img: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=500", link: "https://www.kinguin.net/" },
-            { titulo: "Forza Horizon 5", preco: "R$ 249,00", cat: "Esportes", img: "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=500", link: "https://www.kinguin.net/" },
-            { titulo: "Assetto Corsa", preco: "R$ 37,99", cat: "Esportes", img: "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=500", link: "https://www.kinguin.net/" },
-            { titulo: "Rocket League", preco: "Gratuito", cat: "Esportes", img: "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=500", link: "https://www.kinguin.net/" },
-            { titulo: "Dead Cells", preco: "R$ 47,49", cat: "Indie", img: "https://images.unsplash.com/photo-1579546929518-9e396f3cc809?w=500", link: "https://www.kinguin.net/" },
-            { titulo: "Celeste", preco: "R$ 37,99", cat: "Indie", img: "https://images.unsplash.com/photo-1579546929518-9e396f3cc809?w=500", link: "https://www.kinguin.net/" },
-            { titulo: "Slay the Spire", preco: "R$ 47,49", cat: "Indie", img: "https://images.unsplash.com/photo-1579546929518-9e396f3cc809?w=500", link: "https://www.kinguin.net/" },
-            { titulo: "Cuphead", preco: "R$ 37,99", cat: "Indie", img: "https://images.unsplash.com/photo-1579546929518-9e396f3cc809?w=500", link: "https://www.kinguin.net/" },
-            { titulo: "Subnautica", preco: "R$ 57,99", cat: "Ação", img: "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=500", link: "https://www.kinguin.net/" },
-            { titulo: "Fallout 4", preco: "R$ 82,99", cat: "RPG", img: "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=500", link: "https://www.kinguin.net/" },
-            { titulo: "Skyrim Special Edition", preco: "R$ 149,00", cat: "RPG", img: "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=500", link: "https://www.kinguin.net/" },
-            { titulo: "Persona 5 Royal", preco: "R$ 249,50", cat: "RPG", img: "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=500", link: "https://www.kinguin.net/" },
-            { titulo: "Yakuza: Like a Dragon", preco: "R$ 249,00", cat: "RPG", img: "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=500", link: "https://www.kinguin.net/" },
-            { titulo: "Borderlands 3", preco: "R$ 119,90", cat: "Ação", img: "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=500", link: "https://www.kinguin.net/" },
-            { titulo: "Doom Eternal", preco: "R$ 149,00", cat: "Ação", img: "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=500", link: "https://www.kinguin.net/" },
-            { titulo: "Devil May Cry 5", preco: "R$ 99,00", cat: "Ação", img: "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=500", link: "https://www.kinguin.net/" },
-            { titulo: "Left 4 Dead 2", preco: "R$ 32,99", cat: "Ação", img: "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=500", link: "https://www.kinguin.net/" },
-            { titulo: "Portal 2", preco: "R$ 32,99", cat: "Indie", img: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=500", link: "https://www.kinguin.net/" },
-            { titulo: "Half-Life 2", preco: "R$ 20,49", cat: "Ação", img: "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=500", link: "https://www.kinguin.net/" },
-            { titulo: "BioShock Remastered", preco: "R$ 35,00", cat: "Ação", img: "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=500", link: "https://www.kinguin.net/" },
-            { titulo: "Mafia Definitive Edition", preco: "R$ 159,90", cat: "Ação", img: "https://images.unsplash.com/photo-1533850595775-f8f39423e67d?w=500", link: "https://www.kinguin.net/" },
-            { titulo: "NBA 2K25", preco: "R$ 299,90", cat: "Esportes", img: "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=500", link: "https://www.kinguin.net/" },
-            { titulo: "F1 24", preco: "R$ 319,00", cat: "Esportes", img: "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=500", link: "https://www.kinguin.net/" },
-            { titulo: "Mortal Kombat 11", preco: "R$ 229,99", cat: "Ação", img: "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=500", link: "https://www.kinguin.net/" },
-            { titulo: "Street Fighter 6", preco: "R$ 249,00", cat: "Ação", img: "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=500", link: "https://www.kinguin.net/" },
-            { titulo: "Tekken 8", preco: "R$ 269,90", cat: "Ação", img: "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=500", link: "https://www.kinguin.net/" },
-            { titulo: "Baldur's Gate 1 & 2", preco: "R$ 76,49", cat: "RPG", img: "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=500", link: "https://www.kinguin.net/" },
-            { titulo: "Divinity: Original Sin 2", preco: "R$ 99,99", cat: "RPG", img: "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=500", link: "https://www.kinguin.net/" },
-            { titulo: "Disco Elysium", preco: "R$ 75,49", cat: "RPG", img: "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=500", link: "https://www.kinguin.net/" },
-            { titulo: "Outer Wilds", preco: "R$ 59,99", cat: "Indie", img: "https://images.unsplash.com/photo-1579546929518-9e396f3cc809?w=500", link: "https://www.kinguin.net/" },
-            { titulo: "Detroit: Become Human", preco: "R$ 149,99", cat: "Ação", img: "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=500", link: "https://www.kinguin.net/" }
+        const jogosFallback = [
+            { name: "Baldur's Gate 3", price: "R$ 199,90", image: "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=500", category: "RPG" },
+            { name: "Cyberpunk 2077", price: "R$ 199,90", image: "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=500", category: "Ação" },
+            { name: "Hollow Knight", price: "R$ 46,99", image: "https://images.unsplash.com/photo-1612287233002-ef1d000f37d2?w=500", category: "Indie" },
+            { name: "Elden Ring", price: "R$ 229,90", image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=500", category: "RPG" },
+            { name: "Counter-Strike 2", price: "Gratuito", image: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=500", category: "Esportes" },
+            { name: "Word Rescue", price: "R$ 15,90", image: "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=500", category: "Indie" }
         ];
 
-        function exibirJogos(lista) {
-            const catalogo = document.getElementById("catalogo");
-            catalogo.innerHTML = lista.map(j => `
-                <div class="card-jogo">
-                    <img src="${j.img}" alt="${j.titulo}">
-                    <div class="card-conteudo">
-                        <h2>${j.titulo}</h2>
-                        <div class="preco">${j.preco}</div>
-                        <a href="${j.link}" target="_blank" class="btn-comprar">Ver Oferta</a>
+        let listaJogosAtuais = [];
+
+        function renderizarJogos(jogos) {
+            const grid = document.getElementById('games-grid');
+            grid.innerHTML = '';
+
+            if (!jogos || jogos.length === 0) {
+                grid.innerHTML = '<p>Nenhum jogo encontrado.</p>';
+                return;
+            }
+
+            jogos.forEach(jogo => {
+                const card = document.createElement('div');
+                card.className = 'game-card';
+                card.innerHTML = `
+                    <img src="${jogo.image || 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=500'}" alt="${jogo.name}">
+                    <div class="game-info">
+                        <h3>${jogo.name}</h3>
+                        <p class="price">${jogo.price}</p>
+                        <a href="produto.html?nome=${encodeURIComponent(jogo.name)}" class="btn-comprar">Garantir Chave</a>
                     </div>
-                </div>
-            `).join('');
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        async function carregarCatalogo() {
+            try {
+                const response = await fetch('/api/jogos');
+                const data = await response.json();
+                
+                if (!response.ok || !data || (Array.isArray(data) && data.length === 0)) {
+                    throw new Error('API indisponível ou vazia');
+                }
+
+                listaJogosAtuais = Array.isArray(data) ? data : jogosFallback;
+                renderizarJogos(listaJogosAtuais);
+            } catch (error) {
+                console.warn('Usando dados de fallback local devido a:', error.message);
+                listaJogosAtuais = jogosFallback;
+                renderizarJogos(listaJogosAtuais);
+            }
         }
 
         function filtrarJogos() {
-            const termo = document.getElementById("searchInput").value.toLowerCase();
-            const filtrados = jogos.filter(j => j.titulo.toLowerCase().includes(termo));
-            exibirJogos(filtrados);
+            const termo = document.getElementById('searchInput').value.toLowerCase();
+            const filtrados = listaJogosAtuais.filter(j => j.name.toLowerCase().includes(termo));
+            renderizarJogos(filtrados);
         }
 
-        function filtrarCat(cat, el) {
-            document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
-            if(el) el.classList.add('active');
-            const lista = cat === 'Todos' ? jogos : jogos.filter(j => j.cat === cat);
-            exibirJogos(lista);
-        }
-
-        exibirJogos(jogos);
+        window.onload = carregarCatalogo;
     </script>
 </body>
 </html>
