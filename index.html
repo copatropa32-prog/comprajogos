@@ -64,6 +64,8 @@
                 <option value="MOBA">MOBA</option>
                 <option value="RPG">RPG</option>
                 <option value="Indie">Indie</option>
+                <option value="Ação">Ação</option>
+                <option value="Estratégia">Estratégia</option>
                 <option value="Esportes">Esportes</option>
             </select>
 
@@ -76,23 +78,114 @@
 
         <!-- Grade de Jogos -->
         <div id="games-grid" class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            <!-- Os jogos são injetados dinamicamente via JS -->
+            <!-- Os 100 jogos são injetados dinamicamente via JS -->
         </div>
     </main>
 
     <!-- Scripts de Funcionalidade e Integrações -->
     <script>
-        // Catálogo completo preservado
+        // Catálogo contendo os 100 jogos mais famosos, vendidos, baixados e baratos com capas originais da Steam
         const catalogoJogos = [
             { id: 1, title: "Counter-Strike 2", price: 0.00, category: "FPS", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/730/header.jpg" },
             { id: 2, title: "Dota 2", price: 0.00, category: "MOBA", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/570/header.jpg" },
             { id: 3, title: "Team Fortress 2", price: 0.00, category: "FPS", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/440/header.jpg" },
-            { id: 4, title: "Warframe", price: 0.00, category: "RPG", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/230410/header.jpg" },
-            { id: 5, title: "Path of Exile", price: 0.00, category: "RPG", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/238960/header.jpg" },
+            { id: 4, title: "Apex Legends", price: 0.00, category: "FPS", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1172470/header.jpg" },
+            { id: 5, title: "PUBG: BATTLEGROUNDS", price: 0.00, category: "Ação", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/578080/header.jpg" },
             { id: 6, title: "Destiny 2", price: 0.00, category: "FPS", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1085660/header.jpg" },
-            { id: 7, title: "Rocket League", price: 0.00, category: "Esportes", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/252950/header.jpg" },
-            { id: 8, title: "Weird Worlds: Return to Infinite Space", price: 19.90, category: "RPG", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/11260/header.jpg" },
-            { id: 9, title: "Word Rescue", price: 9.90, category: "Indie", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/358260/header.jpg" }
+            { id: 7, title: "Warframe", price: 0.00, category: "RPG", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/230410/header.jpg" },
+            { id: 8, title: "Path of Exile", price: 0.00, category: "RPG", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/238960/header.jpg" },
+            { id: 9, title: "Grand Theft Auto V", price: 83.60, category: "Ação", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/271590/header.jpg" },
+            { id: 10, title: "Cyberpunk 2077", price: 199.90, category: "RPG", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1091500/header.jpg" },
+            { id: 11, title: "The Witcher 3: Wild Hunt", price: 79.99, category: "RPG", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/292030/header.jpg" },
+            { id: 12, title: "Red Dead Redemption 2", price: 249.90, category: "Ação", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1174180/header.jpg" },
+            { id: 13, title: "Elden Ring", price: 229.90, category: "RPG", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1245620/header.jpg" },
+            { id: 14, title: "Baldur's Gate 3", price: 199.99, category: "RPG", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1086940/header.jpg" },
+            { id: 15, title: "Terraria", price: 19.99, category: "Indie", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/105600/header.jpg" },
+            { id: 16, title: "Stardew Valley", price: 24.99, category: "Indie", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/413150/header.jpg" },
+            { id: 17, title: "Hades", price: 47.49, category: "Indie", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1145360/header.jpg" },
+            { id: 18, title: "Hollow Knight", price: 46.99, category: "Indie", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/367520/header.jpg" },
+            { id: 19, title: "Portal 2", price: 32.99, category: "Indie", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/620/header.jpg" },
+            { id: 20, title: "Left 4 Dead 2", price: 32.99, category: "FPS", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/550/header.jpg" },
+            { id: 21, title: "Rust", price: 107.99, category: "Ação", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/252490/header.jpg" },
+            { id: 22, title: "Palworld", price: 88.99, category: "RPG", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1623730/header.jpg" },
+            { id: 23, title: "Helldivers 2", price: 199.50, category: "Ação", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/553850/header.jpg" },
+            { id: 24, title: "Monster Hunter: World", price: 69.90, category: "RPG", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/582010/header.jpg" },
+            { id: 25, title: "Euro Truck Simulator 2", price: 67.49, category: "Estratégia", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/227300/header.jpg" },
+            { id: 26, title: "American Truck Simulator", price: 67.49, category: "Estratégia", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/270880/header.jpg" },
+            { id: 27, title: "Cities: Skylines", price: 73.99, category: "Estratégia", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/255710/header.jpg" },
+            { id: 28, title: "Sid Meier's Civilization VI", price: 129.90, category: "Estratégia", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/289070/header.jpg" },
+            { id: 29, title: "Age of Empires II: Definitive Edition", price: 36.99, category: "Estratégia", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/813780/header.jpg" },
+            { id: 30, title: "Resident Evil 4", price: 249.00, category: "Ação", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/2050650/header.jpg" },
+            { id: 31, title: "Resident Evil 2", price: 169.00, category: "Ação", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/883710/header.jpg" },
+            { id: 32, title: "God of War", price: 199.90, category: "Ação", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1593500/header.jpg" },
+            { id: 33, title: "Marvel's Spider-Man Remastered", price: 249.00, category: "Ação", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1817070/header.jpg" },
+            { id: 34, title: "Horizon Zero Dawn", price: 199.90, category: "RPG", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1151640/header.jpg" },
+            { id: 35, title: "Days Gone", price: 199.90, category: "Ação", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1259420/header.jpg" },
+            { id: 36, title: "Fallout 4", price: 83.00, category: "RPG", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/377160/header.jpg" },
+            { id: 37, title: "The Elder Scrolls V: Skyrim Special Edition", price: 149.00, category: "RPG", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/489830/header.jpg" },
+            { id: 38, title: "Subnautica", price: 57.99, category: "Indie", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/264710/header.jpg" },
+            { id: 39, title: "The Forest", price: 37.99, category: "Indie", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/242760/header.jpg" },
+            { id: 40, title: "Sons of the Forest", price: 88.99, category: "Ação", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1326470/header.jpg" },
+            { id: 41, title: "Valheim", price: 37.99, category: "Indie", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/892970/header.jpg" },
+            { id: 42, title: "Phasmophobia", price: 46.99, category: "Indie", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/739630/header.jpg" },
+            { id: 43, title: "Dead Cells", price: 47.99, category: "Indie", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/588650/header.jpg" },
+            { id: 44, title: "Cuphead", price: 37.99, category: "Indie", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/268910/header.jpg" },
+            { id: 45, title: "Undertale", price: 19.99, category: "Indie", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/391540/header.jpg" },
+            { id: 46, title: "Celeste", price: 37.99, category: "Indie", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/504230/header.jpg" },
+            { id: 47, title: "Risk of Rain 2", price: 69.99, category: "Ação", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/632360/header.jpg" },
+            { id: 48, title: "Deep Rock Galactic", price: 88.99, category: "FPS", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/548430/header.jpg" },
+            { id: 49, title: "Payday 2", price: 37.99, category: "FPS", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/218620/header.jpg" },
+            { id: 50, title: "Garry's Mod", price: 25.00, category: "Indie", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/4000/header.jpg" },
+            { id: 51, title: "Among Us", price: 10.99, category: "Indie", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/945360/header.jpg" },
+            { id: 52, title: "Fall Guys", price: 0.00, category: "Ação", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1097150/header.jpg" },
+            { id: 53, title: "Brawlhalla", price: 0.00, category: "Ação", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/291550/header.jpg" },
+            { id: 54, title: "War Thunder", price: 0.00, category: "Ação", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/236390/header.jpg" },
+            { id: 55, title: "World of Warships", price: 0.00, category: "Ação", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/552990/header.jpg" },
+            { id: 56, title: "Lost Ark", price: 0.00, category: "RPG", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1599340/header.jpg" },
+            { id: 57, title: "Naraka: Bladepoint", price: 0.00, category: "Ação", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1203220/header.jpg" },
+            { id: 58, title: "Yu-Gi-Oh! Master Duel", price: 0.00, category: "Estratégia", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1449850/header.jpg" },
+            { id: 59, title: "Magic: The Gathering Arena", price: 0.00, category: "Estratégia", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/213850/header.jpg" },
+            { id: 60, title: "Super Animal Royale", price: 0.00, category: "Ação", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/843380/header.jpg" },
+            { id: 61, title: "Unturned", price: 0.00, category: "Indie", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/304930/header.jpg" },
+            { id: 62, title: "Paladins", price: 0.00, category: "FPS", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/444090/header.jpg" },
+            { id: 63, title: "Smite", price: 0.00, category: "MOBA", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/386360/header.jpg" },
+            { id: 64, title: "Realm Royale Reforged", price: 0.00, category: "Ação", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/813820/header.jpg" },
+            { id: 65, title: "SCP: Secret Laboratory", price: 0.00, category: "FPS", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/700330/header.jpg" },
+            { id: 66, title: "Star Wars: The Old Republic", price: 0.00, category: "RPG", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1286830/header.jpg" },
+            { id: 67, title: "Enshrouded", price: 88.99, category: "RPG", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1203620/header.jpg" },
+            { id: 68, title: "Granblue Fantasy: Relink", price: 249.00, category: "RPG", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/881020/header.jpg" },
+            { id: 69, title: "Dragon's Dogma 2", price: 299.00, category: "RPG", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/2054970/header.jpg" },
+            { id: 70, title: "Persona 5 Royal", price: 249.00, category: "RPG", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1687950/header.jpg" },
+            { id: 71, title: "Persona 4 Golden", price: 69.99, category: "RPG", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1113000/header.jpg" },
+            { id: 72, title: "Persona 3 Reload", price: 299.00, category: "RPG", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/2161700/header.jpg" },
+            { id: 73, title: "Like a Dragon: Infinite Wealth", price: 349.00, category: "RPG", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/2072450/header.jpg" },
+            { id: 74, title: "Yakuza: Like a Dragon", price: 249.00, category: "RPG", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1235140/header.jpg" },
+            { id: 75, title: "NieR: Automata", price: 159.00, category: "RPG", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/524220/header.jpg" },
+            { id: 76, title: "Monster Hunter Rise", price: 139.00, category: "RPG", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1446780/header.jpg" },
+            { id: 77, title: "Sekiro: Shadows Die Twice", price: 229.90, category: "Ação", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/814380/header.jpg" },
+            { id: 78, title: "Dark Souls III", price: 257.90, category: "RPG", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/374320/header.jpg" },
+            { id: 79, title: "Dark Souls II: Scholar of the First Sin", price: 159.90, category: "RPG", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/335300/header.jpg" },
+            { id: 80, title: "Dark Souls: Remastered", price: 159.90, category: "RPG", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/570940/header.jpg" },
+            { id: 81, title: "Armored Core VI: Fires of Rubicon", price: 257.90, category: "Ação", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1888160/header.jpg" },
+            { id: 82, title: "Street Fighter 6", price: 249.00, category: "Ação", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1364780/header.jpg" },
+            { id: 83, title: "Tekken 8", price: 269.90, category: "Ação", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1778820/header.jpg" },
+            { id: 84, title: "Mortal Kombat 1", price: 279.00, category: "Ação", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1971870/header.jpg" },
+            { id: 85, title: "Guilty Gear Strive", price: 149.99, category: "Ação", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1384160/header.jpg" },
+            { id: 86, title: "It Takes Two", price: 199.00, category: "Indie", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1426210/header.jpg" },
+            { id: 87, title: "A Way Out", price: 179.00, category: "Ação", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1222700/header.jpg" },
+            { id: 88, title: "Battlefield 1", price: 119.00, category: "FPS", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1238840/header.jpg" },
+            { id: 89, title: "Battlefield V", price: 199.00, category: "FPS", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1238810/header.jpg" },
+            { id: 90, title: "Titanfall 2", price: 149.00, category: "FPS", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1237970/header.jpg" },
+            { id: 91, title: "Star Wars Jedi: Survivor", price: 298.90, category: "Ação", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1774580/header.jpg" },
+            { id: 92, title: "Star Wars Jedi: Fallen Order", price: 199.00, category: "Ação", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1172380/header.jpg" },
+            { id: 93, title: "Dead Space", price: 249.00, category: "Ação", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1693980/header.jpg" },
+            { id: 94, title: "Mass Effect Legendary Edition", price: 249.00, category: "RPG", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1328670/header.jpg" },
+            { id: 95, title: "Battlefield 2042", price: 249.00, category: "FPS", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1517290/header.jpg" },
+            { id: 96, title: "Dying Light", price: 74.99, category: "Ação", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/239140/header.jpg" },
+            { id: 97, title: "Dying Light 2 Stay Human", price: 249.00, category: "Ação", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/534380/header.jpg" },
+            { id: 98, title: "Metro Exodus", price: 149.99, category: "FPS", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/412020/header.jpg" },
+            { id: 99, title: "BioShock Infinite", price: 89.99, category: "FPS", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/8870/header.jpg" },
+            { id: 100, title: "Weird Worlds: Return to Infinite Space", price: 19.90, category: "Indie", image: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/11260/header.jpg" }
         ];
 
         function renderizarJogos(jogos) {
