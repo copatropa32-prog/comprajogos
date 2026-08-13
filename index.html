@@ -11,22 +11,19 @@
     </style>
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen">
-    <!-- Header -->
     <header class="fixed top-0 w-full z-40 glass shadow-2xl">
         <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
             <div class="flex items-center gap-2">
                 <div class="bg-indigo-600 p-2 rounded-xl text-white">🎮</div>
                 <h1 class="text-2xl font-black tracking-tighter text-white">COMPRAJOGOS</h1>
             </div>
-            <button onclick="toggleCart()" class="relative p-2 hover:bg-slate-800 rounded-full">
+            <button onclick="toggleCart()" class="relative p-2 hover:bg-slate-800 rounded-full transition-all">
                 🛒 <span id="cartCount" class="absolute -top-1 -right-1 bg-indigo-600 text-[10px] w-5 h-5 flex items-center justify-center rounded-full font-bold">0</span>
             </button>
         </div>
     </header>
 
-    <!-- Main Content -->
     <main class="max-w-6xl mx-auto px-4 pt-28 pb-12">
-        <!-- Filtros -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8 glass p-6 rounded-2xl">
             <input type="text" id="searchInput" placeholder="🔍 Buscar nome..." class="bg-slate-900 border border-slate-700 px-4 py-3 rounded-xl focus:ring-2 focus:ring-indigo-500 outline-none" onkeyup="filtrarJogos()">
             <select id="genreFilter" onchange="filtrarJogos()" class="bg-slate-900 border border-slate-700 px-4 py-3 rounded-xl outline-none">
@@ -55,6 +52,20 @@
         </div>
     </div>
 
+    <!-- Modal Pix -->
+    <div id="pixModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
+        <div class="glass p-8 rounded-2xl max-w-sm w-full text-center">
+            <h2 class="text-xl font-bold mb-4 text-emerald-400">Pagamento Pix</h2>
+            <p class="text-sm text-slate-400 mb-6">Escaneie ou copie o código abaixo:</p>
+            <div class="bg-white p-2 rounded-lg mb-4">
+                <div class="w-32 h-32 mx-auto bg-slate-900 flex items-center justify-center text-xs text-white">QR CODE</div>
+            </div>
+            <input type="text" id="pixCode" value="00020126440014BR.GOV.BCB.PIX0112comprajogos" class="w-full bg-slate-950 text-emerald-400 text-xs p-2 rounded mb-4 text-center font-mono" readonly>
+            <button onclick="copiarPix()" class="w-full bg-indigo-600 py-2 rounded-lg font-bold">Copiar Código</button>
+            <button onclick="fecharPix()" class="w-full mt-2 text-slate-500 hover:text-white text-sm">Fechar</button>
+        </div>
+    </div>
+
     <script>
         let listaJogos = [];
         let cart = [];
@@ -63,10 +74,16 @@
             const res = await fetch('/api/jogos');
             listaJogos = await res.json();
             
-            // Popular Gêneros
             const generos = ['Todos', ...new Set(listaJogos.map(j => j.genre))];
             const genreSelect = document.getElementById('genreFilter');
             generos.forEach(g => genreSelect.innerHTML += `<option value="${g}">${g}</option>`);
+            
+            // Carregar carrinho do localStorage
+            const savedCart = localStorage.getItem('cart');
+            if (savedCart) {
+                cart = JSON.parse(savedCart);
+                updateCart();
+            }
             
             renderizar(listaJogos);
         }
@@ -74,13 +91,13 @@
         function renderizar(jogos) {
             const container = document.getElementById('catalog');
             container.innerHTML = jogos.map(j => `
-                <div class="group bg-slate-900 rounded-2xl overflow-hidden border border-slate-800 hover:border-indigo-500 transition-all shadow-lg hover:shadow-indigo-500/20">
-                    <img src="${j.image}" class="h-40 w-full object-cover">
+                <div class="group bg-slate-900 rounded-2xl overflow-hidden border border-slate-800 hover:border-indigo-500 transition-all shadow-lg">
+                    <img src="${j.image}" loading="lazy" class="h-40 w-full object-cover">
                     <div class="p-4">
                         <span class="text-[10px] font-bold text-indigo-400 bg-indigo-950 px-2 py-1 rounded">${j.genre}</span>
                         <h3 class="font-bold mt-2 h-12">${j.name}</h3>
                         <p class="text-lg font-black text-emerald-400 mb-4">${j.price}</p>
-                        <button onclick="addToCart('${j.name}')" class="w-full bg-slate-800 hover:bg-indigo-600 py-2 rounded-lg text-sm font-bold transition-all">Adicionar ao Carrinho</button>
+                        <button onclick="addToCart('${j.name.replace(/'/g, "\\'")}')" class="w-full bg-slate-800 hover:bg-indigo-600 py-2 rounded-lg text-sm font-bold transition-all">Adicionar</button>
                     </div>
                 </div>
             `).join('');
@@ -107,6 +124,7 @@
         }
 
         function updateCart() {
+            localStorage.setItem('cart', JSON.stringify(cart)); // Persistência
             document.getElementById('cartCount').innerText = cart.length;
             const items = document.getElementById('cartItems');
             items.innerHTML = cart.map((j, i) => `
@@ -132,10 +150,24 @@
 
         function finalizarCompra() {
             if(cart.length === 0) return alert('Carrinho vazio!');
-            alert('Pedido enviado! Chaves geradas no seu e-mail.');
+            document.getElementById('pixModal').classList.remove('hidden');
+        }
+
+        function copiarPix() {
+            const copyText = document.getElementById("pixCode");
+            copyText.select();
+            document.execCommand("copy");
+            alert("Código Pix copiado!");
+            
+            // Limpar após "pagamento"
             cart = [];
             updateCart();
+            fecharPix();
             toggleCart();
+        }
+
+        function fecharPix() {
+            document.getElementById('pixModal').classList.add('hidden');
         }
 
         init();
