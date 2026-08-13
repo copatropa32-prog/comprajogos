@@ -3,146 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Comprajogos - Chaves Steam com Entrega Instantânea</title>
-    <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background-color: #0b0e14; color: #fff; }
-        header { background: #171a21; color: white; padding: 24px 20px; text-align: center; border-bottom: 1px solid #2a475e; }
-        header h1 { color: #66c0f4; font-size: 28px; }
-        header p { color: #8f98a0; font-size: 14px; margin-top: 6px; }
-        
-        .search-container { margin-top: 15px; }
-        .search-container input {
-            width: 100%; max-width: 400px; padding: 10px 15px; border-radius: 4px; border: 1px solid #2a475e;
-            background: #1b2838; color: white; font-size: 14px; outline: none;
-        }
-        .search-container input:focus { border-color: #66c0f4; }
-
-        main { max-width: 1200px; margin: 0 auto; padding: 20px; }
-        .catalog h2 { font-size: 22px; margin-bottom: 20px; color: #c7d5e0; border-bottom: 2px solid #2a475e; padding-bottom: 8px; }
-
-        .games-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 20px;
-        }
-
-        .game-card {
-            background: #16202d;
-            border-radius: 8px;
-            overflow: hidden;
-            border: 1px solid #2a475e;
-            transition: transform 0.2s;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .game-card:hover { transform: translateY(-4px); border-color: #66c0f4; }
-
-        .game-card img {
-            width: 100%;
-            height: 140px;
-            object-fit: cover;
-        }
-
-        .game-info {
-            padding: 15px;
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
-            justify-content: space-between;
-        }
-
-        .game-info h3 { font-size: 16px; margin-bottom: 8px; color: #ffffff; }
-        .price { font-size: 16px; font-weight: bold; color: #a4d007; margin-bottom: 12px; }
-
-        .btn-comprar {
-            display: block;
-            text-align: center;
-            background: linear-gradient(to bottom, #75b126 5%, #528212 100%);
-            color: white;
-            padding: 8px 12px;
-            border-radius: 4px;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 14px;
-        }
-
-        .btn-comprar:hover { background: linear-gradient(to bottom, #8cd730 5%, #629c15 100%); }
-    </style>
+    <title>Comprajogos - Chaves Steam com entrega instantânea</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    <header>
-        <h1>Comprajogos</h1>
-        <p>Chaves Steam com entrega instantânea</p>
-        <div class="search-container">
-            <input type="text" id="searchInput" placeholder="Pesquisar por jogos..." onkeyup="filtrarJogos()">
+<body class="bg-slate-950 text-slate-100 min-h-screen">
+    <header class="py-8 text-center bg-slate-900 border-b border-slate-800">
+        <h1 class="text-4xl font-extrabold text-sky-400 tracking-tight">Comprajogos</h1>
+        <p class="text-slate-400 mt-2">Chaves Steam com entrega instantânea</p>
+        <div class="mt-6 max-w-md mx-auto px-4">
+            <input type="text" id="searchInput" placeholder="Pesquisar por jogos..." class="w-full px-4 py-3 rounded-lg bg-slate-800 border border-slate-700 text-slate-100 focus:outline-none focus:border-sky-500" onkeyup="filtrarJogos()">
         </div>
     </header>
 
-    <main>
-        <section class="catalog">
-            <h2>Catálogo em Destaque</h2>
-            <div id="games-grid" class="games-grid">
-                <p style="text-align: center; color: #888;">Carregando jogos...</p>
-            </div>
-        </section>
+    <main class="max-w-6xl mx-auto px-4 py-8">
+        <h2 class="text-2xl font-bold mb-6 border-l-4 border-sky-500 pl-3">Catálogo em Destaque</h2>
+        <div id="catalog" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            <p class="text-slate-400 col-span-full text-center py-10">Carregando jogos da API...</p>
+        </div>
     </main>
 
     <script>
-        const jogosFallback = [
-            { name: "Baldur's Gate 3", price: "R$ 199,90", image: "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=500", category: "RPG" },
-            { name: "Cyberpunk 2077", price: "R$ 199,90", image: "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=500", category: "Ação" },
-            { name: "Hollow Knight", price: "R$ 46,99", image: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=500", category: "Indie" },
-            { name: "Elden Ring", price: "R$ 229,90", image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=500", category: "RPG" },
-            { name: "Counter-Strike 2", price: "Gratuito", image: "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=500", category: "Esportes" },
-            { name: "Word Rescue", price: "R$ 15,90", image: "https://images.unsplash.com/photo-1542751110-97427bbecf20?w=500", category: "Indie" }
-        ];
-
         let listaJogosAtuais = [];
 
-        function renderizarJogos(jogos) {
-            const grid = document.getElementById('games-grid');
-            grid.innerHTML = '';
-
-            if (!jogos || jogos.length === 0) {
-                grid.innerHTML = '<p>Nenhum jogo encontrado.</p>';
-                return;
-            }
-
-            jogos.forEach(jogo => {
-                const card = document.createElement('div');
-                card.className = 'game-card';
-                const linkProduto = `produto.html?name=${encodeURIComponent(jogo.name)}&price=${encodeURIComponent(jogo.price)}&image=${encodeURIComponent(jogo.image)}`;
-                
-                card.innerHTML = `
-                    <img src="${jogo.image || 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=500'}" alt="${jogo.name}">
-                    <div class="game-info">
-                        <h3>${jogo.name}</h3>
-                        <p class="price">${jogo.price}</p>
-                        <a href="${linkProduto}" class="btn-comprar">Garantir Chave</a>
-                    </div>
-                `;
-                grid.appendChild(card);
-            });
-        }
-
-        async function carregarCatalogo() {
+        async function carregarJogos() {
             try {
                 const response = await fetch('/api/jogos');
-                const data = await response.json();
+                const jogos = await response.json();
                 
-                if (!response.ok || !data || (Array.isArray(data) && data.length === 0)) {
-                    throw new Error('API indisponível ou vazia');
+                const catalog = document.getElementById('catalog');
+                if (!Array.isArray(jogos) || jogos.length === 0) {
+                    catalog.innerHTML = '<p class="text-slate-400 col-span-full text-center">Nenhum jogo encontrado no momento.</p>';
+                    return;
                 }
 
-                listaJogosAtuais = Array.isArray(data) ? data : jogosFallback;
+                listaJogosAtuais = jogos;
                 renderizarJogos(listaJogosAtuais);
-            } catch (error) {
-                console.warn('Usando dados de fallback local devido a:', error.message);
-                listaJogosAtuais = jogosFallback;
-                renderizarJogos(listaJogosAtuais);
+            } catch (err) {
+                console.error('Erro ao carregar catálogo:', err);
+                document.getElementById('catalog').innerHTML = '<p class="text-red-400 col-span-full text-center">Erro ao carregar o catálogo de jogos.</p>';
             }
+        }
+
+        function renderizarJogos(jogos) {
+            const catalog = document.getElementById('catalog');
+            catalog.innerHTML = jogos.map(jogo => `
+                <div class="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden shadow-lg flex flex-col">
+                    <img src="${jogo.image}" alt="${jogo.name}" class="h-40 w-full object-cover">
+                    <div class="p-4 flex flex-col flex-grow justify-between">
+                        <div>
+                            <h3 class="font-bold text-lg mb-2 text-slate-200 truncate">${jogo.name}</h3>
+                            <p class="text-sky-400 font-extrabold text-xl mb-4">${jogo.price}</p>
+                        </div>
+                        <button onclick="alert('Funcionalidade de compra integrada em breve!')" class="w-full bg-lime-600 hover:bg-lime-500 text-white font-bold py-2 px-4 rounded-lg transition-colors">
+                            Garantir Chave
+                        </button>
+                    </div>
+                </div>
+            `).join('');
         }
 
         function filtrarJogos() {
@@ -151,7 +68,7 @@
             renderizarJogos(filtrados);
         }
 
-        window.onload = carregarCatalogo;
+        carregarJogos();
     </script>
 </body>
 </html>
