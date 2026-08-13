@@ -22,8 +22,45 @@
         </div>
     </main>
 
+    <!-- Modal de Checkout -->
+    <div id="checkoutModal" class="fixed inset-0 bg-black/70 flex items-center justify-center hidden z-50 p-4">
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-md w-full p-6 relative shadow-2xl">
+            <button onclick="fecharCheckout()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-xl font-bold">&times;</button>
+            <h3 class="text-2xl font-bold text-sky-400 mb-2">Finalizar Pedido</h3>
+            <p id="modalGameName" class="text-slate-300 font-medium mb-4"></p>
+            <div class="bg-slate-800 p-4 rounded-xl mb-6 flex justify-between items-center">
+                <span class="text-slate-400">Total a pagar:</span>
+                <span id="modalGamePrice" class="text-xl font-extrabold text-lime-400"></span>
+            </div>
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-sm text-slate-400 mb-1">Seu E-mail (para receber a chave)</label>
+                    <input type="email" id="buyerEmail" placeholder="seu@email.com" class="w-full px-4 py-2 rounded-lg bg-slate-800 border border-slate-700 text-white focus:outline-none focus:border-sky-500">
+                </div>
+                <button onclick="finalizarCompra()" class="w-full bg-lime-600 hover:bg-lime-500 text-white font-bold py-3 rounded-xl transition-colors shadow-lg">
+                    Pagar com Pix / Cartão
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Sucesso / Chave Entregue -->
+    <div id="successModal" class="fixed inset-0 bg-black/70 flex items-center justify-center hidden z-50 p-4">
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-md w-full p-6 text-center relative shadow-2xl">
+            <h3 class="text-2xl font-bold text-lime-400 mb-2">Compra Aprovada!</h3>
+            <p class="text-slate-300 mb-4">Sua chave Steam foi gerada com sucesso:</p>
+            <div class="bg-slate-800 p-4 rounded-xl mb-6 border border-dashed border-lime-500/50">
+                <span id="steamKey" class="text-lg font-mono font-bold text-sky-300 tracking-wider"></span>
+            </div>
+            <button onclick="fecharSucesso()" class="w-full bg-sky-600 hover:bg-sky-500 text-white font-bold py-3 rounded-xl transition-colors">
+                Concluir
+            </button>
+        </div>
+    </div>
+
     <script>
         let listaJogosAtuais = [];
+        let jogoSelecionado = null;
 
         async function carregarJogos() {
             try {
@@ -46,7 +83,7 @@
 
         function renderizarJogos(jogos) {
             const catalog = document.getElementById('catalog');
-            catalog.innerHTML = jogos.map(jogo => `
+            catalog.innerHTML = jogos.map((jogo, index) => `
                 <div class="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden shadow-lg flex flex-col">
                     <img src="${jogo.image}" alt="${jogo.name}" class="h-40 w-full object-cover">
                     <div class="p-4 flex flex-col flex-grow justify-between">
@@ -54,7 +91,7 @@
                             <h3 class="font-bold text-lg mb-2 text-slate-200 truncate">${jogo.name}</h3>
                             <p class="text-sky-400 font-extrabold text-xl mb-4">${jogo.price}</p>
                         </div>
-                        <button onclick="alert('Funcionalidade de compra integrada em breve!')" class="w-full bg-lime-600 hover:bg-lime-500 text-white font-bold py-2 px-4 rounded-lg transition-colors">
+                        <button onclick="abrirCheckout(${index})" class="w-full bg-lime-600 hover:bg-lime-500 text-white font-bold py-2 px-4 rounded-lg transition-colors">
                             Garantir Chave
                         </button>
                     </div>
@@ -66,6 +103,41 @@
             const termo = document.getElementById('searchInput').value.toLowerCase();
             const filtrados = listaJogosAtuais.filter(j => j.name.toLowerCase().includes(termo));
             renderizarJogos(filtrados);
+        }
+
+        function abrirCheckout(index) {
+            jogoSelecionado = listaJogosAtuais[index];
+            document.getElementById('modalGameName').innerText = jogoSelecionado.name;
+            document.getElementById('modalGamePrice').innerText = jogoSelecionado.price;
+            document.getElementById('checkoutModal').classList.remove('hidden');
+        }
+
+        function fecharCheckout() {
+            document.getElementById('checkoutModal').classList.add('hidden');
+        }
+
+        function finalizarCompra() {
+            const email = document.getElementById('buyerEmail').value;
+            if (!email || !email.includes('@')) {
+                alert('Por favor, informe um e-mail válido.');
+                return;
+            }
+            fecharCheckout();
+            
+            // Simula geração de chave Steam aleatória
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+            let chave = '';
+            for(let i=0; i<15; i++) {
+                if(i > 0 && i % 5 === 0) chave += '-';
+                chave += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+
+            document.getElementById('steamKey').innerText = chave;
+            document.getElementById('successModal').classList.remove('hidden');
+        }
+
+        function fecharSucesso() {
+            document.getElementById('successModal').classList.add('hidden');
         }
 
         carregarJogos();
