@@ -129,7 +129,7 @@
 
         async function carregarCatalogo() {
             try {
-                const response =*(await fetch('/api/jogos'));
+                const response = await fetch('/api/jogos');
                 const data = await response.json();
                 
                 if (!response.ok || !data || (Array.isArray(data) && data.length === 0)) {
