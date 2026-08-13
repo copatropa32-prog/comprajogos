@@ -2,13 +2,16 @@ const axios = require('axios');
 
 module.exports = async (req, res) => {
     try {
+        const apiKey = process.env.KINGUIN_API_KEY_WSL || process.env.KINGUIN_API_KEY;
+
         const response = await axios.get('https://api.kinguin.net/v1/products', {
             headers: {
-                'Api-Key': process.env.KINGUIN_API_KEY_WSL
+                'Api-Key': apiKey
             },
             params: {
                 limit: 20
-            }
+            },
+            timeout: 5000
         });
 
         let rawData = response.data;
