@@ -4,7 +4,7 @@ module.exports = async (req, res) => {
   try {
     const response = await axios.get('https://api.kinguin.net/v1/products', {
       headers: {
-        'X-Api-Key': process.env.KINGUIN_API_KEY
+        'Api-Key': process.env.KINGUIN_API_KEY_WSL
       },
       params: {
         limit: 20
