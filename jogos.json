@@ -1,0 +1,14 @@
+[
+    { "name": "Baldur's Gate 3", "price": "R$ 199,90", "image": "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=500" },
+    { "name": "Cyberpunk 2077", "price": "R$ 199,90", "image": "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=500" },
+    { "name": "Hollow Knight", "price": "R$ 46,99", "image": "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=500" },
+    { "name": "Elden Ring", "price": "R$ 229,90", "image": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=500" },
+    { "name": "Grand Theft Auto V", "price": "R$ 83,00", "image": "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=500" },
+    { "name": "Red Dead Redemption 2", "price": "R$ 299,99", "image": "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=500" },
+    { "name": "Stardew Valley", "price": "R$ 24,99", "image": "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=500" },
+    { "name": "Terraria", "price": "R$ 19,99", "image": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=500" },
+    { "name": "The Witcher 3: Wild Hunt", "price": "R$ 79,99", "image": "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=500" },
+    { "name": "God of War", "price": "R$ 199,90", "image": "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=500" },
+    { "name": "Hades", "price": "R$ 47,49", "image": "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=500" },
+    { "name": "Counter-Strike 2", "price": "Gratuito", "image": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=500" }
+]
