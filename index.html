@@ -5,172 +5,160 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Comprajogos | Loja Premium</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Biblioteca do Google Identity Services -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    
     <style>
-        .glass { background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.1); }
-        .transition-all { transition: all 0.3s ease; }
+        .glass { background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.1); transition: all 0.3s ease; }
+        .glass:hover { border-color: rgba(99, 102, 241, 0.5); }
     </style>
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen">
+    
+    <!-- Cabeçalho (Header) -->
     <header class="fixed top-0 w-full z-40 glass shadow-2xl">
         <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+            
+            <!-- Logo -->
             <div class="flex items-center gap-2">
                 <div class="bg-indigo-600 p-2 rounded-xl text-white">🎮</div>
                 <h1 class="text-2xl font-black tracking-tighter text-white">COMPRAJOGOS</h1>
             </div>
-            <button onclick="toggleCart()" class="relative p-2 hover:bg-slate-800 rounded-full transition-all">
-                🛒 <span id="cartCount" class="absolute -top-1 -right-1 bg-indigo-600 text-[10px] w-5 h-5 flex items-center justify-center rounded-full font-bold">0</span>
-            </button>
+
+            <!-- Área da Direita: Login do Google e Carrinho -->
+            <div class="flex items-center gap-4">
+                
+                <!-- Div Invisível (Configuração do Google) -->
+                <div id="g_id_onload"
+                     data-client_id="75702393897-88uv9hvhq0gi23n0vqk75m3.apps.googleusercontent.com"
+                     data-callback="handleCredentialResponse"
+                     data-auto_prompt="false">
+                </div>
+                
+                <!-- O Botão Visual do Google aparecerá aqui -->
+                <div class="g_id_signin" data-type="standard" data-shape="rectangular" data-theme="outline" data-text="signin_with" data-size="large" data-logo_alignment="left"></div>
+                
+                <!-- Texto de Saudação (Oculto até logar) -->
+                <div id="user-info" class="text-white text-sm font-bold hidden"></div>
+
+                <button onclick="toggleCart()" class="relative p-2 hover:bg-slate-800 rounded-full transition-all">
+                    🛒
+                    <span id="cartCount" class="absolute -top-1 -right-1 bg-indigo-600 text-[10px] w-5 h-5 flex items-center justify-center rounded-full">0</span>
+                </button>
+            </div>
         </div>
     </header>
 
+    <!-- Corpo Principal (Lista de Jogos) -->
     <main class="max-w-6xl mx-auto px-4 pt-28 pb-12">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8 glass p-6 rounded-2xl">
-            <input type="text" id="searchInput" placeholder="🔍 Buscar nome..." class="bg-slate-900 border border-slate-700 px-4 py-3 rounded-xl focus:ring-2 focus:ring-indigo-500 outline-none" onkeyup="filtrarJogos()">
-            <select id="genreFilter" onchange="filtrarJogos()" class="bg-slate-900 border border-slate-700 px-4 py-3 rounded-xl outline-none">
-                <option value="Todos">Todos os Gêneros</option>
-            </select>
-            <select id="priceFilter" onchange="filtrarJogos()" class="bg-slate-900 border border-slate-700 px-4 py-3 rounded-xl outline-none">
-                <option value="Todos">Preço: Todos</option>
-                <option value="Gratuito">Gratuito</option>
-                <option value="Pago">Pago</option>
-            </select>
-        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            
+            <!-- Jogo 1 -->
+            <div class="glass p-6 rounded-2xl flex flex-col items-center text-center gap-4">
+                <img src="https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/11260/header.jpg" alt="Weird Worlds" class="rounded-xl w-full object-cover">
+                <h2 class="text-xl font-bold">Weird Worlds: Return to Infinite Space</h2>
+                <p class="text-slate-400">Chave Steam</p>
+                <p class="text-2xl font-black text-indigo-400">R$ 19,90</p>
+                <button onclick="comprarJogo('Weird Worlds', 19.90)" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-3 px-4 rounded-xl transition-all">
+                    Comprar com Mercado Pago
+                </button>
+            </div>
 
-        <div id="catalog" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
+            <!-- Jogo 2 -->
+            <div class="glass p-6 rounded-2xl flex flex-col items-center text-center gap-4">
+                <img src="https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/358260/header.jpg" alt="Word Rescue" class="rounded-xl w-full object-cover">
+                <h2 class="text-xl font-bold">Word Rescue</h2>
+                <p class="text-slate-400">Chave Steam</p>
+                <p class="text-2xl font-black text-indigo-400">R$ 9,90</p>
+                <button onclick="comprarJogo('Word Rescue', 9.90)" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-3 px-4 rounded-xl transition-all">
+                    Comprar com Mercado Pago
+                </button>
+            </div>
+
+            <!-- Jogo 3 -->
+            <div class="glass p-6 rounded-2xl flex flex-col items-center text-center gap-4">
+                <img src="https://via.placeholder.com/460x215/1e293b/ffffff?text=Adicionar+Jogo" alt="Outro Jogo" class="rounded-xl w-full object-cover">
+                <h2 class="text-xl font-bold">Lançamento Surpresa</h2>
+                <p class="text-slate-400">Chave Steam</p>
+                <p class="text-2xl font-black text-indigo-400">R$ 49,90</p>
+                <button onclick="comprarJogo('Lancamento', 49.90)" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-3 px-4 rounded-xl transition-all">
+                    Comprar com Mercado Pago
+                </button>
+            </div>
+
+        </div>
     </main>
 
-    <!-- Sidebar Carrinho -->
-    <div id="cartDrawer" class="fixed inset-y-0 right-0 z-50 w-80 glass transform translate-x-full transition-transform duration-300 p-6 flex flex-col shadow-2xl">
-        <div class="flex justify-between items-center mb-6">
-            <h2 class="text-xl font-bold">Seu Carrinho</h2>
-            <button onclick="toggleCart()" class="text-slate-400 hover:text-white">✕</button>
-        </div>
-        <div id="cartItems" class="flex-grow space-y-4 overflow-y-auto"></div>
-        <div class="border-t border-slate-700 pt-4 mt-4">
-            <div class="flex justify-between font-bold text-lg mb-4"><span>Total:</span> <span id="cartTotal">R$ 0,00</span></div>
-            <button onclick="finalizarCompra()" class="w-full bg-indigo-600 hover:bg-indigo-500 py-3 rounded-xl font-bold transition-all">Finalizar Pedido</button>
-        </div>
-    </div>
-
-    <!-- Modal Pix -->
-    <div id="pixModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
-        <div class="glass p-8 rounded-2xl max-w-sm w-full text-center">
-            <h2 class="text-xl font-bold mb-4 text-emerald-400">Pagamento Pix</h2>
-            <p class="text-sm text-slate-400 mb-6">Escaneie ou copie o código abaixo:</p>
-            <div class="bg-white p-2 rounded-lg mb-4">
-                <div class="w-32 h-32 mx-auto bg-slate-900 flex items-center justify-center text-xs text-white">QR CODE</div>
-            </div>
-            <input type="text" id="pixCode" value="00020126440014BR.GOV.BCB.PIX0112comprajogos" class="w-full bg-slate-950 text-emerald-400 text-xs p-2 rounded mb-4 text-center font-mono" readonly>
-            <button onclick="copiarPix()" class="w-full bg-indigo-600 py-2 rounded-lg font-bold">Copiar Código</button>
-            <button onclick="fecharPix()" class="w-full mt-2 text-slate-500 hover:text-white text-sm">Fechar</button>
-        </div>
-    </div>
-
+    <!-- Scripts de Integração (Google e Mercado Pago) -->
     <script>
-        let listaJogos = [];
-        let cart = [];
+        // 1. Processar Login do Google
+        function handleCredentialResponse(response) {
+            fetch('/api/auth/google', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ token: response.credential })
+            })
+            .then(res => res.json())
+            .then(data => {
+                if(data.success) {
+                    // Salvar usuário localmente
+                    localStorage.setItem('usuario', JSON.stringify(data.user));
+                    mostrarUsuarioLogado(data.user);
+                } else {
+                    alert('Erro ao realizar o login.');
+                }
+            })
+            .catch(err => console.error('Erro na requisição de login:', err));
+        }
 
-        async function init() {
-            const res = await fetch('/api/jogos');
-            listaJogos = await res.json();
+        // 2. Atualizar o Menu (Ocultar botão, mostrar nome)
+        function mostrarUsuarioLogado(user) {
+            const infoDiv = document.getElementById('user-info');
+            infoDiv.innerHTML = `Olá, <span class="text-indigo-400">${user.name}</span>!`;
+            infoDiv.classList.remove('hidden');
             
-            const generos = ['Todos', ...new Set(listaJogos.map(j => j.genre))];
-            const genreSelect = document.getElementById('genreFilter');
-            generos.forEach(g => genreSelect.innerHTML += `<option value="${g}">${g}</option>`);
-            
-            // Carregar carrinho do localStorage
-            const savedCart = localStorage.getItem('cart');
-            if (savedCart) {
-                cart = JSON.parse(savedCart);
-                updateCart();
+            const btnLogin = document.querySelector('.g_id_signin');
+            if(btnLogin) btnLogin.style.display = 'none';
+        }
+
+        // 3. Processar Pagamento
+        function comprarJogo(nomeJogo, precoJogo) {
+            const usuario = localStorage.getItem('usuario');
+            if (!usuario) {
+                alert('⚠️ Por favor, faça login com sua conta Google antes de comprar.');
+                return;
             }
+
+            alert(`Redirecionando para pagamento seguro de ${nomeJogo}...`);
             
-            renderizar(listaJogos);
+            fetch('/api/criar-pagamento', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ title: nomeJogo, price: precoJogo })
+            })
+            .then(res => res.json())
+            .then(data => {
+                if(data.init_point) {
+                    window.location.href = data.init_point; // Vai para o Checkout do Mercado Pago
+                } else {
+                    alert('Ocorreu um erro ao gerar a cobrança.');
+                }
+            })
+            .catch(err => console.error('Erro na requisição de pagamento:', err));
         }
 
-        function renderizar(jogos) {
-            const container = document.getElementById('catalog');
-            container.innerHTML = jogos.map(j => `
-                <div class="group bg-slate-900 rounded-2xl overflow-hidden border border-slate-800 hover:border-indigo-500 transition-all shadow-lg">
-                    <img src="${j.image}" loading="lazy" class="h-40 w-full object-cover">
-                    <div class="p-4">
-                        <span class="text-[10px] font-bold text-indigo-400 bg-indigo-950 px-2 py-1 rounded">${j.genre}</span>
-                        <h3 class="font-bold mt-2 h-12">${j.name}</h3>
-                        <p class="text-lg font-black text-emerald-400 mb-4">${j.price}</p>
-                        <button onclick="addToCart('${j.name.replace(/'/g, "\\'")}')" class="w-full bg-slate-800 hover:bg-indigo-600 py-2 rounded-lg text-sm font-bold transition-all">Adicionar</button>
-                    </div>
-                </div>
-            `).join('');
-        }
-
-        function filtrarJogos() {
-            const termo = document.getElementById('searchInput').value.toLowerCase();
-            const genero = document.getElementById('genreFilter').value;
-            const preco = document.getElementById('priceFilter').value;
-
-            const filtrados = listaJogos.filter(j => {
-                const matchNome = j.name.toLowerCase().includes(termo);
-                const matchGenero = genero === 'Todos' || j.genre === genero;
-                const matchPreco = preco === 'Todos' ? true : (preco === 'Gratuito' ? j.price === 'Gratuito' : j.price !== 'Gratuito');
-                return matchNome && matchGenero && matchPreco;
-            });
-            renderizar(filtrados);
-        }
-
-        function addToCart(name) {
-            const jogo = listaJogos.find(j => j.name === name);
-            cart.push(jogo);
-            updateCart();
-        }
-
-        function updateCart() {
-            localStorage.setItem('cart', JSON.stringify(cart)); // Persistência
-            document.getElementById('cartCount').innerText = cart.length;
-            const items = document.getElementById('cartItems');
-            items.innerHTML = cart.map((j, i) => `
-                <div class="flex justify-between items-center bg-slate-950 p-2 rounded">
-                    <span class="text-sm truncate w-32">${j.name}</span>
-                    <span class="text-emerald-400 text-sm">${j.price}</span>
-                    <button onclick="removeFromCart(${i})" class="text-red-400 hover:text-red-300">×</button>
-                </div>
-            `).join('');
-            
-            const total = cart.reduce((acc, curr) => acc + (curr.price === 'Gratuito' ? 0 : parseFloat(curr.price.replace('R$ ', '').replace(',', '.'))), 0);
-            document.getElementById('cartTotal').innerText = `R$ ${total.toFixed(2).replace('.', ',')}`;
-        }
-
-        function removeFromCart(index) {
-            cart.splice(index, 1);
-            updateCart();
-        }
+        // 4. Manter a sessão logada ao atualizar a página
+        window.onload = function() {
+            const usuarioSalvo = localStorage.getItem('usuario');
+            if (usuarioSalvo) {
+                mostrarUsuarioLogado(JSON.parse(usuarioSalvo));
+            }
+        };
 
         function toggleCart() {
-            document.getElementById('cartDrawer').classList.toggle('translate-x-full');
+            alert("Carrinho será implementado em breve!");
         }
-
-        function finalizarCompra() {
-            if(cart.length === 0) return alert('Carrinho vazio!');
-            document.getElementById('pixModal').classList.remove('hidden');
-        }
-
-        function copiarPix() {
-            const copyText = document.getElementById("pixCode");
-            copyText.select();
-            document.execCommand("copy");
-            alert("Código Pix copiado!");
-            
-            // Limpar após "pagamento"
-            cart = [];
-            updateCart();
-            fecharPix();
-            toggleCart();
-        }
-
-        function fecharPix() {
-            document.getElementById('pixModal').classList.add('hidden');
-        }
-
-        init();
     </script>
 </body>
 </html>
