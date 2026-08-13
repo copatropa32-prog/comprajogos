@@ -6,28 +6,10 @@
         "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/730/header.jpg"
     },
     {
-        "name": "Dota 2",
-        "genre": "MOBA",
-        "price": "Gratuito",
-        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/570/header.jpg"
-    },
-    {
         "name": "Team Fortress 2",
         "genre": "FPS",
         "price": "Gratuito",
         "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/440/header.jpg"
-    },
-    {
-        "name": "Warframe",
-        "genre": "RPG",
-        "price": "Gratuito",
-        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/230410/header.jpg"
-    },
-    {
-        "name": "Path of Exile",
-        "genre": "RPG",
-        "price": "Gratuito",
-        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/238960/header.jpg"
     },
     {
         "name": "Apex Legends",
@@ -42,34 +24,40 @@
         "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/1085660/header.jpg"
     },
     {
-        "name": "Rocket League",
-        "genre": "Racing",
-        "price": "Gratuito",
-        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/252950/header.jpg"
-    },
-    {
-        "name": "Valorant",
+        "name": "Left 4 Dead 2",
         "genre": "FPS",
-        "price": "Gratuito",
-        "image": "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=400&q=80"
+        "price": "R$ 32,99",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/550/header.jpg"
     },
     {
-        "name": "League of Legends",
+        "name": "Portal 2",
+        "genre": "Puzzle",
+        "price": "R$ 32,99",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/620/header.jpg"
+    },
+    {
+        "name": "Dota 2",
         "genre": "MOBA",
         "price": "Gratuito",
-        "image": "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=400&q=80"
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/570/header.jpg"
     },
     {
-        "name": "Genshin Impact",
+        "name": "Warframe",
         "genre": "RPG",
         "price": "Gratuito",
-        "image": "https://images.unsplash.com/photo-1612287233002-ef2f1c849646?w=400&q=80"
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/230410/header.jpg"
     },
     {
-        "name": "Fortnite",
-        "genre": "Adventure",
+        "name": "Path of Exile",
+        "genre": "RPG",
         "price": "Gratuito",
-        "image": "https://images.unsplash.com/photo-1589241062272-c0a000071dfa?w=400&q=80"
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/238960/header.jpg"
+    },
+    {
+        "name": "The Witcher 3: Wild Hunt",
+        "genre": "RPG",
+        "price": "R$ 79,90",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/292030/header.jpg"
     },
     {
         "name": "Cyberpunk 2077",
@@ -84,10 +72,28 @@
         "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/1245620/header.jpg"
     },
     {
-        "name": "The Witcher 3: Wild Hunt",
+        "name": "Baldur's Gate 3",
         "genre": "RPG",
-        "price": "R$ 79,90",
-        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/292030/header.jpg"
+        "price": "R$ 199,90",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/1086940/header.jpg"
+    },
+    {
+        "name": "Skyrim Special Edition",
+        "genre": "RPG",
+        "price": "R$ 149,00",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/489830/header.jpg"
+    },
+    {
+        "name": "Fallout 4",
+        "genre": "RPG",
+        "price": "R$ 82,99",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/377160/header.jpg"
+    },
+    {
+        "name": "Dark Souls III",
+        "genre": "RPG",
+        "price": "R$ 159,90",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/374320/header.jpg"
     },
     {
         "name": "Red Dead Redemption 2",
@@ -100,12 +106,6 @@
         "genre": "Adventure",
         "price": "R$ 83,00",
         "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/271590/header.jpg"
-    },
-    {
-        "name": "Baldur's Gate 3",
-        "genre": "RPG",
-        "price": "R$ 199,90",
-        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/1086940/header.jpg"
     },
     {
         "name": "Starfield",
@@ -136,5 +136,95 @@
         "genre": "RPG",
         "price": "R$ 199,90",
         "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/1151640/header.jpg"
+    },
+    {
+        "name": "Monster Hunter: World",
+        "genre": "Action",
+        "price": "R$ 99,90",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/582010/header.jpg"
+    },
+    {
+        "name": "Sekiro: Shadows Die Twice",
+        "genre": "Action",
+        "price": "R$ 229,90",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/814380/header.jpg"
+    },
+    {
+        "name": "Devil May Cry 5",
+        "genre": "Action",
+        "price": "R$ 99,00",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/601150/header.jpg"
+    },
+    {
+        "name": "Rocket League",
+        "genre": "Racing",
+        "price": "Gratuito",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/252950/header.jpg"
+    },
+    {
+        "name": "Euro Truck Simulator 2",
+        "genre": "Simulator",
+        "price": "R$ 83,99",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/227300/header.jpg"
+    },
+    {
+        "name": "Cities: Skylines",
+        "genre": "Simulator",
+        "price": "R$ 88,99",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/255710/header.jpg"
+    },
+    {
+        "name": "Civilization VI",
+        "genre": "Strategy",
+        "price": "R$ 129,90",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/289070/header.jpg"
+    },
+    {
+        "name": "Age of Empires II: Definitive Edition",
+        "genre": "Strategy",
+        "price": "R$ 79,00",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/813780/header.jpg"
+    },
+    {
+        "name": "Terraria",
+        "genre": "Adventure",
+        "price": "R$ 32,99",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/105600/header.jpg"
+    },
+    {
+        "name": "Stardew Valley",
+        "genre": "Simulator",
+        "price": "R$ 24,99",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/413150/header.jpg"
+    },
+    {
+        "name": "Hades",
+        "genre": "Action",
+        "price": "R$ 73,49",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/1145360/header.jpg"
+    },
+    {
+        "name": "Valorant",
+        "genre": "FPS",
+        "price": "Gratuito",
+        "image": "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=400&q=80"
+    },
+    {
+        "name": "League of Legends",
+        "genre": "MOBA",
+        "price": "Gratuito",
+        "image": "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=400&q=80"
+    },
+    {
+        "name": "Genshin Impact",
+        "genre": "RPG",
+        "price": "Gratuito",
+        "image": "https://images.unsplash.com/photo-1612287233002-ef2f1c849646?w=400&q=80"
+    },
+    {
+        "name": "Fortnite",
+        "genre": "Adventure",
+        "price": "Gratuito",
+        "image": "https://images.unsplash.com/photo-1589241062272-c0a000071dfa?w=400&q=80"
     }
 ]
