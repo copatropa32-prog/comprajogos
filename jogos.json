@@ -3,37 +3,37 @@
         "name": "Valorant",
         "genre": "RPG",
         "price": "Gratuito",
-        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/730/header.jpg"
+        "image": "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=400&q=80"
     },
     {
         "name": "League of Legends",
         "genre": "FPS",
         "price": "Gratuito",
-        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/730/header.jpg"
+        "image": "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=400&q=80"
     },
     {
         "name": "Dota 2",
         "genre": "MOBA",
         "price": "Gratuito",
-        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/570/header.jpg"
+        "image": "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=400&q=80"
     },
     {
         "name": "Counter-Strike 2",
         "genre": "Strategy",
         "price": "Gratuito",
-        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/730/header.jpg"
+        "image": "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=400&q=80"
     },
     {
         "name": "Fortnite",
         "genre": "Racing",
         "price": "Gratuito",
-        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/730/header.jpg"
+        "image": "https://images.unsplash.com/photo-1589241062272-c0a000071dfa?w=400&q=80"
     },
     {
         "name": "Genshin Impact",
         "genre": "Simulator",
         "price": "Gratuito",
-        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/730/header.jpg"
+        "image": "https://images.unsplash.com/photo-1612287233002-ef2f1c849646?w=400&q=80"
     },
     {
         "name": "Warframe",
@@ -57,19 +57,19 @@
         "name": "Destiny 2",
         "genre": "MOBA",
         "price": "Gratuito",
-        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/1085660/header.jpg"
+        "image": "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=400&q=80"
     },
     {
         "name": "Team Fortress 2",
         "genre": "Strategy",
         "price": "Gratuito",
-        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/440/header.jpg"
+        "image": "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=400&q=80"
     },
     {
         "name": "World of Tanks",
         "genre": "Racing",
         "price": "Gratuito",
-        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/730/header.jpg"
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/1407200/header.jpg"
     },
     {
         "name": "Rocket League",
@@ -81,55 +81,55 @@
         "name": "Roblox",
         "genre": "Adventure",
         "price": "Gratuito",
-        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/730/header.jpg"
+        "image": "https://images.unsplash.com/photo-1627856013091-fed6e4e304b2?w=400&q=80"
     },
     {
         "name": "Minecraft (Demo)",
         "genre": "RPG",
         "price": "Gratuito",
-        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/730/header.jpg"
+        "image": "https://images.unsplash.com/photo-1627398242454-45a1465c2479?w=400&q=80"
     },
     {
         "name": "Brawlhalla",
         "genre": "FPS",
         "price": "Gratuito",
-        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/730/header.jpg"
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/291550/header.jpg"
     },
     {
         "name": "Paladins",
         "genre": "MOBA",
         "price": "Gratuito",
-        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/730/header.jpg"
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/444090/header.jpg"
     },
     {
         "name": "SMITE",
         "genre": "Strategy",
         "price": "Gratuito",
-        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/730/header.jpg"
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/386360/header.jpg"
     },
     {
         "name": "Albion Online",
         "genre": "Racing",
         "price": "Gratuito",
-        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/730/header.jpg"
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/761890/header.jpg"
     },
     {
         "name": "Lost Ark",
         "genre": "Simulator",
         "price": "Gratuito",
-        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/730/header.jpg"
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/1599340/header.jpg"
     },
     {
         "name": "Valorant 20",
         "genre": "Adventure",
         "price": "Gratuito",
-        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/730/header.jpg"
+        "image": "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=400&q=80"
     },
     {
         "name": "League of Legends 21",
         "genre": "RPG",
         "price": "Gratuito",
-        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/730/header.jpg"
+        "image": "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=400&q=80"
     },
     {
         "name": "Dota 2 22",
@@ -147,13 +147,13 @@
         "name": "Fortnite 24",
         "genre": "Strategy",
         "price": "Gratuito",
-        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/730/header.jpg"
+        "image": "https://images.unsplash.com/photo-1589241062272-c0a000071dfa?w=400&q=80"
     },
     {
         "name": "Genshin Impact 25",
         "genre": "Racing",
         "price": "Gratuito",
-        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/730/header.jpg"
+        "image": "https://images.unsplash.com/photo-1612287233002-ef2f1c849646?w=400&q=80"
     },
     {
         "name": "Warframe 26",
@@ -189,7 +189,7 @@
         "name": "World of Tanks 31",
         "genre": "Strategy",
         "price": "Gratuito",
-        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/730/header.jpg"
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/1407200/header.jpg"
     },
     {
         "name": "Rocket League 32",
@@ -201,55 +201,55 @@
         "name": "Roblox 33",
         "genre": "Simulator",
         "price": "Gratuito",
-        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/730/header.jpg"
+        "image": "https://images.unsplash.com/photo-1627856013091-fed6e4e304b2?w=400&q=80"
     },
     {
         "name": "Minecraft (Demo) 34",
         "genre": "Adventure",
         "price": "Gratuito",
-        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/730/header.jpg"
+        "image": "https://images.unsplash.com/photo-1627398242454-45a1465c2479?w=400&q=80"
     },
     {
         "name": "Brawlhalla 35",
         "genre": "RPG",
         "price": "Gratuito",
-        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/730/header.jpg"
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/291550/header.jpg"
     },
     {
         "name": "Paladins 36",
         "genre": "FPS",
         "price": "Gratuito",
-        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/730/header.jpg"
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/444090/header.jpg"
     },
     {
         "name": "SMITE 37",
         "genre": "MOBA",
         "price": "Gratuito",
-        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/730/header.jpg"
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/386360/header.jpg"
     },
     {
         "name": "Albion Online 38",
         "genre": "Strategy",
         "price": "Gratuito",
-        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/730/header.jpg"
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/761890/header.jpg"
     },
     {
         "name": "Lost Ark 39",
         "genre": "Racing",
         "price": "Gratuito",
-        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/730/header.jpg"
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/1599340/header.jpg"
     },
     {
         "name": "Valorant 40",
         "genre": "Simulator",
         "price": "Gratuito",
-        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/730/header.jpg"
+        "image": "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=400&q=80"
     },
     {
         "name": "League of Legends 41",
         "genre": "Adventure",
         "price": "Gratuito",
-        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/730/header.jpg"
+        "image": "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=400&q=80"
     },
     {
         "name": "Dota 2 42",
@@ -267,13 +267,13 @@
         "name": "Fortnite 44",
         "genre": "MOBA",
         "price": "Gratuito",
-        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/730/header.jpg"
+        "image": "https://images.unsplash.com/photo-1589241062272-c0a000071dfa?w=400&q=80"
     },
     {
         "name": "Genshin Impact 45",
         "genre": "Strategy",
         "price": "Gratuito",
-        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/730/header.jpg"
+        "image": "https://images.unsplash.com/photo-1612287233002-ef2f1c849646?w=400&q=80"
     },
     {
         "name": "Warframe 46",
@@ -309,7 +309,7 @@
         "name": "World of Tanks 51",
         "genre": "MOBA",
         "price": "Gratuito",
-        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/730/header.jpg"
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/1407200/header.jpg"
     },
     {
         "name": "Rocket League 52",
@@ -321,55 +321,55 @@
         "name": "Roblox 53",
         "genre": "Racing",
         "price": "Gratuito",
-        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/730/header.jpg"
+        "image": "https://images.unsplash.com/photo-1627856013091-fed6e4e304b2?w=400&q=80"
     },
     {
         "name": "Minecraft (Demo) 54",
         "genre": "Simulator",
         "price": "Gratuito",
-        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/730/header.jpg"
+        "image": "https://images.unsplash.com/photo-1627398242454-45a1465c2479?w=400&q=80"
     },
     {
         "name": "Brawlhalla 55",
         "genre": "Adventure",
         "price": "Gratuito",
-        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/730/header.jpg"
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/291550/header.jpg"
     },
     {
         "name": "Paladins 56",
         "genre": "RPG",
         "price": "Gratuito",
-        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/730/header.jpg"
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/444090/header.jpg"
     },
     {
         "name": "SMITE 57",
         "genre": "FPS",
         "price": "Gratuito",
-        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/730/header.jpg"
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/386360/header.jpg"
     },
     {
         "name": "Albion Online 58",
         "genre": "MOBA",
         "price": "Gratuito",
-        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/730/header.jpg"
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/761890/header.jpg"
     },
     {
         "name": "Lost Ark 59",
         "genre": "Strategy",
         "price": "Gratuito",
-        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/730/header.jpg"
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/1599340/header.jpg"
     },
     {
         "name": "Valorant 60",
         "genre": "Racing",
         "price": "Gratuito",
-        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/730/header.jpg"
+        "image": "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=400&q=80"
     },
     {
         "name": "League of Legends 61",
         "genre": "Simulator",
         "price": "Gratuito",
-        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/730/header.jpg"
+        "image": "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=400&q=80"
     },
     {
         "name": "Dota 2 62",
@@ -387,13 +387,13 @@
         "name": "Fortnite 64",
         "genre": "FPS",
         "price": "Gratuito",
-        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/730/header.jpg"
+        "image": "https://images.unsplash.com/photo-1589241062272-c0a000071dfa?w=400&q=80"
     },
     {
         "name": "Genshin Impact 65",
         "genre": "MOBA",
         "price": "Gratuito",
-        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/730/header.jpg"
+        "image": "https://images.unsplash.com/photo-1612287233002-ef2f1c849646?w=400&q=80"
     },
     {
         "name": "Warframe 66",
@@ -429,7 +429,7 @@
         "name": "World of Tanks 71",
         "genre": "FPS",
         "price": "Gratuito",
-        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/730/header.jpg"
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/1407200/header.jpg"
     },
     {
         "name": "Rocket League 72",
@@ -441,19 +441,19 @@
         "name": "Roblox 73",
         "genre": "Strategy",
         "price": "Gratuito",
-        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/730/header.jpg"
+        "image": "https://images.unsplash.com/photo-1627856013091-fed6e4e304b2?w=400&q=80"
     },
     {
         "name": "Minecraft (Demo) 74",
         "genre": "Racing",
         "price": "Gratuito",
-        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/730/header.jpg"
+        "image": "https://images.unsplash.com/photo-1627398242454-45a1465c2479?w=400&q=80"
     },
     {
         "name": "Cyberpunk 2077",
         "genre": "RPG",
         "price": "R$ 10,90",
-        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/1091500/header.jpg"
+        "image": "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=400&q=80"
     },
     {
         "name": "Elden Ring",
@@ -465,13 +465,13 @@
         "name": "The Witcher 3",
         "genre": "MOBA",
         "price": "R$ 12,90",
-        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/292030/header.jpg"
+        "image": "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=400&q=80"
     },
     {
         "name": "Red Dead Redemption 2",
         "genre": "Strategy",
         "price": "R$ 13,90",
-        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/1174180/header.jpg"
+        "image": "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=400&q=80"
     },
     {
         "name": "GTA V",
@@ -483,7 +483,7 @@
         "name": "Baldur's Gate 3",
         "genre": "Simulator",
         "price": "R$ 15,90",
-        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/1086940/header.jpg"
+        "image": "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=400&q=80"
     },
     {
         "name": "Starfield",
@@ -507,25 +507,25 @@
         "name": "Spider-Man Remastered",
         "genre": "MOBA",
         "price": "R$ 19,90",
-        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/730/header.jpg"
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/1817070/header.jpg"
     },
     {
         "name": "FIFA 24",
         "genre": "Strategy",
         "price": "R$ 20,90",
-        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/730/header.jpg"
+        "image": "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=400&q=80"
     },
     {
         "name": "Call of Duty: MW3",
         "genre": "Racing",
         "price": "R$ 21,90",
-        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/730/header.jpg"
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/1938090/header.jpg"
     },
     {
         "name": "Assassin's Creed Valhalla",
         "genre": "Simulator",
         "price": "R$ 22,90",
-        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/730/header.jpg"
+        "image": "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=400&q=80"
     },
     {
         "name": "Horizon Zero Dawn",
@@ -537,7 +537,7 @@
         "name": "Resident Evil 4",
         "genre": "RPG",
         "price": "R$ 24,90",
-        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/2050650/header.jpg"
+        "image": "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=400&q=80"
     },
     {
         "name": "Cyberpunk 2077 15",
@@ -597,25 +597,25 @@
         "name": "Spider-Man Remastered 24",
         "genre": "Strategy",
         "price": "R$ 34,90",
-        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/730/header.jpg"
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/1817070/header.jpg"
     },
     {
         "name": "FIFA 24 25",
         "genre": "Racing",
         "price": "R$ 35,90",
-        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/730/header.jpg"
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/2195250/header.jpg"
     },
     {
         "name": "Call of Duty: MW3 26",
         "genre": "Simulator",
         "price": "R$ 36,90",
-        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/730/header.jpg"
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/1938090/header.jpg"
     },
     {
         "name": "Assassin's Creed Valhalla 27",
         "genre": "Adventure",
         "price": "R$ 37,90",
-        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/730/header.jpg"
+        "image": "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=400&q=80"
     },
     {
         "name": "Horizon Zero Dawn 28",
@@ -687,25 +687,25 @@
         "name": "Spider-Man Remastered 39",
         "genre": "Racing",
         "price": "R$ 49,90",
-        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/730/header.jpg"
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/1817070/header.jpg"
     },
     {
         "name": "FIFA 24 40",
         "genre": "Simulator",
         "price": "R$ 50,90",
-        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/730/header.jpg"
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/2195250/header.jpg"
     },
     {
         "name": "Call of Duty: MW3 41",
         "genre": "Adventure",
         "price": "R$ 51,90",
-        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/730/header.jpg"
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/1938090/header.jpg"
     },
     {
         "name": "Assassin's Creed Valhalla 42",
         "genre": "RPG",
         "price": "R$ 52,90",
-        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/730/header.jpg"
+        "image": "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=400&q=80"
     },
     {
         "name": "Horizon Zero Dawn 43",
@@ -777,25 +777,25 @@
         "name": "Spider-Man Remastered 54",
         "genre": "Simulator",
         "price": "R$ 64,90",
-        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/730/header.jpg"
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/1817070/header.jpg"
     },
     {
         "name": "FIFA 24 55",
         "genre": "Adventure",
         "price": "R$ 65,90",
-        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/730/header.jpg"
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/2195250/header.jpg"
     },
     {
         "name": "Call of Duty: MW3 56",
         "genre": "RPG",
         "price": "R$ 66,90",
-        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/730/header.jpg"
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/1938090/header.jpg"
     },
     {
         "name": "Assassin's Creed Valhalla 57",
         "genre": "FPS",
         "price": "R$ 67,90",
-        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/730/header.jpg"
+        "image": "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=400&q=80"
     },
     {
         "name": "Horizon Zero Dawn 58",
@@ -867,25 +867,25 @@
         "name": "Spider-Man Remastered 69",
         "genre": "Adventure",
         "price": "R$ 79,90",
-        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/730/header.jpg"
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/1817070/header.jpg"
     },
     {
         "name": "FIFA 24 70",
         "genre": "RPG",
         "price": "R$ 80,90",
-        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/730/header.jpg"
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/2195250/header.jpg"
     },
     {
         "name": "Call of Duty: MW3 71",
         "genre": "FPS",
         "price": "R$ 81,90",
-        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/730/header.jpg"
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/1938090/header.jpg"
     },
     {
         "name": "Assassin's Creed Valhalla 72",
         "genre": "MOBA",
         "price": "R$ 82,90",
-        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/730/header.jpg"
+        "image": "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=400&q=80"
     },
     {
         "name": "Horizon Zero Dawn 73",
