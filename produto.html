@@ -1,19 +1,40 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head><meta charset="UTF-8"><title>Detalhes</title><link rel="stylesheet" href="style.css"></head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalhes do Produto | CompraJogos</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f0f2f5; display: flex; flex-direction: column; align-items: center; padding: 20px; margin: 0; }
+        .container { background: white; padding: 30px; border-radius: 12px; max-width: 500px; width: 100%; box-shadow: 0 4px 6px rgba(0,0,0,0.1); text-align: center; }
+        img { width: 100%; max-height: 300px; object-fit: cover; border-radius: 8px; margin-bottom: 20px; }
+        h1 { color: #333; margin-bottom: 10px; }
+        .price { color: #27ae60; font-size: 1.8em; font-weight: bold; margin: 20px 0; }
+        button { background: #e67e22; color: white; border: none; padding: 15px 30px; border-radius: 6px; cursor: pointer; width: 100%; font-size: 1.2em; transition: background 0.3s; }
+        button:hover { background: #d35400; }
+        a { display: inline-block; margin-top: 15px; color: #7f8c8d; text-decoration: none; }
+    </style>
+</head>
 <body>
-    <main class="container">
-        <div class="produto-container">
-            <h1 id="tituloJogo">Carregando...</h1>
-            <p id="precoJogo" style="font-size:24px; color:#4CAF50;"></p>
-            <a id="btnComprar" href="#" class="btn-comprar-grande">Comprar Agora</a>
-        </div>
-        <div class="relacionados"><h3>Você também pode gostar</h3><div id="gridRel" class="grid-catalogo"></div></div>
-    </main>
+
+    <div class="container" id="product-details">
+        <h1 id="product-name">Carregando detalhes...</h1>
+        <img id="product-image" src="" alt="Capa do Jogo">
+        <p class="price" id="product-price"></p>
+        <button onclick="alert('Redirecionando para o gateway de pagamento...')">Comprar Agora</button>
+        <br>
+        <a href="index.html">← Voltar para a loja</a>
+    </div>
+
     <script>
         const params = new URLSearchParams(window.location.search);
-        document.getElementById('tituloJogo').innerText = params.get('titulo');
-        document.getElementById('precoJogo').innerText = params.get('preco');
+        const name = params.get('name');
+        const price = params.get('price');
+        const image = params.get('image');
+
+        if (name) document.getElementById('product-name').innerText = name;
+        if (price) document.getElementById('product-price').innerText = price;
+        if (image) document.getElementById('product-image').src = image;
     </script>
 </body>
 </html>
