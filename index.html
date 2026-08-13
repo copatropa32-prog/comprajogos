@@ -10,27 +10,27 @@
     
     <!-- Header -->
     <header class="border-b border-slate-800 bg-slate-900/90 backdrop-blur sticky top-0 z-50">
-        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
-            <h1 class="text-2xl font-black tracking-tighter text-indigo-500">COMPRAJOGOS</h1>
-            <input type="text" id="searchInput" placeholder="Filtrar por nome..." oninput="renderizar()" class="bg-slate-800 rounded-lg px-4 py-2 text-sm text-white w-64 focus:ring-2 focus:ring-indigo-500 outline-none">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex flex-col sm:flex-row justify-between items-center gap-3">
+            <h1 class="text-xl sm:text-2xl font-black tracking-tighter text-indigo-500">COMPRAJOGOS</h1>
+            <input type="text" id="searchInput" placeholder="Filtrar por nome..." oninput="renderizar()" class="bg-slate-800 rounded-lg px-4 py-2 text-sm text-white w-full sm:w-64 focus:ring-2 focus:ring-indigo-500 outline-none">
         </div>
     </header>
 
     <!-- Hero Section -->
-    <section class="max-w-6xl mx-auto px-4 pt-10 pb-6 text-center">
-        <h2 class="text-4xl font-black mb-3">Catálogo de Jogos Gratuitos</h2>
-        <p class="text-slate-400 max-w-2xl mx-auto text-sm">Seleção curada com os melhores títulos Free-to-Play e periféricos essenciais.</p>
+    <section class="max-w-6xl mx-auto px-4 pt-8 pb-4 text-center">
+        <h2 class="text-3xl sm:text-4xl font-black mb-2">Catálogo de Jogos Gratuitos</h2>
+        <p class="text-slate-400 max-w-2xl mx-auto text-xs sm:text-sm">Seleção curada com os melhores títulos Free-to-Play e periféricos essenciais.</p>
     </section>
 
     <!-- Seção de Afiliados Amazon -->
-    <section class="max-w-6xl mx-auto px-4 pb-10">
-        <h3 class="text-xl font-black mb-6 text-white border-l-4 border-indigo-500 pl-3">Setup de Entrada Recomendado</h3>
+    <section class="max-w-6xl mx-auto px-4 pb-8">
+        <h3 class="text-lg sm:text-xl font-black mb-6 text-white border-l-4 border-indigo-500 pl-3">Setup de Entrada Recomendado</h3>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
             
             <!-- Produto 1: Mouse -->
-            <div class="bg-slate-900 p-6 rounded-2xl border border-slate-800 hover:border-indigo-500 transition-all flex flex-col justify-between shadow-lg">
+            <div class="bg-slate-900 p-5 sm:p-6 rounded-2xl border border-slate-800 hover:border-indigo-500 transition-all flex flex-col justify-between shadow-lg">
                 <div>
-                    <div class="bg-slate-950 rounded-xl p-3 mb-4 flex items-center justify-center h-48 overflow-hidden border border-slate-800/60">
+                    <div class="bg-slate-950 rounded-xl p-3 mb-4 flex items-center justify-center h-44 sm:h-48 overflow-hidden border border-slate-800/60">
                         <img src="mouse-reddragon.jpg" alt="Mouse Gamer Redragon RGB" class="max-h-full max-w-full object-contain hover:scale-105 transition-transform duration-300">
                     </div>
                     <span class="text-[10px] bg-indigo-500/10 text-indigo-400 px-2 py-1 rounded font-bold uppercase">Periférico</span>
@@ -40,18 +40,18 @@
                 <div>
                     <div class="mb-3 flex justify-between items-center bg-slate-950/60 px-3 py-2 rounded-lg border border-slate-800">
                         <span class="text-xs text-slate-400">Preço na Amazon</span>
-                        <span class="text-lg font-black text-emerald-400">R$ 89,99</span>
+                        <span class="text-base sm:text-lg font-black text-emerald-400">R$ 89,99</span>
                     </div>
-                    <a href="https://www.amazon.com.br/Mouse-Redragon-Chroma-12400DPI-Bot%C3%B5es/dp/B07Q437WXK?linkCode=ll2&tag=comprajogos-20" target="_blank" class="block w-full text-center bg-indigo-600 hover:bg-indigo-500 text-white py-2.5 rounded-lg text-sm font-bold transition-all shadow">
+                    <a href="https://www.amazon.com.br/Mouse-Redragon-Chroma-12400DPI-Bot%C3%B5es/dp/B07Q437WXK?linkCode=ll2&tag=comprajogos-20" target="_blank" class="block w-full text-center bg-indigo-600 hover:bg-indigo-500 text-white py-3 sm:py-2.5 rounded-lg text-sm font-bold transition-all shadow">
                         Ver na Amazon
                     </a>
                 </div>
             </div>
 
             <!-- Produto 2: Teclado -->
-            <div class="bg-slate-900 p-6 rounded-2xl border border-slate-800 hover:border-indigo-500 transition-all flex flex-col justify-between shadow-lg">
+            <div class="bg-slate-900 p-5 sm:p-6 rounded-2xl border border-slate-800 hover:border-indigo-500 transition-all flex flex-col justify-between shadow-lg">
                 <div>
-                    <div class="bg-slate-950 rounded-xl p-3 mb-4 flex items-center justify-center h-48 overflow-hidden border border-slate-800/60">
+                    <div class="bg-slate-950 rounded-xl p-3 mb-4 flex items-center justify-center h-44 sm:h-48 overflow-hidden border border-slate-800/60">
                         <img src="teclado-mecanico.png" alt="Teclado Mecânico Redragon Kumara" class="max-h-full max-w-full object-contain hover:scale-105 transition-transform duration-300">
                     </div>
                     <span class="text-[10px] bg-indigo-500/10 text-indigo-400 px-2 py-1 rounded font-bold uppercase">Periférico</span>
@@ -61,18 +61,18 @@
                 <div>
                     <div class="mb-3 flex justify-between items-center bg-slate-950/60 px-3 py-2 rounded-lg border border-slate-800">
                         <span class="text-xs text-slate-400">Preço na Amazon</span>
-                        <span class="text-lg font-black text-emerald-400">R$ 140,00</span>
+                        <span class="text-base sm:text-lg font-black text-emerald-400">R$ 140,00</span>
                     </div>
-                    <a href="https://www.amazon.com.br/Teclado-Redragon-Kumara-Mec%C3%A2nico-PT-Brown/dp/B08F6QCG19?linkCode=ll2&tag=comprajogos-20" target="_blank" class="block w-full text-center bg-indigo-600 hover:bg-indigo-500 text-white py-2.5 rounded-lg text-sm font-bold transition-all shadow">
+                    <a href="https://www.amazon.com.br/Teclado-Redragon-Kumara-Mec%C3%A2nico-PT-Brown/dp/B08F6QCG19?linkCode=ll2&tag=comprajogos-20" target="_blank" class="block w-full text-center bg-indigo-600 hover:bg-indigo-500 text-white py-3 sm:py-2.5 rounded-lg text-sm font-bold transition-all shadow">
                         Ver na Amazon
                     </a>
                 </div>
             </div>
 
             <!-- Produto 3: Headset -->
-            <div class="bg-slate-900 p-6 rounded-2xl border border-slate-800 hover:border-indigo-500 transition-all flex flex-col justify-between shadow-lg">
+            <div class="bg-slate-900 p-5 sm:p-6 rounded-2xl border border-slate-800 hover:border-indigo-500 transition-all flex flex-col justify-between shadow-lg">
                 <div>
-                    <div class="bg-slate-950 rounded-xl p-3 mb-4 flex items-center justify-center h-48 overflow-hidden border border-slate-800/60">
+                    <div class="bg-slate-950 rounded-xl p-3 mb-4 flex items-center justify-center h-44 sm:h-48 overflow-hidden border border-slate-800/60">
                         <img src="headset-reddragon.png" alt="Headset Gamer Redragon" class="max-h-full max-w-full object-contain hover:scale-105 transition-transform duration-300">
                     </div>
                     <span class="text-[10px] bg-indigo-500/10 text-indigo-400 px-2 py-1 rounded font-bold uppercase">Áudio</span>
@@ -82,9 +82,9 @@
                 <div>
                     <div class="mb-3 flex justify-between items-center bg-slate-950/60 px-3 py-2 rounded-lg border border-slate-800">
                         <span class="text-xs text-slate-400">Preço na Amazon</span>
-                        <span class="text-lg font-black text-emerald-400">R$ 142,36</span>
+                        <span class="text-base sm:text-lg font-black text-emerald-400">R$ 142,36</span>
                     </div>
-                    <a href="https://www.amazon.com.br/Headset-Gamer-Redragon-Preto-H510-LT/dp/B0F1C3MRMF?linkCode=ll2&tag=comprajogos-20" target="_blank" class="block w-full text-center bg-indigo-600 hover:bg-indigo-500 text-white py-2.5 rounded-lg text-sm font-bold transition-all shadow">
+                    <a href="https://www.amazon.com.br/Headset-Gamer-Redragon-Preto-H510-LT/dp/B0F1C3MRMF?linkCode=ll2&tag=comprajogos-20" target="_blank" class="block w-full text-center bg-indigo-600 hover:bg-indigo-500 text-white py-3 sm:py-2.5 rounded-lg text-sm font-bold transition-all shadow">
                         Ver na Amazon
                     </a>
                 </div>
@@ -95,8 +95,8 @@
 
     <!-- Main Games Grid -->
     <main class="max-w-6xl mx-auto px-4 pb-16">
-        <h3 class="text-xl font-black mb-6 text-white border-l-4 border-indigo-500 pl-3">Jogos Gratuitos em Destaque</h3>
-        <div id="games-grid" class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <h3 class="text-lg sm:text-xl font-black mb-6 text-white border-l-4 border-indigo-500 pl-3">Jogos Gratuitos em Destaque</h3>
+        <div id="games-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             <p class="text-slate-400 col-span-full text-center py-8">Buscando catálogo...</p>
         </div>
     </main>
@@ -133,7 +133,7 @@
                 return;
             }
 
-filtrados.forEach(jogo => {
+            filtrados.forEach(jogo => {
                 const card = document.createElement('div');
                 card.className = "bg-slate-900 p-4 rounded-xl border border-slate-800 hover:border-indigo-500 transition-all flex flex-col justify-between shadow-lg";
                 card.innerHTML = `
@@ -145,7 +145,7 @@ filtrados.forEach(jogo => {
                         <h4 class="text-sm font-bold mt-2 mb-3 line-clamp-1 text-white">${jogo.title}</h4>
                     </div>
                     <div>
-                        <a href="${jogo.url}" target="_blank" class="block w-full text-center bg-indigo-600 hover:bg-indigo-500 text-white py-2 rounded-lg text-sm font-bold transition-all">
+                        <a href="${jogo.url}" target="_blank" class="block w-full text-center bg-indigo-600 hover:bg-indigo-500 text-white py-2.5 rounded-lg text-sm font-bold transition-all">
                             Jogar Agora
                         </a>
                     </div>
