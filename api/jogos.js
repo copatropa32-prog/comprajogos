@@ -4,7 +4,8 @@ module.exports = async (req, res) => {
     try {
         const apiKey = process.env.KINGUIN_API_KEY_WSL || process.env.KINGUIN_API_KEY;
 
-        const response = await axios.get('https://api.kinguin.net/v1/products', {
+        // Tentativa na rota v1/products ou v2 se aplicável
+        const response = await axios.get('https://api.kinguin.net/v2/store/products', {
             headers: {
                 'Api-Key': apiKey
             },
