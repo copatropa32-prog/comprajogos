@@ -2,7 +2,7 @@ module.exports = async (req, res) => {
     try {
         const response = await fetch('https://www.freetogame.com/api/games');
         const data = await response.json();
-        const jogosApi = data.slice(0, 12); // Pega os 12 primeiros jogos
+        const jogosApi = data.slice(0, 36); // Aumentado para 36 jogos (ou remova o .slice() para exibir todos)
 
         const jogosFormatados = jogosApi.map(jogo => ({
             name: jogo.title,
