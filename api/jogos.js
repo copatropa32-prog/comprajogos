@@ -1,13 +1,18 @@
-const fs = require('fs');
-const path = require('path');
+const axios = require('axios');
 
 module.exports = async (req, res) => {
     try {
-        const filePath = path.join(process.cwd(), 'jogos.json');
-        const fileData = fs.readFileSync(filePath, 'utf8');
-        const jogos = JSON.parse(fileData);
-        return res.status(200).json(jogos);
+        const response = await axios.get('https://www.freetogame.com/api/games');
+        const jogosApi = response.data.slice(0, 12); // Pega os 12 primeiros jogos
+
+        const jogosFormatados = jogosApi.map(jogo => ({
+            name: jogo.title,
+            price: "Gratuito",
+            image: jogo.thumbnail
+        }));
+
+        return res.status(200).json(jogosFormatados);
     } catch (error) {
-        return res.status(500).json({ error: 'Erro ao carregar catálogo local' });
+        return res.status(500).json({ error: 'Erro ao buscar jogos' });
     }
 };
