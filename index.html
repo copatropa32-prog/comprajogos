@@ -3,189 +3,142 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Comprajogos - Chaves Steam com entrega instantânea</title>
+    <title>Comprajogos | Loja Premium</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .glass { background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.1); }
+        .transition-all { transition: all 0.3s ease; }
+    </style>
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen">
-    <header class="py-8 text-center bg-slate-900 border-b border-slate-800">
-        <div class="flex items-center justify-center gap-3 mb-2">
-            <!-- Logotipo com ícone de controle -->
-            <div class="bg-sky-500/10 border border-sky-500/30 p-2.5 rounded-2xl text-sky-400 shadow-inner">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z" />
-                </svg>
+    <!-- Header -->
+    <header class="fixed top-0 w-full z-40 glass shadow-2xl">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <div class="bg-indigo-600 p-2 rounded-xl text-white">🎮</div>
+                <h1 class="text-2xl font-black tracking-tighter text-white">COMPRAJOGOS</h1>
             </div>
-            <h1 class="text-4xl font-extrabold text-sky-400 tracking-tight">Comprajogos</h1>
-        </div>
-        <p class="text-slate-400">Chaves Steam com entrega instantânea</p>
-        
-        <!-- Barra de Pesquisa -->
-        <div class="mt-6 max-w-md mx-auto px-4">
-            <input type="text" id="searchInput" placeholder="Pesquisar por jogos..." class="w-full px-4 py-3 rounded-lg bg-slate-800 border border-slate-700 text-slate-100 focus:outline-none focus:border-sky-500 shadow-md" onkeyup="filtrarJogos()">
-        </div>
-
-        <!-- Barra de Gêneros -->
-        <div id="genreBar" class="mt-6 max-w-5xl mx-auto px-4 flex flex-wrap justify-center gap-2">
-            <button onclick="filtrarPorGenero('Todos')" class="genre-btn bg-sky-600 text-white px-4 py-1.5 rounded-full text-sm font-semibold transition-colors shadow">Todos</button>
+            <button onclick="toggleCart()" class="relative p-2 hover:bg-slate-800 rounded-full">
+                🛒 <span id="cartCount" class="absolute -top-1 -right-1 bg-indigo-600 text-[10px] w-5 h-5 flex items-center justify-center rounded-full font-bold">0</span>
+            </button>
         </div>
     </header>
 
-    <main class="max-w-6xl mx-auto px-4 py-8">
-        <h2 class="text-2xl font-bold mb-6 border-l-4 border-sky-500 pl-3">Catálogo em Destaque</h2>
-        <div id="catalog" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            <p class="text-slate-400 col-span-full text-center py-10">Carregando catálogo completo...</p>
+    <!-- Main Content -->
+    <main class="max-w-6xl mx-auto px-4 pt-28 pb-12">
+        <!-- Filtros -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8 glass p-6 rounded-2xl">
+            <input type="text" id="searchInput" placeholder="🔍 Buscar nome..." class="bg-slate-900 border border-slate-700 px-4 py-3 rounded-xl focus:ring-2 focus:ring-indigo-500 outline-none" onkeyup="filtrarJogos()">
+            <select id="genreFilter" onchange="filtrarJogos()" class="bg-slate-900 border border-slate-700 px-4 py-3 rounded-xl outline-none">
+                <option value="Todos">Todos os Gêneros</option>
+            </select>
+            <select id="priceFilter" onchange="filtrarJogos()" class="bg-slate-900 border border-slate-700 px-4 py-3 rounded-xl outline-none">
+                <option value="Todos">Preço: Todos</option>
+                <option value="Gratuito">Gratuito</option>
+                <option value="Pago">Pago</option>
+            </select>
         </div>
+
+        <div id="catalog" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
     </main>
 
-    <!-- Modal de Checkout -->
-    <div id="checkoutModal" class="fixed inset-0 bg-black/70 flex items-center justify-center hidden z-50 p-4">
-        <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-md w-full p-6 relative shadow-2xl">
-            <button onclick="fecharCheckout()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-xl font-bold">&times;</button>
-            <h3 class="text-2xl font-bold text-sky-400 mb-2">Finalizar Pedido</h3>
-            <p id="modalGameName" class="text-slate-300 font-medium mb-4"></p>
-            <div class="bg-slate-800 p-4 rounded-xl mb-6 flex justify-between items-center">
-                <span class="text-slate-400">Total a pagar:</span>
-                <span id="modalGamePrice" class="text-xl font-extrabold text-lime-400"></span>
-            </div>
-            <div class="space-y-4">
-                <div>
-                    <label class="block text-sm text-slate-400 mb-1">Seu E-mail (para receber a chave)</label>
-                    <input type="email" id="buyerEmail" placeholder="seu@email.com" class="w-full px-4 py-2 rounded-lg bg-slate-800 border border-slate-700 text-white focus:outline-none focus:border-sky-500">
-                </div>
-                <button onclick="finalizarCompra()" class="w-full bg-lime-600 hover:bg-lime-500 text-white font-bold py-3 rounded-xl transition-colors shadow-lg">
-                    Pagar com Pix / Cartão
-                </button>
-            </div>
+    <!-- Sidebar Carrinho -->
+    <div id="cartDrawer" class="fixed inset-y-0 right-0 z-50 w-80 glass transform translate-x-full transition-transform duration-300 p-6 flex flex-col shadow-2xl">
+        <div class="flex justify-between items-center mb-6">
+            <h2 class="text-xl font-bold">Seu Carrinho</h2>
+            <button onclick="toggleCart()" class="text-slate-400 hover:text-white">✕</button>
         </div>
-    </div>
-
-    <!-- Modal de Sucesso -->
-    <div id="successModal" class="fixed inset-0 bg-black/70 flex items-center justify-center hidden z-50 p-4">
-        <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-md w-full p-6 text-center relative shadow-2xl">
-            <h3 class="text-2xl font-bold text-lime-400 mb-2">Compra Aprovada!</h3>
-            <p class="text-slate-300 mb-4">Sua chave Steam foi gerada com sucesso:</p>
-            <div class="bg-slate-800 p-4 rounded-xl mb-6 border border-dashed border-lime-500/50">
-                <span id="steamKey" class="text-lg font-mono font-bold text-sky-300 tracking-wider"></span>
-            </div>
-            <button onclick="fecharSucesso()" class="w-full bg-sky-600 hover:bg-sky-500 text-white font-bold py-3 rounded-xl transition-colors">
-                Concluir
-            </button>
+        <div id="cartItems" class="flex-grow space-y-4 overflow-y-auto"></div>
+        <div class="border-t border-slate-700 pt-4 mt-4">
+            <div class="flex justify-between font-bold text-lg mb-4"><span>Total:</span> <span id="cartTotal">R$ 0,00</span></div>
+            <button onclick="finalizarCompra()" class="w-full bg-indigo-600 hover:bg-indigo-500 py-3 rounded-xl font-bold transition-all">Finalizar Pedido</button>
         </div>
     </div>
 
     <script>
-        let listaJogosAtuais = [];
-        let generoSelecionado = 'Todos';
-        let jogoSelecionado = null;
+        let listaJogos = [];
+        let cart = [];
 
-        async function carregarJogos() {
-            try {
-                const response = await fetch('/api/jogos');
-                const jogos = await response.json();
-                
-                if (!Array.isArray(jogos) || jogos.length === 0) {
-                    document.getElementById('catalog').innerHTML = '<p class="text-slate-400 col-span-full text-center">Nenhum jogo encontrado no momento.</p>';
-                    return;
-                }
-
-                listaJogosAtuais = jogos;
-                gerarBarraGeneros();
-                renderizarJogos(listaJogosAtuais);
-            } catch (err) {
-                console.error('Erro ao carregar catálogo:', err);
-                document.getElementById('catalog').innerHTML = '<p class="text-red-400 col-span-full text-center">Erro ao carregar o catálogo de jogos.</p>';
-            }
-        }
-
-        function gerarBarraGeneros() {
-            const generos = ['Todos', ...new Set(listaJogosAtuais.map(j => j.genre))];
-            const genreBar = document.getElementById('genreBar');
+        async function init() {
+            const res = await fetch('/api/jogos');
+            listaJogos = await res.json();
             
-            genreBar.innerHTML = generos.map(g => `
-                <button onclick="filtrarPorGenero('${g}')" class="genre-btn px-4 py-1.5 rounded-full text-sm font-semibold transition-colors shadow ${g === generoSelecionado ? 'bg-sky-600 text-white' : 'bg-slate-800 text-slate-300 hover:bg-slate-700'}">
-                    ${g}
-                </button>
-            `).join('');
+            // Popular Gêneros
+            const generos = ['Todos', ...new Set(listaJogos.map(j => j.genre))];
+            const genreSelect = document.getElementById('genreFilter');
+            generos.forEach(g => genreSelect.innerHTML += `<option value="${g}">${g}</option>`);
+            
+            renderizar(listaJogos);
         }
 
-        function filtrarPorGenero(genero) {
-            generoSelecionado = genero;
-            gerarBarraGeneros();
-            filtrarJogos();
-        }
-
-        function renderizarJogos(jogos) {
-            const catalog = document.getElementById('catalog');
-            if (jogos.length === 0) {
-                catalog.innerHTML = '<p class="text-slate-400 col-span-full text-center py-10">Nenhum jogo encontrado para esta busca.</p>';
-                return;
-            }
-
-            catalog.innerHTML = jogos.map((jogo) => {
-                const indexOriginal = listaJogosAtuais.indexOf(jogo);
-                return `
-                    <div class="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden shadow-lg flex flex-col hover:border-slate-700 transition-all">
-                        <img src="${jogo.image}" alt="${jogo.name}" class="h-40 w-full object-cover">
-                        <div class="p-4 flex flex-col flex-grow justify-between">
-                            <div>
-                                <span class="text-xs font-semibold text-sky-400 uppercase tracking-wider bg-sky-950 px-2.5 py-0.5 rounded-md border border-sky-800/50">${jogo.genre}</span>
-                                <h3 class="font-bold text-lg mt-2 mb-1 text-slate-200 truncate">${jogo.name}</h3>
-                                <p class="text-lime-400 font-extrabold text-xl mb-4">${jogo.price}</p>
-                            </div>
-                            <button onclick="abrirCheckout(${indexOriginal})" class="w-full bg-lime-600 hover:bg-lime-500 text-white font-bold py-2 px-4 rounded-lg transition-colors shadow">
-                                Garantir Chave
-                            </button>
-                        </div>
+        function renderizar(jogos) {
+            const container = document.getElementById('catalog');
+            container.innerHTML = jogos.map(j => `
+                <div class="group bg-slate-900 rounded-2xl overflow-hidden border border-slate-800 hover:border-indigo-500 transition-all shadow-lg hover:shadow-indigo-500/20">
+                    <img src="${j.image}" class="h-40 w-full object-cover">
+                    <div class="p-4">
+                        <span class="text-[10px] font-bold text-indigo-400 bg-indigo-950 px-2 py-1 rounded">${j.genre}</span>
+                        <h3 class="font-bold mt-2 h-12">${j.name}</h3>
+                        <p class="text-lg font-black text-emerald-400 mb-4">${j.price}</p>
+                        <button onclick="addToCart('${j.name}')" class="w-full bg-slate-800 hover:bg-indigo-600 py-2 rounded-lg text-sm font-bold transition-all">Adicionar ao Carrinho</button>
                     </div>
-                `;
-            }).join('');
+                </div>
+            `).join('');
         }
 
         function filtrarJogos() {
             const termo = document.getElementById('searchInput').value.toLowerCase();
-            const filtrados = listaJogosAtuais.filter(j => {
+            const genero = document.getElementById('genreFilter').value;
+            const preco = document.getElementById('priceFilter').value;
+
+            const filtrados = listaJogos.filter(j => {
                 const matchNome = j.name.toLowerCase().includes(termo);
-                const matchGenero = generoSelecionado === 'Todos' || j.genre === generoSelecionado;
-                return matchNome && matchGenero;
+                const matchGenero = genero === 'Todos' || j.genre === genero;
+                const matchPreco = preco === 'Todos' ? true : (preco === 'Gratuito' ? j.price === 'Gratuito' : j.price !== 'Gratuito');
+                return matchNome && matchGenero && matchPreco;
             });
-            renderizarJogos(filtrados);
+            renderizar(filtrados);
         }
 
-        function abrirCheckout(index) {
-            jogoSelecionado = listaJogosAtuais[index];
-            document.getElementById('modalGameName').innerText = jogoSelecionado.name;
-            document.getElementById('modalGamePrice').innerText = jogoSelecionado.price;
-            document.getElementById('checkoutModal').classList.remove('hidden');
+        function addToCart(name) {
+            const jogo = listaJogos.find(j => j.name === name);
+            cart.push(jogo);
+            updateCart();
         }
 
-        function fecharCheckout() {
-            document.getElementById('checkoutModal').classList.add('hidden');
+        function updateCart() {
+            document.getElementById('cartCount').innerText = cart.length;
+            const items = document.getElementById('cartItems');
+            items.innerHTML = cart.map((j, i) => `
+                <div class="flex justify-between items-center bg-slate-950 p-2 rounded">
+                    <span class="text-sm truncate w-32">${j.name}</span>
+                    <span class="text-emerald-400 text-sm">${j.price}</span>
+                    <button onclick="removeFromCart(${i})" class="text-red-400 hover:text-red-300">×</button>
+                </div>
+            `).join('');
+            
+            const total = cart.reduce((acc, curr) => acc + (curr.price === 'Gratuito' ? 0 : parseFloat(curr.price.replace('R$ ', '').replace(',', '.'))), 0);
+            document.getElementById('cartTotal').innerText = `R$ ${total.toFixed(2).replace('.', ',')}`;
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCart();
+        }
+
+        function toggleCart() {
+            document.getElementById('cartDrawer').classList.toggle('translate-x-full');
         }
 
         function finalizarCompra() {
-            const email = document.getElementById('buyerEmail').value;
-            if (!email || !email.includes('@')) {
-                alert('Por favor, informe um e-mail válido.');
-                return;
-            }
-            fecharCheckout();
-            
-            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-            let chave = '';
-            for(let i=0; i<15; i++) {
-                if(i > 0 && i % 5 === 0) chave += '-';
-                chave += chars.charAt(Math.floor(Math.random() * chars.length));
-            }
-
-            document.getElementById('steamKey').innerText = chave;
-            document.getElementById('successModal').classList.remove('hidden');
+            if(cart.length === 0) return alert('Carrinho vazio!');
+            alert('Pedido enviado! Chaves geradas no seu e-mail.');
+            cart = [];
+            updateCart();
+            toggleCart();
         }
 
-        function fecharSucesso() {
-            document.getElementById('successModal').classList.add('hidden');
-        }
-
-        carregarJogos();
+        init();
     </script>
 </body>
 </html>
