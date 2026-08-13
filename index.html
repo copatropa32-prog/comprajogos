@@ -93,10 +93,10 @@
         const jogosFallback = [
             { name: "Baldur's Gate 3", price: "R$ 199,90", image: "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=500", category: "RPG" },
             { name: "Cyberpunk 2077", price: "R$ 199,90", image: "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=500", category: "Ação" },
-            { name: "Hollow Knight", price: "R$ 46,99", image: "https://images.unsplash.com/photo-1612287233002-ef1d000f37d2?w=500", category: "Indie" },
+            { name: "Hollow Knight", price: "R$ 46,99", image: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=500", category: "Indie" },
             { name: "Elden Ring", price: "R$ 229,90", image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=500", category: "RPG" },
-            { name: "Counter-Strike 2", price: "Gratuito", image: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=500", category: "Esportes" },
-            { name: "Word Rescue", price: "R$ 15,90", image: "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=500", category: "Indie" }
+            { name: "Counter-Strike 2", price: "Gratuito", image: "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=500", category: "Esportes" },
+            { name: "Word Rescue", price: "R$ 15,90", image: "https://images.unsplash.com/photo-1542751110-97427bbecf20?w=500", category: "Indie" }
         ];
 
         let listaJogosAtuais = [];
@@ -113,12 +113,14 @@
             jogos.forEach(jogo => {
                 const card = document.createElement('div');
                 card.className = 'game-card';
+                const linkProduto = `produto.html?name=${encodeURIComponent(jogo.name)}&price=${encodeURIComponent(jogo.price)}&image=${encodeURIComponent(jogo.image)}`;
+                
                 card.innerHTML = `
                     <img src="${jogo.image || 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=500'}" alt="${jogo.name}">
                     <div class="game-info">
                         <h3>${jogo.name}</h3>
                         <p class="price">${jogo.price}</p>
-                        <a href="produto.html?nome=${encodeURIComponent(jogo.name)}" class="btn-comprar">Garantir Chave</a>
+                        <a href="${linkProduto}" class="btn-comprar">Garantir Chave</a>
                     </div>
                 `;
                 grid.appendChild(card);
@@ -127,7 +129,7 @@
 
         async function carregarCatalogo() {
             try {
-                const response = await fetch('/api/jogos');
+                const response =*(await fetch('/api/jogos'));
                 const data = await response.json();
                 
                 if (!response.ok || !data || (Array.isArray(data) && data.length === 0)) {
