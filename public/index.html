@@ -6,29 +6,44 @@
   <title>Compra Jogos - As Melhores Ofertas de Keys e Jogos</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-900 text-white min-h-screen">
+<body class="bg-gray-950 text-white min-h-screen font-sans">
 
-  <header class="border-b border-gray-800 bg-gray-950 p-4">
+  <!-- Cabeçalho -->
+  <header class="border-b border-gray-800 bg-gray-900/80 backdrop-blur sticky top-0 z-50 p-4">
     <div class="container mx-auto flex justify-between items-center">
-      <h1 class="text-2xl font-bold text-green-400">CompraJogos.com.br</h1>
-      <nav class="space-x-4">
-        <a href="#" class="hover:text-green-400">Catálogo</a>
-        <a href="#" class="hover:text-green-400">Ofertas</a>
+      <h1 class="text-2xl font-black tracking-wider text-green-400">
+        Compra<span class="text-white">Jogos</span><span class="text-xs text-gray-500 font-normal">.com.br</span>
+      </h1>
+      <nav class="space-x-6 text-sm font-semibold">
+        <a href="#" class="text-green-400 border-b-2 border-green-400 pb-1">Ofertas</a>
+        <a href="#" class="text-gray-400 hover:text-white transition">Lojas</a>
       </nav>
     </div>
   </header>
 
-  <section class="py-12 bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 text-center">
-    <h2 class="text-4xl font-extrabold mb-2">Sua Loja de Keys e Jogos Digitais</h2>
-    <p class="text-gray-400">Ativação instantânea nas melhores plataformas (Steam, Xbox, PlayStation)</p>
+  <!-- Banner -->
+  <section class="py-12 bg-gradient-to-b from-gray-900 to-gray-950 text-center border-b border-gray-800/50">
+    <div class="container mx-auto px-4">
+      <span class="bg-green-500/10 text-green-400 text-xs font-bold px-3 py-1 rounded-full border border-green-500/20 uppercase tracking-widest">
+        🔥 Ofertas em Tempo Real
+      </span>
+      <h2 class="text-4xl sm:text-5xl font-black mt-4 mb-2 tracking-tight">As Melhores Keys de PC</h2>
+      <p class="text-gray-400 max-w-xl mx-auto text-sm sm:text-base">
+        Sincronizado automaticamente com os maiores descontos do mercado digital.
+      </p>
+    </div>
   </section>
 
+  <!-- Catálogo -->
   <main class="container mx-auto py-10 px-4">
-    <h3 class="text-xl font-bold mb-6 text-green-400">Catálogo em Destaque</h3>
+    <h3 class="text-xl font-bold mb-6 text-gray-200 flex items-center gap-2">
+      <span class="w-2 h-2 rounded-full bg-green-400"></span>
+      Destaques do Dia
+    </h3>
     
     <div id="catalog" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-      <div class="bg-gray-800 p-4 rounded-lg animate-pulse h-48 flex items-center justify-center text-gray-500 col-span-full">
-        Carregando produtos do Sandbox...
+      <div class="bg-gray-900 border border-gray-800 p-8 rounded-xl animate-pulse flex items-center justify-center text-gray-500 col-span-full">
+        Buscando melhores ofertas...
       </div>
     </div>
   </main>
@@ -38,50 +53,53 @@
       const container = document.getElementById('catalog');
       try {
         const res = await fetch('/api/products');
-        const data = await res.json();
+        const products = await res.json();
 
-        if (data.error) {
-          container.innerHTML = `
-            <div class="col-span-full bg-red-900/40 border border-red-500 p-4 rounded-lg text-red-200">
-              <p class="font-bold text-lg">Atenção na conexão com a API:</p>
-              <p class="text-sm mt-1">${data.error}</p>
-            </div>`;
+        if (products.error) {
+          container.innerHTML = `<p class="text-red-400 col-span-full">Erro: ${products.error}</p>`;
           return;
         }
 
-        const products = Array.isArray(data) ? data : (data.items || data.products || []);
+        container.innerHTML = products.map(item => `
+          <div class="bg-gray-900 rounded-xl overflow-hidden border border-gray-800 hover:border-green-500/50 hover:shadow-lg hover:shadow-green-500/5 transition flex flex-col justify-between group">
+            
+            <div class="relative bg-gray-950 h-40 overflow-hidden flex items-center justify-center">
+              <img src="${item.thumb}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" />
+              ${item.savings > 0 ? `
+                <span class="absolute top-2 right-2 bg-green-500 text-gray-950 text-xs font-black px-2 py-1 rounded">
+                  -${item.savings}%
+                </span>
+              ` : ''}
+            </div>
 
-        if (products.length === 0) {
-          container.innerHTML = '<p class="text-gray-400 col-span-full">Nenhum produto disponível no catálogo de testes no momento.</p>';
-          return;
-        }
-
-        container.innerHTML = products.map(item => {
-          const name = item.name || item.identifier || 'Jogo Digital';
-          const platform = item.platform || 'PC / Digital';
-          let priceText = 'Consultar';
-
-          if (item.prices && item.prices.length > 0) {
-            priceText = '€ ' + Number(item.prices[0].value).toFixed(2);
-          } else if (item.price) {
-            priceText = '€ ' + Number(item.price).toFixed(2);
-          }
-
-          return `
-            <div class="bg-gray-800 rounded-lg p-4 flex flex-col justify-between border border-gray-700 hover:border-green-500 transition">
+            <div class="p-4 flex-1 flex flex-col justify-between">
               <div>
-                <h4 class="font-bold text-lg mb-2">${name}</h4>
-                <p class="text-xs text-gray-400 mb-4">Plataforma: ${platform}</p>
+                <h4 class="font-bold text-base text-gray-100 line-clamp-2 mb-1 group-hover:text-green-400 transition">
+                  ${item.title}
+                </h4>
+                ${item.rating ? `
+                  <p class="text-xs text-gray-400">👍 ${item.rating}% avaliações positivas</p>
+                ` : ''}
               </div>
-              <div class="flex justify-between items-center mt-4 border-t border-gray-700 pt-3">
-                <span class="text-green-400 font-bold text-xl">${priceText}</span>
-                <button class="bg-green-600 hover:bg-green-500 text-white px-3 py-1.5 rounded font-semibold text-sm">
-                  Comprar
-                </button>
+
+              <div class="flex justify-between items-end mt-6 border-t border-gray-800/80 pt-3">
+                <div>
+                  <span class="text-xs text-gray-500 line-through block">$ ${item.normalPrice}</span>
+                  <span class="text-xl font-extrabold text-green-400">$ ${item.salePrice}</span>
+                </div>
+                <a 
+                  href="https://www.cheapshark.com/redirect?dealID=${item.id}" 
+                  target="_blank" 
+                  class="bg-green-500 hover:bg-green-400 text-gray-950 font-bold px-3 py-2 rounded-lg text-xs transition"
+                >
+                  Ver Oferta
+                </a>
               </div>
             </div>
-          `;
-        }).join('');
+
+          </div>
+        `).join('');
+
       } catch (err) {
         container.innerHTML = `<p class="text-red-400 col-span-full">Erro de conexão: ${err.message}</p>`;
       }
