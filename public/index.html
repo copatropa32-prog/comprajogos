@@ -83,16 +83,16 @@
     </div>
   </section>
 
-  <!-- Destaques do Dia (CheapShark API - Ofertas de Keys) -->
+  <!-- Destaques do Dia (CheapShark API em Reais com 15% de Lucro) -->
   <main class="container mx-auto py-10 px-4">
     <h3 class="text-xl font-bold mb-6 text-gray-200 flex items-center gap-2">
       <span class="w-2 h-2 rounded-full bg-green-400"></span>
-      Destaques de Ofertas & Keys
+      Destaques de Ofertas & Keys (Em Reais)
     </h3>
     
     <div id="catalog" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
       <div class="bg-gray-900 border border-gray-800 p-8 rounded-xl animate-pulse flex items-center justify-center text-gray-500 col-span-full">
-        Buscando melhores ofertas...
+        Buscando cotação e melhores ofertas...
       </div>
     </div>
   </main>
@@ -143,7 +143,7 @@
       <div class="border-t border-gray-800 pt-4">
         <div class="flex justify-between items-center mb-4 text-lg font-bold">
           <span>Total:</span>
-          <span id="cartTotal" class="text-green-400">$ 0.00</span>
+          <span id="cartTotal" class="text-green-400">R$ 0,00</span>
         </div>
         <button onclick="finalizarCompra()" class="w-full bg-green-500 hover:bg-green-400 text-gray-950 font-bold py-3 rounded-xl transition">
           Finalizar Pedido
@@ -200,8 +200,8 @@
       renderizarCarrinho();
     }
 
-    function adicionarAoCarrinho(title, price, id) {
-      cart.push({ title, price: parseFloat(price), id });
+    function adicionarAoCarrinho(title, priceBRL, id) {
+      cart.push({ title, price: parseFloat(priceBRL), id });
       localStorage.setItem('cart', JSON.stringify(cart));
       atualizarContadorCarrinho();
       alert(`"${title}" foi adicionado ao carrinho!`);
@@ -224,7 +224,7 @@
       
       if (cart.length === 0) {
         container.innerHTML = `<p class="text-gray-500 text-sm">Seu carrinho está vazio.</p>`;
-        totalContainer.innerText = "$ 0.00";
+        totalContainer.innerText = "R$ 0,00";
         return;
       }
 
@@ -235,14 +235,14 @@
           <div class="bg-gray-800/50 p-3 rounded-xl flex justify-between items-center border border-gray-800">
             <div>
               <h4 class="text-sm font-bold text-white line-clamp-1">${item.title}</h4>
-              <span class="text-xs text-green-400 font-bold">$ ${item.price.toFixed(2)}</span>
+              <span class="text-xs text-green-400 font-bold">R$ ${item.price.toFixed(2).replace('.', ',')}</span>
             </div>
             <button onclick="removerDoCarrinho(${index})" class="text-red-400 hover:text-red-300 text-xs font-bold px-2 py-1">Remover</button>
           </div>
         `;
       }).join('');
 
-      totalContainer.innerText = `$ ${total.toFixed(2)}`;
+      totalContainer.innerText = `R$ ${total.toFixed(2).replace('.', ',')}`;
     }
 
     function removerDoCarrinho(index) {
@@ -269,10 +269,15 @@
       toggleCart();
     }
 
-    // --- CARREGAR API DE OFERTAS (CheapShark) ---
+    // --- CARREGAR API DE OFERTAS (Com Cotação USD -> BRL e 15% de Lucro) ---
     async function loadProducts() {
       const container = document.getElementById('catalog');
       try {
+        // Busca a cotação atual do Dólar em relação ao Real
+        const cotacaoRes = await fetch('https://economia.awesomeapi.com.br/json/last/USD-BRL');
+        const cotacaoData = await cotacaoRes.json();
+        const dolarTaxa = parseFloat(cotacaoData.USDBRL.bid) || 5.50; // Fallback para 5.50 caso ocorra erro
+
         const res = await fetch('https://www.cheapshark.com/api/1.0/deals?storeID=1&upperPrice=50&pageSize=8');
         const products = await res.json();
 
@@ -281,36 +286,45 @@
           return;
         }
 
-        container.innerHTML = products.map(item => `
-          <div class="bg-gray-900 rounded-xl overflow-hidden border border-gray-800 hover:border-green-500/50 transition flex flex-col justify-between group">
-            <div class="relative bg-gray-950 h-40 overflow-hidden flex items-center justify-center">
-              <img src="${item.thumb}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" />
-              ${parseFloat(item.savings) > 0 ? `
-                <span class="absolute top-2 right-2 bg-green-500 text-gray-950 text-xs font-black px-2 py-1 rounded">
-                  -${Math.round(item.savings)}%
-                </span>
-              ` : ''}
-            </div>
-            <div class="p-4 flex-1 flex flex-col justify-between">
-              <div>
-                <h4 class="font-bold text-base text-gray-100 line-clamp-2 mb-1 group-hover:text-green-400 transition">${item.title}</h4>
-                ${item.steamRatingPercent ? `<p class="text-xs text-gray-400">👍 ${item.steamRatingPercent}% avaliações positivas</p>` : ''}
+        container.innerHTML = products.map(item => {
+          // Conversão para Reais + 15% de margem de lucro ( * 1.15 )
+          const salePriceBRL = (parseFloat(item.salePrice) * dolarTaxa * 1.15).toFixed(2);
+          const normalPriceBRL = (parseFloat(item.normalPrice) * dolarTaxa * 1.15).toFixed(2);
+
+          const saleFormatted = salePriceBRL.replace('.', ',');
+          const normalFormatted = normalPriceBRL.replace('.', ',');
+
+          return `
+            <div class="bg-gray-900 rounded-xl overflow-hidden border border-gray-800 hover:border-green-500/50 transition flex flex-col justify-between group">
+              <div class="relative bg-gray-950 h-40 overflow-hidden flex items-center justify-center">
+                <img src="${item.thumb}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" />
+                ${parseFloat(item.savings) > 0 ? `
+                  <span class="absolute top-2 right-2 bg-green-500 text-gray-950 text-xs font-black px-2 py-1 rounded">
+                    -${Math.round(item.savings)}%
+                  </span>
+                ` : ''}
               </div>
-              <div class="flex justify-between items-end mt-6 border-t border-gray-800/80 pt-3">
+              <div class="p-4 flex-1 flex flex-col justify-between">
                 <div>
-                  <span class="text-xs text-gray-500 line-through block">$ ${item.normalPrice}</span>
-                  <span class="text-xl font-extrabold text-green-400">$ ${item.salePrice}</span>
+                  <h4 class="font-bold text-base text-gray-100 line-clamp-2 mb-1 group-hover:text-green-400 transition">${item.title}</h4>
+                  ${item.steamRatingPercent ? `<p class="text-xs text-gray-400">👍 ${item.steamRatingPercent}% avaliações positivas</p>` : ''}
                 </div>
-                <div class="flex gap-2">
-                  <button onclick="adicionarAoCarrinho('${item.title.replace(/'/g, "")}', '${item.salePrice}', '${item.dealID}')" class="bg-gray-800 hover:bg-green-500 hover:text-gray-950 text-gray-200 font-bold px-3 py-2 rounded-lg text-xs transition" title="Adicionar ao Carrinho">🛒</button>
-                  <a href="https://www.cheapshark.com/redirect?dealID=${item.dealID}" target="_blank" class="bg-green-500 hover:bg-green-400 text-gray-950 font-bold px-3 py-2 rounded-lg text-xs transition">Ver</a>
+                <div class="flex justify-between items-end mt-6 border-t border-gray-800/80 pt-3">
+                  <div>
+                    <span class="text-xs text-gray-500 line-through block">R$ ${normalFormatted}</span>
+                    <span class="text-xl font-extrabold text-green-400">R$ ${saleFormatted}</span>
+                  </div>
+                  <div class="flex gap-2">
+                    <button onclick="adicionarAoCarrinho('${item.title.replace(/'/g, "")}', '${salePriceBRL}', '${item.dealID}')" class="bg-gray-800 hover:bg-green-500 hover:text-gray-950 text-gray-200 font-bold px-3 py-2 rounded-lg text-xs transition" title="Adicionar ao Carrinho">🛒</button>
+                    <a href="https://www.cheapshark.com/redirect?dealID=${item.dealID}" target="_blank" class="bg-green-500 hover:bg-green-400 text-gray-950 font-bold px-3 py-2 rounded-lg text-xs transition">Ver</a>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        `).join('');
+          `;
+        }).join('');
       } catch (err) {
-        container.innerHTML = `<p class="text-red-400 col-span-full">Erro ao carregar ofertas.</p>`;
+        container.innerHTML = `<p class="text-red-400 col-span-full">Erro ao carregar ofertas e cotação.</p>`;
       }
     }
 
@@ -359,7 +373,7 @@
       });
     }
 
-    // Inicializar as duas APIs
+    // Inicializar as APIs
     loadProducts();
     carregarJogosGratuitos();
   </script>
