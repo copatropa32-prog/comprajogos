@@ -1,342 +1,47 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name='impact-site-verification' value='217f04aa-f069-4982-9638-62d77f75f7f9'>
-  <title>Compra Jogos - Keys, Ofertas e Jogos Gratuitos</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Google AdSense - Código de Verificação -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9710931146430417" crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CompraJogos.com.br - Keys & Ofertas</title>
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9710931146430417" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css">
 </head>
-<body class="bg-[#090a0f] text-slate-100 min-h-screen font-sans antialiased selection:bg-emerald-500 selection:text-slate-950">
-
-  <!-- Cabeçalho -->
-  <header class="border-b border-slate-800/80 bg-[#0c0e17]/90 backdrop-blur-md sticky top-0 z-50 px-4 py-3.5 shadow-lg shadow-black/40">
-    <div class="container mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
-      
-      <!-- Logotipo + Nome do Site -->
-      <a href="#" class="flex items-center gap-3 group">
-        <img src="logo-comprajogos.png" alt="CompraJogos" class="h-9 sm:h-10 object-contain transition-transform group-hover:scale-105">
-        <div class="flex flex-col">
-          <h1 class="text-xl sm:text-2xl font-black tracking-wider text-emerald-400 leading-none">
-            Compra<span class="text-white">Jogos</span><span class="text-xs text-slate-500 font-normal">.com.br</span>
-          </h1>
-          <span class="text-[10px] text-slate-400 tracking-widest uppercase mt-0.5 font-medium">Keys & Ofertas</span>
+<body>
+    <header class="site-header">
+        <div class="logo-container">
+            <h1>Compra<span>Jogos</span><small>.com.br</small></h1>
+            <p>KEYS & OFERTAS</p>
         </div>
-      </a>
-      
-      <!-- Barra de Busca -->
-      <div class="w-full sm:w-auto relative">
-        <span class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-slate-400">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-        </span>
-        <input type="text" id="searchInput" placeholder="Pesquisar jogos..." oninput="filtrarEFiltrarJogos()" class="bg-slate-900/90 border border-slate-700/80 rounded-xl pl-9 pr-4 py-2 text-sm text-white w-full sm:w-72 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition shadow-inner">
-      </div>
-    </div>
-  </header>
-
-  <!-- Banner Hero -->
-  <section class="relative py-14 overflow-hidden bg-gradient-to-b from-[#121624] via-[#0c0e17] to-[#090a0f] text-center border-b border-slate-800/60">
-    <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(16,185,129,0.08)_0,transparent_70%)] pointer-events-none"></div>
-    <div class="container mx-auto px-4 relative z-10">
-      <div class="inline-flex items-center gap-2 bg-emerald-500/10 text-emerald-400 text-xs font-bold px-3.5 py-1.5 rounded-full border border-emerald-500/20 uppercase tracking-widest mb-4 shadow-sm">
-        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-        Catálogo Unificado & Tempo Real (180 Jogos)
-      </div>
-      <h2 class="text-4xl sm:text-6xl font-black mt-2 mb-4 tracking-tight text-white drop-shadow-sm">Jogos e Keys</h2>
-      <p class="text-slate-400 max-w-xl mx-auto text-sm sm:text-base leading-relaxed">
-        Explore descontos imbatíveis em chaves de PC e os melhores jogos gratuitos (F2P).
-      </p>
-    </div>
-  </section>
-
-  <!-- Espaço para o Banner do AdSense (Parte Superior) -->
-  <section class="container mx-auto px-4 pt-6">
-    <div class="bg-slate-900/40 border border-slate-800/80 rounded-2xl p-4 text-center overflow-hidden shadow-lg">
-      <span class="text-[10px] text-slate-500 uppercase tracking-widest block mb-2">Publicidade</span>
-      <!-- Substitua o bloco abaixo pelo código fornecido pelo Google AdSense -->
-      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-SUO_CLIENT_ID" crossorigin="anonymous"></script>
-      <ins class="adsbygoogle"
-           style="display:block"
-           data-ad-client="ca-pub-SUO_CLIENT_ID"
-           data-ad-slot="SUO_AD_SLOT"
-           data-ad-format="auto"
-           data-full-width-responsive="true"></ins>
-      <script>
-           (adsbygoogle = window.adsbygoogle || []).push({});
-      </script>
-    </div>
-  </section>
-
-  <!-- Filtros e Barra de Gêneros -->
-  <section class="container mx-auto px-4 py-6">
-    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-slate-900/40 backdrop-blur p-4 rounded-2xl border border-slate-800/80 shadow-xl shadow-black/20">
-      
-      <!-- Filtro Tipo -->
-      <div class="flex items-center gap-2 flex-wrap">
-        <span class="text-xs text-slate-400 font-bold uppercase tracking-wider mr-1">Filtrar por:</span>
-        <button onclick="mudarTipo('all', this)" class="tipo-btn px-4 py-2 rounded-xl text-xs font-bold transition bg-emerald-500 text-slate-950 shadow-md shadow-emerald-500/20">Todos</button>
-        <button onclick="mudarTipo('paid', this)" class="tipo-btn px-4 py-2 rounded-xl text-xs font-bold transition bg-slate-800/80 text-slate-300 hover:bg-slate-700 hover:text-white border border-slate-700/50">Jogos Pagos / Keys</button>
-        <button onclick="mudarTipo('free', this)" class="tipo-btn px-4 py-2 rounded-xl text-xs font-bold transition bg-slate-800/80 text-slate-300 hover:bg-slate-700 hover:text-white border border-slate-700/50">Jogos Gratuitos (F2P)</button>
-      </div>
-
-    </div>
-
-    <!-- Barra de Gêneros Horizontal -->
-    <div id="genre-bar" class="flex items-center gap-2 overflow-x-auto py-4 mt-3 scrollbar-thin scrollbar-thumb-slate-800">
-      <!-- Preenchido dinamicamente via JS -->
-    </div>
-  </section>
-
-  <!-- Grade de Jogos -->
-  <main class="container mx-auto pb-16 px-4">
-    <div id="catalog" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-      <div class="bg-slate-900/60 border border-slate-800/80 p-12 rounded-2xl animate-pulse flex flex-col items-center justify-center text-slate-400 col-span-full gap-3 shadow-inner">
-        <div class="w-8 h-8 rounded-full border-4 border-emerald-500 border-t-transparent animate-spin"></div>
-        <span class="text-sm font-medium">Sincronizando 180 jogos das APIs...</span>
-      </div>
-    </div>
-  </main>
-
-  <!-- Rodapé -->
-  <footer class="border-t border-slate-800/80 bg-[#07090f] py-12 mt-12">
-    <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8">
-        <div>
-            <h4 class="font-black text-white mb-3 uppercase text-xs tracking-widest text-emerald-400">Sobre o CompraJogos</h4>
-            <p class="text-slate-400 text-sm leading-relaxed mb-4">
-                O CompraJogos é um portal especializado em curadoria de chaves de PC e jogos gratuitos com os melhores preços do mercado.
-            </p>
-            <button onclick="abrirModal('sobre')" class="text-xs text-emerald-400 hover:underline font-bold">Ler mais sobre nós &rarr;</button>
+        <div class="search-container">
+            <input type="text" id="search-input" placeholder="Pesquisar jogos...">
+            <button id="search-btn">Pesquisar</button>
         </div>
-        <div>
-            <h4 class="font-black text-white mb-3 uppercase text-xs tracking-widest text-emerald-400">Políticas e Termos</h4>
-            <ul class="space-y-2 text-sm">
-                <li><button onclick="abrirModal('privacidade')" class="text-slate-400 hover:text-emerald-400 transition">Política de Privacidade</button></li>
-                <li><button onclick="abrirModal('termos')" class="text-slate-400 hover:text-emerald-400 transition">Termos de Uso</button></li>
-            </ul>
-        </div>
-        <div>
-            <h4 class="font-black text-white mb-3 uppercase text-xs tracking-widest text-emerald-400">Contato & Afiliados</h4>
-            <p class="text-slate-400 text-sm mb-2">Suporte: <a href="mailto:contato@comprajogos.com.br" class="text-emerald-400 hover:underline font-bold">contato@comprajogos.com.br</a></p>
-            <p class="text-[11px] text-slate-500 leading-relaxed mt-4 border-t border-slate-800/80 pt-3">
-                <strong>Aviso de Isenção:</strong> O CompraJogos participa de programas de afiliados. Podemos receber comissões por compras realizadas através dos links indicados, sem custo adicional para você.
-            </p>
-        </div>
-    </div>
-  </footer>
+    </header>
 
-  <!-- Modal Genérico -->
-  <div id="modalContainer" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4">
-    <div class="bg-[#0c0e17] border border-slate-800 rounded-2xl max-w-2xl w-full max-h-[85vh] overflow-y-auto p-6 sm:p-8 shadow-2xl relative">
-      <button onclick="fecharModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-xl font-bold bg-slate-800/50 hover:bg-slate-800 w-8 h-8 rounded-full flex items-center justify-center transition">&times;</button>
-      <div id="modalContent" class="text-slate-300 text-sm leading-relaxed space-y-4">
-        <!-- Conteúdo injetado via JS -->
-      </div>
-    </div>
-  </div>
-
-  <script>
-    let catalogoGlobal = [];
-    let tipoAtual = 'all';
-    let generoAtual = 'all';
-
-    async function carregarTudo() {
-      const container = document.getElementById('catalog');
-      try {
-        const cotacaoRes = await fetch('https://economia.awesomeapi.com.br/json/last/USD-BRL');
-        const cotacaoData = await cotacaoRes.json();
-        const dolarTaxa = parseFloat(cotacaoData.USDBRL.bid) || 5.50;
-
-        const resPaid = await fetch('https://www.cheapshark.com/api/1.0/deals?storeID=1&upperPrice=50&pageSize=90');
-        const paidData = await resPaid.json();
-        
-        const paidFormatted = paidData.map(item => {
-          const saleBRL = (parseFloat(item.salePrice) * dolarTaxa).toFixed(2);
-          const normalBRL = (parseFloat(item.normalPrice) * dolarTaxa).toFixed(2);
-          return {
-            title: item.title,
-            type: 'paid',
-            genre: 'PC Key / Oferta',
-            image: item.thumb,
-            salePrice: parseFloat(saleBRL),
-            normalPrice: parseFloat(normalBRL),
-            saleFormatted: `R$ ${saleBRL.replace('.', ',')}`,
-            normalFormatted: `R$ ${normalBRL.replace('.', ',')}`,
-            savings: Math.round(item.savings || 0),
-            url: `https://www.cheapshark.com/redirect?dealID=${item.dealID}`
-          };
-        });
-
-        const resFree = await fetch('https://www.freetogame.com/api/games');
-        const freeData = await resFree.json();
-        
-        const freeFormatted = freeData.slice(0, 90).map(item => ({
-          title: item.title,
-          type: 'free',
-          genre: item.genre || 'Free-to-Play',
-          image: item.thumbnail,
-          salePrice: 0,
-          normalPrice: 0,
-          saleFormatted: 'Gratuito',
-          normalFormatted: '',
-          savings: 100,
-          url: item.game_url
-        }));
-
-        catalogoGlobal = [...paidFormatted, ...freeFormatted];
-
-        construirBarraGeneros();
-        filtrarEFiltrarJogos();
-
-      } catch (err) {
-        container.innerHTML = `<div class="bg-slate-900 border border-slate-800 p-8 rounded-xl text-center text-rose-400 col-span-full shadow-inner">Erro ao carregar o catálogo de jogos. Tente recarregar a página.</div>`;
-      }
-    }
-
-    function construirBarraGeneros() {
-      const bar = document.getElementById('genre-bar');
-      bar.innerHTML = '';
-
-      const btnTodos = document.createElement('button');
-      btnTodos.className = `genre-btn whitespace-nowrap px-3.5 py-1.5 rounded-xl text-xs font-semibold transition ${generoAtual === 'all' ? 'bg-emerald-500 text-slate-950 font-bold shadow-md shadow-emerald-500/20' : 'bg-slate-800/80 text-slate-300 hover:bg-slate-700 border border-slate-700/50'}`;
-      btnTodos.innerText = 'Todos os Gêneros';
-      btnTodos.onclick = () => mudarGenero('all', btnTodos);
-      bar.appendChild(btnTodos);
-
-      const itensFiltradosPorTipo = tipoAtual === 'all' 
-        ? catalogoGlobal 
-        : catalogoGlobal.filter(j => j.type === tipoAtual);
-
-      const generosUnicos = [...new Set(itensFiltradosPorTipo.map(j => j.genre))].sort();
-
-      generosUnicos.forEach(g => {
-        const btn = document.createElement('button');
-        const ativo = generoAtual === g;
-        btn.className = `genre-btn whitespace-nowrap px-3.5 py-1.5 rounded-xl text-xs font-semibold transition ${ativo ? 'bg-emerald-500 text-slate-950 font-bold shadow-md shadow-emerald-500/20' : 'bg-slate-800/80 text-slate-300 hover:bg-slate-700 border border-slate-700/50'}`;
-        btn.innerText = g;
-        btn.onclick = () => mudarGenero(g, btn);
-        bar.appendChild(btn);
-      });
-    }
-
-    function mudarTipo(tipo, el) {
-      tipoAtual = tipo;
-      generoAtual = 'all'; 
-      
-      document.querySelectorAll('.tipo-btn').forEach(b => {
-        b.className = "tipo-btn px-4 py-2 rounded-xl text-xs font-bold transition bg-slate-800/80 text-slate-300 hover:bg-slate-700 hover:text-white border border-slate-700/50";
-      });
-      el.className = "tipo-btn px-4 py-2 rounded-xl text-xs font-bold transition bg-emerald-500 text-slate-950 shadow-md shadow-emerald-500/20";
-      
-      construirBarraGeneros();
-      filtrarEFiltrarJogos();
-    }
-
-    function mudarGenero(genero, el) {
-      generoAtual = genero;
-      
-      document.querySelectorAll('.genre-btn').forEach(b => {
-        b.className = "genre-btn whitespace-nowrap px-3.5 py-1.5 rounded-xl text-xs font-semibold transition bg-slate-800/80 text-slate-300 hover:bg-slate-700 border border-slate-700/50";
-      });
-      el.className = "genre-btn whitespace-nowrap px-3.5 py-1.5 rounded-xl text-xs font-semibold transition bg-emerald-500 text-slate-950 font-bold shadow-md shadow-emerald-500/20";
-      
-      filtrarEFiltrarJogos();
-    }
-
-    function filtrarEFiltrarJogos() {
-      const busca = document.getElementById('searchInput').value.toLowerCase();
-      const container = document.getElementById('catalog');
-
-      const filtrados = catalogoGlobal.filter(jogo => {
-        const matchBusca = jogo.title.toLowerCase().includes(busca);
-        const matchTipo = tipoAtual === 'all' || jogo.type === tipoAtual;
-        const matchGenero = generoAtual === 'all' || jogo.genre === generoAtual;
-        return matchBusca && matchTipo && matchGenero;
-      });
-
-      if (filtrados.length === 0) {
-        container.innerHTML = `<div class="bg-slate-900/60 border border-slate-800 p-12 rounded-2xl text-center text-slate-400 col-span-full shadow-inner">Nenhum item encontrado com esses filtros.</div>`;
-        return;
-      }
-
-      container.innerHTML = filtrados.map(item => `
-        <div class="bg-slate-900/70 rounded-2xl overflow-hidden border border-slate-800/80 hover:border-emerald-500/50 transition-all duration-300 flex flex-col justify-between group shadow-lg hover:shadow-emerald-500/5">
-          <div class="relative bg-slate-950 h-44 overflow-hidden flex items-center justify-center">
-            <img src="${item.image}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" />
-            <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-80"></div>
-            <span class="absolute top-3 left-3 bg-slate-900/80 backdrop-blur-md text-[10px] font-bold px-2.5 py-1 rounded-lg text-slate-300 border border-slate-700/50 uppercase tracking-wide">${item.genre}</span>
-            ${item.savings > 0 && item.type === 'paid' ? `<span class="absolute top-3 right-3 bg-emerald-500 text-slate-950 text-xs font-black px-2.5 py-1 rounded-lg shadow-md">-${item.savings}%</span>` : ''}
-            ${item.type === 'free' ? `<span class="absolute top-3 right-3 bg-indigo-600 text-white text-xs font-black px-2.5 py-1 rounded-lg shadow-md">Grátis</span>` : ''}
-          </div>
-          <div class="p-5 flex-1 flex flex-col justify-between gap-4">
-            <div>
-              <h4 class="font-bold text-base text-slate-100 line-clamp-2 group-hover:text-emerald-400 transition">${item.title}</h4>
+    <main>
+        <!-- Seção de Destaques Misturados (Pagos & Gratuitos) -->
+        <section class="destaques-container-wrapper">
+            <h2 class="section-title">🔥 Destaques: Melhores Jogos Pagos & Gratuitos</h2>
+            <div id="destaques-grid" class="destaques-grid">
+                <!-- Inserido via JavaScript -->
             </div>
-            <div class="flex justify-between items-end border-t border-slate-800/80 pt-4">
-              <div>
-                ${item.type === 'paid' ? `
-                  <span class="text-xs text-slate-500 line-through block font-medium">${item.normalFormatted}</span>
-                  <span class="text-xl font-black text-emerald-400 tracking-tight">${item.saleFormatted}</span>
-                ` : `
-                  <span class="text-xs text-slate-400 block font-medium">Plataforma PC</span>
-                  <span class="text-lg font-black text-indigo-400 tracking-tight">Free-to-Play</span>
-                `}
-              </div>
-              <a href="${item.url}" target="_blank" class="${item.type === 'paid' ? 'bg-emerald-500 hover:bg-emerald-400 text-slate-950 shadow-emerald-500/20' : 'bg-indigo-600 hover:bg-indigo-500 text-white shadow-indigo-600/20'} font-bold px-4 py-2.5 rounded-xl text-xs transition shadow-md active:scale-95">
-                ${item.type === 'paid' ? 'Ver Oferta' : 'Jogar Grátis'}
-              </a>
+        </section>
+
+        <!-- Catálogo Geral de Jogos -->
+        <section class="catalog-section">
+            <h2 class="section-title">🎮 Catálogo de Jogos e Ofertas</h2>
+            <div id="catalogo-grid" class="catalogo-grid">
+                <!-- Inserido via JavaScript -->
             </div>
-          </div>
-        </div>
-      `).join('');
-    }
+        </section>
+    </main>
 
-    // Controle de Modais Institucionais
-    const textosModais = {
-      sobre: `
-        <h3 class="text-xl font-bold text-white mb-2">Sobre o CompraJogos</h3>
-        <p>O <strong>CompraJogos.com.br</strong> é um portal especializado em curadoria e agregação de ofertas de chaves de jogos para PC (keys) e jogos gratuitos (Free-to-Play).</p>
-        <p><strong>Idealizadora:</strong> O projeto foi idealizado por <em>Beatriz Marcondes Cesar</em> com o propósito de conectar jogadores aos melhores preços e promoções do mercado digital de forma ágil, segura e centralizada.</p>
-        <p>Nosso objetivo principal é simplificar a busca por entretenimento digital de qualidade, permitindo que a comunidade encontre descontos expressivos e novidades sem complicações.</p>
-      `,
-      privacidade: `
-        <h3 class="text-xl font-bold text-white mb-2">Política de Privacidade</h3>
-        <p>A sua privacidade é importante para nós. O CompraJogos.com.br segue diretrizes rígidas de proteção de dados.</p>
-        <p><strong>Uso de Cookies e Anúncios:</strong> Utilizamos serviços de terceiros, como o Google AdSense, para exibir anúncios relevantes aos visitantes. O Google pode usar cookies (como o cookie DART) para exibir anúncios com base em suas visitas a este e a outros sites na internet.</p>
-        <p>Você pode desativar o uso do cookie DART visitando a política de privacidade da rede de conteúdo e dos anúncios do Google.</p>
-        <p>Não coletamos informações pessoais sensíveis diretamente em nosso banco de dados sem o seu consentimento explícito.</p>
-      `,
-      termos: `
-        <h3 class="text-xl font-bold text-white mb-2">Termos de Uso</h3>
-        <p>Ao acessar o site <strong>CompraJogos.com.br</strong>, você concorda em cumprir estes termos de serviço, todas as leis e regulamentos aplicáveis.</p>
-        <p><strong>Isenção de Responsabilidade sobre Preços e Links:</strong> Os preços, descontos e disponibilidades dos jogos exibidos em nosso catálogo são obtidos em tempo real através de APIs parceiras e podem sofrer alterações por parte das lojas oficiais a qualquer momento. O CompraJogos atua como agregador e redirecionador, não realizando a venda direta dos produtos digitais.</p>
-      `
-    };
+    <footer class="site-footer">
+        <p>&copy; 2026 CompraJogos.com.br - Todos os direitos reservados.</p>
+    </footer>
 
-    function abrirModal(tipo) {
-      const modal = document.getElementById('modalContainer');
-      const content = document.getElementById('modalContent');
-      content.innerHTML = textosModais[tipo] || '<p>Conteúdo não encontrado.</p>';
-      modal.classList.remove('hidden');
-      modal.classList.add('flex');
-    }
-
-    function fecharModal() {
-      const modal = document.getElementById('modalContainer');
-      modal.classList.remove('flex');
-      modal.classList.add('hidden');
-    }
-
-    // Fechar ao clicar fora do modal
-    window.onclick = function(event) {
-      const modal = document.getElementById('modalContainer');
-      if (event.target === modal) {
-        fecharModal();
-      }
-    }
-
-    carregarTudo();
-  </script>
+    <script src="index.js"></script>
 </body>
 </html>
