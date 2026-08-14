@@ -12,6 +12,10 @@ async function getAccessToken() {
   const clientId = process.env.CODESWHOLESALE_CLIENT_ID;
   const clientSecret = process.env.CODESWHOLESALE_CLIENT_SECRET;
 
+  if (!clientId || !clientSecret) {
+    throw new Error('Chaves da API não configuradas no arquivo .env');
+  }
+
   const params = new URLSearchParams();
   params.append('grant_type', 'client_credentials');
   params.append('client_id', clientId);
@@ -24,7 +28,8 @@ async function getAccessToken() {
   });
 
   if (!response.ok) {
-    throw new Error(`Erro Auth: ${response.status} ${response.statusText}`);
+    const errorText = await response.text();
+    throw new Error(`Falha na Autenticação (${response.status}): ${errorText}`);
   }
 
   const data = await response.json();
@@ -34,12 +39,17 @@ async function getAccessToken() {
 app.get('/api/products', async (req, res) => {
   try {
     const token = await getAccessToken();
-    const prodRes = await fetch(`${BASE_URL}/v1/products`, {
+    const prodRes = await fetch(`${BASE_URL}/v3/products`, {
       headers: {
         'Authorization': `Bearer ${token}`,
         'Accept': 'application/json'
       }
     });
+
+    if (!prodRes.ok) {
+      const errText = await prodRes.text();
+      return res.status(prodRes.status).json({ error: `Erro na API v3 (${prodRes.status}): ${errText}` });
+    }
 
     const products = await prodRes.json();
     res.json(products);
