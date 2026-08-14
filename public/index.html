@@ -53,13 +53,13 @@
   <section class="container mx-auto px-4 py-8">
     <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-slate-900/40 backdrop-blur p-4 rounded-2xl border border-slate-800/80 shadow-xl shadow-black/20">
       
-      <!-- Filtro Tipo (Pagos, Gratuitos, Periféricos) -->
+      <!-- Filtro Tipo -->
       <div class="flex items-center gap-2 flex-wrap">
         <span class="text-xs text-slate-400 font-bold uppercase tracking-wider mr-1">Filtrar por:</span>
         <button onclick="mudarTipo('all', this)" class="tipo-btn px-4 py-2 rounded-xl text-xs font-bold transition bg-emerald-500 text-slate-950 shadow-md shadow-emerald-500/20">Todos</button>
         <button onclick="mudarTipo('paid', this)" class="tipo-btn px-4 py-2 rounded-xl text-xs font-bold transition bg-slate-800/80 text-slate-300 hover:bg-slate-700 hover:text-white border border-slate-700/50">Jogos Pagos / Keys</button>
         <button onclick="mudarTipo('free', this)" class="tipo-btn px-4 py-2 rounded-xl text-xs font-bold transition bg-slate-800/80 text-slate-300 hover:bg-slate-700 hover:text-white border border-slate-700/50">Jogos Gratuitos (F2P)</button>
-        <button onclick="mudarTipo('hardware', this)" class="tipo-btn px-4 py-2 rounded-xl text-xs font-bold transition bg-slate-800/80 text-slate-300 hover:bg-slate-700 hover:text-white border border-slate-700/50">Periféricos Amazon</button>
+        <button onclick="mudarTipo('hardware', this)" class="tipo-btn px-4 py-2 rounded-xl text-xs font-bold transition bg-slate-800/80 text-slate-300 hover:bg-slate-700 hover:text-white border border-slate-700/50">Periféricos & Setup</button>
       </div>
 
     </div>
@@ -102,8 +102,20 @@
     let tipoAtual = 'all';
     let generoAtual = 'all';
 
-    // Periféricos oficiais cadastrados na pasta pública (Amazon)
+    // Periféricos e Setup de Entrada da Amazon (Preços ajustáveis)
     const perifericosAmazon = [
+      {
+        title: 'Setup Gamer de Entrada Completo (Teclado + Mouse + Headset + Mousepad)',
+        type: 'hardware',
+        genre: 'Setup Gamer',
+        image: 'teclado-mecanico.png',
+        salePrice: 399.90,
+        normalPrice: 499.90,
+        saleFormatted: 'R$ 399,90',
+        normalFormatted: 'R$ 499,90',
+        savings: 20,
+        url: 'https://www.amazon.com.br'
+      },
       {
         title: 'Headset Gamer Redragon Zeus H510 RGB Surround 7.1',
         type: 'hardware',
@@ -185,7 +197,6 @@
           url: item.game_url
         }));
 
-        // Unir Jogos Pagos, Gratuitos e Periféricos da Amazon
         catalogoGlobal = [...perifericosAmazon, ...paidFormatted, ...freeFormatted];
 
         construirBarraGeneros();
