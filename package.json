@@ -3,12 +3,26 @@
   "version": "1.0.0",
   "main": "server.js",
   "dependencies": {
-    "express": "^4.19.2",
     "cors": "^2.8.5",
+    "dotenv": "^17.4.2",
+    "express": "^4.22.2",
     "google-auth-library": "^9.9.0",
     "mercadopago": "^2.0.8"
   },
   "scripts": {
     "start": "node server.js"
-  }
+  },
+  "description": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/copatropa32-prog/comprajogos.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/copatropa32-prog/comprajogos/issues"
+  },
+  "homepage": "https://github.com/copatropa32-prog/comprajogos#readme"
 }
