@@ -40,7 +40,7 @@
     <div class="container mx-auto px-4 relative z-10">
       <div class="inline-flex items-center gap-2 bg-emerald-500/10 text-emerald-400 text-xs font-bold px-3.5 py-1.5 rounded-full border border-emerald-500/20 uppercase tracking-widest mb-4 shadow-sm">
         <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-        Catálogo Unificado & Tempo Real (180 Jogos)
+        Catálogo Unificado & Tempo Real (200 Jogos Destacados)
       </div>
       <h2 class="text-4xl sm:text-6xl font-black mt-2 mb-4 tracking-tight text-white drop-shadow-sm">Jogos e Keys</h2>
       <p class="text-slate-400 max-w-xl mx-auto text-sm sm:text-base leading-relaxed">
@@ -53,7 +53,6 @@
   <section class="container mx-auto px-4 pt-6">
     <div class="bg-slate-900/40 border border-slate-800/80 rounded-2xl p-4 text-center overflow-hidden shadow-lg">
       <span class="text-[10px] text-slate-500 uppercase tracking-widest block mb-2">Publicidade</span>
-      <!-- Substitua o bloco abaixo pelo código fornecido pelo Google AdSense -->
       <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-SUO_CLIENT_ID" crossorigin="anonymous"></script>
       <ins class="adsbygoogle"
            style="display:block"
@@ -92,7 +91,7 @@
     <div id="catalog" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
       <div class="bg-slate-900/60 border border-slate-800/80 p-12 rounded-2xl animate-pulse flex flex-col items-center justify-center text-slate-400 col-span-full gap-3 shadow-inner">
         <div class="w-8 h-8 rounded-full border-4 border-emerald-500 border-t-transparent animate-spin"></div>
-        <span class="text-sm font-medium">Sincronizando 180 jogos das APIs...</span>
+        <span class="text-sm font-medium">Sincronizando 200 jogos em alta das APIs...</span>
       </div>
     </div>
   </main>
@@ -146,7 +145,8 @@
         const cotacaoData = await cotacaoRes.json();
         const dolarTaxa = parseFloat(cotacaoData.USDBRL.bid) || 5.50;
 
-        const resPaid = await fetch('https://www.cheapshark.com/api/1.0/deals?storeID=1&upperPrice=50&pageSize=90');
+        // Requisição CheapShark ajustada para puxar até 200 jogos ordenados por Reviews/Popularidade no topo
+        const resPaid = await fetch('https://www.cheapshark.com/api/1.0/deals?storeID=1&pageSize=200&sortBy=Reviews');
         const paidData = await resPaid.json();
         
         const paidFormatted = paidData.map(item => {
@@ -290,7 +290,6 @@
       `).join('');
     }
 
-    // Controle de Modais Institucionais
     const textosModais = {
       sobre: `
         <h3 class="text-xl font-bold text-white mb-2">Sobre o CompraJogos</h3>
@@ -326,7 +325,6 @@
       modal.classList.add('hidden');
     }
 
-    // Fechar ao clicar fora do modal
     window.onclick = function(event) {
       const modal = document.getElementById('modalContainer');
       if (event.target === modal) {
@@ -338,4 +336,3 @@
   </script>
 </body>
 </html>
-```[cite: 1]
