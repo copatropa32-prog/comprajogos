@@ -1,69 +1,70 @@
-// Função para carregar e mesclar os destaques no topo com segurança
+// Carregar Destaques (Jogos Pagos e Gratuitos das APIs Reais)
 async function carregarDestaquesTopo() {
     const container = document.getElementById('destaques-grid');
     if (!container) return;
 
-    let pagos = [];
-    let gratis = [];
-
     try {
-        const resPagos = await fetch('https://www.cheapshark.com/api/1.0/deals?storeID=1&upperPrice=60&sortBy=Metacritic&pageSize=4');
-        pagos = await resPagos.json();
-    } catch (error) {
-        console.error("Erro ao carregar jogos pagos:", error);
-    }
+        // Requisição para CheapShark (Jogos pagos em oferta)
+        const resPagos = await fetch('https://www.cheapshark.com/api/1.0/deals?storeID=1&upperPrice=60&sortBy=Metacritic&pageSize=3');
+        const pagos = await resPagos.json();
 
-    try {
+        // Requisição para FreeToGame (Jogos gratuitos)
         const resGratis = await fetch('https://www.freetogame.com/api/games?sort=popularity');
-        gratis = await resGratis.json();
-    } catch (error) {
-        console.error("Erro ao carregar jogos gratuitos:", error);
-    }
+        const gratis = await resGratis.json();
 
-    const destaquesMisturados = [];
-    for (let i = 0; i < 3; i++) {
-        if (pagos[i]) destaquesMisturados.push({ ...pagos[i], tipo: 'pago' });
-        if (gratis[i]) destaquesMisturados.push({ ...gratis[i], tipo: 'gratis' });
-    }
+        container.innerHTML = '';
 
-    container.innerHTML = '';
+        let itensRenderizados = 0;
 
-    if (destaquesMisturados.length === 0) {
-        container.innerHTML = '<p style="color: #aaa; grid-column: 1/-1; text-align: center;">Carregando destaques...</p>';
-        return;
-    }
-
-    destaquesMisturados.forEach(jogo => {
-        const card = document.createElement('div');
-        card.className = 'destaque-item';
-
-        if (jogo.tipo === 'pago') {
-            card.innerHTML = `
-                <img src="${jogo.thumb}" alt="${jogo.title}">
-                <div class="destaque-info">
-                    <span class="badge pago">Oferta</span>
-                    <h3>${jogo.title}</h3>
-                    <p class="preco">R$ ${jogo.salePrice} <span class="de">R$ ${jogo.normalPrice}</span></p>
-                    <a href="https://www.cheapshark.com/redirect?dealID=${jogo.dealID}" target="_blank" class="btn-comprar">Ver Oferta</a>
-                </div>
-            `;
-        } else {
-            card.innerHTML = `
-                <img src="${jogo.thumbnail}" alt="${jogo.title}">
-                <div class="destaque-info">
-                    <span class="badge gratis">Gratuito</span>
-                    <h3>${jogo.title}</h3>
-                    <p class="preco">Grátis</p>
-                    <a href="${jogo.game_url}" target="_blank" class="btn-comprar">Jogar Agora</a>
-                </div>
-            `;
+        // Adicionar até 3 pagos
+        if (Array.isArray(pagos)) {
+            pagos.slice(0, 3).forEach(jogo => {
+                const card = document.createElement('div');
+                card.className = 'destaque-item';
+                card.innerHTML = `
+                    <img src="${jogo.thumb}" alt="${jogo.title}">
+                    <div class="destaque-info">
+                        <span class="badge pago">Oferta</span>
+                        <h3>${jogo.title}</h3>
+                        <p class="preco">R$ ${jogo.salePrice} <span class="de">R$ ${jogo.normalPrice}</span></p>
+                        <a href="https://www.cheapshark.com/redirect?dealID=${jogo.dealID}" target="_blank" class="btn-comprar">Ver Oferta</a>
+                    </div>
+                `;
+                container.appendChild(card);
+                itensRenderizados++;
+            });
         }
 
-        container.appendChild(card);
-    });
+        // Adicionar até 3 gratuitos
+        if (Array.isArray(gratis)) {
+            gratis.slice(0, 3).forEach(jogo => {
+                const card = document.createElement('div');
+                card.className = 'destaque-item';
+                card.innerHTML = `
+                    <img src="${jogo.thumbnail}" alt="${jogo.title}">
+                    <div class="destaque-info">
+                        <span class="badge gratis">Gratuito</span>
+                        <h3>${jogo.title}</h3>
+                        <p class="preco">Grátis</p>
+                        <a href="${jogo.game_url}" target="_blank" class="btn-comprar">Jogar Agora</a>
+                    </div>
+                `;
+                container.appendChild(card);
+                itensRenderizados++;
+            });
+        }
+
+        if (itensRenderizados === 0) {
+            container.innerHTML = '<p style="color: #aaa; grid-column: 1/-1; text-align: center;">Nenhum destaque encontrado nas APIs.</p>';
+        }
+
+    } catch (error) {
+        console.error("Erro ao carregar destaques das APIs:", error);
+        container.innerHTML = '<p style="color: #ff6b6b; grid-column: 1/-1; text-align: center;">Erro ao conectar com as APIs de jogos.</p>';
+    }
 }
 
-// Função para carregar o catálogo geral
+// Carregar Catálogo Geral (CheapShark API)
 async function carregarCatalogo(termoBusca = '') {
     const container = document.getElementById('catalogo-grid');
     if (!container) return;
@@ -80,7 +81,7 @@ async function carregarCatalogo(termoBusca = '') {
         container.innerHTML = '';
 
         if (!Array.isArray(jogos) || jogos.length === 0) {
-            container.innerHTML = '<p style="color: #aaa; grid-column: 1/-1; text-align: center;">Nenhum jogo encontrado.</p>';
+            container.innerHTML = '<p style="color: #aaa; grid-column: 1/-1; text-align: center;">Nenhum jogo encontrado na busca.</p>';
             return;
         }
 
@@ -90,7 +91,7 @@ async function carregarCatalogo(termoBusca = '') {
             card.innerHTML = `
                 <img src="${jogo.thumb}" alt="${jogo.title}">
                 <div class="jogo-info">
-                    <span class="badge pago">Jogo / Oferta</span>
+                    <span class="badge pago">Oferta</span>
                     <h3>${jogo.title}</h3>
                     <p class="preco">R$ ${jogo.salePrice} <span class="de">R$ ${jogo.normalPrice}</span></p>
                     <a href="https://www.cheapshark.com/redirect?dealID=${jogo.dealID}" target="_blank" class="btn-comprar">Ver Oferta</a>
@@ -100,11 +101,11 @@ async function carregarCatalogo(termoBusca = '') {
         });
 
     } catch (error) {
-        console.error("Erro ao carregar catálogo:", error);
+        console.error("Erro ao carregar catálogo da API:", error);
+        container.innerHTML = '<p style="color: #ff6b6b; grid-column: 1/-1; text-align: center;">Erro ao carregar o catálogo de jogos.</p>';
     }
 }
 
-// Configurar barra de pesquisa
 function configurarPesquisa() {
     const input = document.getElementById('search-input');
     const btn = document.getElementById('search-btn');
@@ -124,7 +125,6 @@ function configurarPesquisa() {
     });
 }
 
-// Inicialização ao carregar a página
 document.addEventListener('DOMContentLoaded', () => {
     carregarDestaquesTopo();
     carregarCatalogo();
