@@ -52,7 +52,7 @@
 
     <!-- Barra de Gêneros Horizontal -->
     <div id="genre-bar" class="flex items-center gap-2 overflow-x-auto py-3 mt-3 scrollbar-thin scrollbar-thumb-gray-800">
-      <button onclick="mudarGenero('all', this)" class="genre-btn whitespace-nowrap px-3 py-1.5 rounded-lg text-xs font-semibold bg-green-500 text-gray-950 transition">Todos os Gêneros</button>
+      <!-- Preenchido dinamicamente via JS -->
     </div>
   </section>
 
@@ -136,7 +136,7 @@
         // Combinar os dois catálogos (~120 jogos)
         catalogoGlobal = [...paidFormatted, ...freeFormatted];
 
-        // Montar a barra de gêneros dinamicamente
+        // Montar a barra de gêneros inicial
         construirBarraGeneros();
 
         // Renderizar inicial
@@ -149,11 +149,26 @@
 
     function construirBarraGeneros() {
       const bar = document.getElementById('genre-bar');
-      const generosUnicos = [...new Set(catalogoGlobal.map(j => j.genre))].sort();
+      bar.innerHTML = '';
+
+      // Botão "Todos os Gêneros"
+      const btnTodos = document.createElement('button');
+      btnTodos.className = `genre-btn whitespace-nowrap px-3 py-1.5 rounded-lg text-xs font-semibold transition ${generoAtual === 'all' ? 'bg-green-500 text-gray-950 font-bold' : 'bg-gray-800 text-gray-300 hover:bg-gray-700'}`;
+      btnTodos.innerText = 'Todos os Gêneros';
+      btnTodos.onclick = () => mudarGenero('all', btnTodos);
+      bar.appendChild(btnTodos);
+
+      // Filtrar os gêneros disponíveis com base no tipo atual selecionado
+      const itensFiltradosPorTipo = tipoAtual === 'all' 
+        ? catalogoGlobal 
+        : catalogoGlobal.filter(j => j.type === tipoAtual);
+
+      const generosUnicos = [...new Set(itensFiltradosPorTipo.map(j => j.genre))].sort();
 
       generosUnicos.forEach(g => {
         const btn = document.createElement('button');
-        btn.className = "genre-btn whitespace-nowrap px-3 py-1.5 rounded-lg text-xs font-semibold bg-gray-800 text-gray-300 hover:bg-gray-700 transition";
+        const ativo = generoAtual === g;
+        btn.className = `genre-btn whitespace-nowrap px-3 py-1.5 rounded-lg text-xs font-semibold transition ${ativo ? 'bg-green-500 text-gray-950 font-bold' : 'bg-gray-800 text-gray-300 hover:bg-gray-700'}`;
         btn.innerText = g;
         btn.onclick = () => mudarGenero(g, btn);
         bar.appendChild(btn);
@@ -162,19 +177,25 @@
 
     function mudarTipo(tipo, el) {
       tipoAtual = tipo;
+      generoAtual = 'all'; // Reseta o gênero ao trocar de tipo para evitar conflitos de filtro vazio
+      
       document.querySelectorAll('.tipo-btn').forEach(b => {
         b.className = "tipo-btn px-3 py-1.5 rounded-lg text-xs font-bold transition bg-gray-800 text-gray-300 hover:bg-gray-700";
       });
       el.className = "tipo-btn px-3 py-1.5 rounded-lg text-xs font-bold transition bg-green-500 text-gray-950";
+      
+      construirBarraGeneros();
       filtrarEFiltrarJogos();
     }
 
     function mudarGenero(genero, el) {
       generoAtual = genero;
+      
       document.querySelectorAll('.genre-btn').forEach(b => {
         b.className = "genre-btn whitespace-nowrap px-3 py-1.5 rounded-lg text-xs font-semibold bg-gray-800 text-gray-300 hover:bg-gray-700 transition";
       });
       el.className = "genre-btn whitespace-nowrap px-3 py-1.5 rounded-lg text-xs font-semibold bg-green-500 text-gray-950 transition";
+      
       filtrarEFiltrarJogos();
     }
 
