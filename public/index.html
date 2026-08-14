@@ -44,7 +44,7 @@
       </div>
       <h2 class="text-4xl sm:text-6xl font-black mt-2 mb-4 tracking-tight text-white drop-shadow-sm">Jogos e Keys</h2>
       <p class="text-slate-400 max-w-xl mx-auto text-sm sm:text-base leading-relaxed">
-        Explore os melhores jogos gratuitos (F2P) no topo e descontos imbatíveis em chaves de PC.
+        Explore centenas de jogos gratuitos (F2P) no topo e descontos imbatíveis em chaves de PC.
       </p>
     </div>
   </section>
@@ -175,7 +175,8 @@
         const resFree = await fetch('https://www.freetogame.com/api/games');
         const freeData = await resFree.json();
         
-        const freeFormatted = freeData.slice(0, 90).map(item => ({
+        // AUMENTADO DE 90 PARA 190 JOGOS GRATUITOS (+100 jogos)
+        const freeFormatted = freeData.slice(0, 190).map(item => ({
           title: item.title,
           type: 'free',
           genre: item.genre || 'Free-to-Play',
@@ -188,7 +189,7 @@
           url: item.game_url
         }));
 
-        // JOGOS GRATUITOS NO TOPO E PAGOS EM SEGUIDA
+        // Mantém a ordem: Jogos gratuitos no topo + Jogos pagos abaixo
         catalogoGlobal = [...freeFormatted, ...paidFormatted];
 
         construirBarraGeneros();
