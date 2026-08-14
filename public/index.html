@@ -47,7 +47,7 @@
         <!-- Card 1: Mouse -->
         <div class="bg-gray-900 p-6 rounded-xl border border-gray-800 hover:border-blue-500/50 transition flex flex-col justify-between">
             <div>
-              <img src="mouse-redragon.jpg" alt="Mouse Gamer" class="w-full h-40 object-contain bg-white rounded-lg p-2 mb-4">
+              <img src="/mouse-redragon.jpg" alt="Mouse Gamer" class="w-full h-40 object-contain bg-white rounded-lg p-2 mb-4">
               <h4 class="font-bold text-white mb-2">Mouse Gamer Redragon</h4>
               <p class="text-gray-400 text-xs mb-4">Ergonomia e precisão.</p>
               <span class="text-green-400 font-bold block mb-4">R$ 89,99</span>
@@ -58,7 +58,7 @@
         <!-- Card 2: Teclado -->
         <div class="bg-gray-900 p-6 rounded-xl border border-gray-800 hover:border-blue-500/50 transition flex flex-col justify-between">
             <div>
-              <img src="teclado-mecanico.png" alt="Teclado Gamer" class="w-full h-40 object-contain bg-white rounded-lg p-2 mb-4">
+              <img src="/teclado-mecanico.png" alt="Teclado Gamer" class="w-full h-40 object-contain bg-white rounded-lg p-2 mb-4">
               <h4 class="font-bold text-white mb-2">Teclado Mecânico Kumara</h4>
               <p class="text-gray-400 text-xs mb-4">Layout ABNT2 e switch brown.</p>
               <span class="text-green-400 font-bold block mb-4">R$ 169,00</span>
@@ -69,7 +69,7 @@
         <!-- Card 3: Headset -->
         <div class="bg-gray-900 p-6 rounded-xl border border-gray-800 hover:border-blue-500/50 transition flex flex-col justify-between">
             <div>
-              <img src="headset-redragon.png" alt="Headset Gamer" class="w-full h-40 object-contain bg-white rounded-lg p-2 mb-4">
+              <img src="/headset-redragon.png" alt="Headset Gamer" class="w-full h-40 object-contain bg-white rounded-lg p-2 mb-4">
               <h4 class="font-bold text-white mb-2">Headset Gamer Redragon</h4>
               <p class="text-gray-400 text-xs mb-4">Conforto para longas horas.</p>
               <span class="text-green-400 font-bold block mb-4">R$ 142,36</span>
@@ -125,7 +125,6 @@
   </footer>
 
   <script>
-    // --- CARREGAR API DE OFERTAS ---
     async function loadProducts() {
       const container = document.getElementById('catalog');
       try {
@@ -135,11 +134,6 @@
 
         const res = await fetch('https://www.cheapshark.com/api/1.0/deals?storeID=1&upperPrice=50&pageSize=8');
         const products = await res.json();
-
-        if (!Array.isArray(products) || products.length === 0) {
-          container.innerHTML = `<p class="text-gray-400 col-span-full">Nenhuma oferta encontrada no momento.</p>`;
-          return;
-        }
 
         container.innerHTML = products.map(item => {
           const salePriceBRL = (parseFloat(item.salePrice) * dolarTaxa).toFixed(2);
@@ -170,7 +164,6 @@
       }
     }
 
-    // --- CARREGAR API DE JOGOS GRATUITOS ---
     let todosJogosGratuitos = [];
     async function carregarJogosGratuitos() {
       try {
