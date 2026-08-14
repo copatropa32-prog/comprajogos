@@ -70,7 +70,7 @@
     </div>
   </section>
 
-  <!-- Destaques do Dia (CheapShark API em Reais com margem simulada) -->
+  <!-- Destaques do Dia (CheapShark API em Reais com Preço Original Convertido) -->
   <main class="container mx-auto py-10 px-4">
     <h3 class="text-xl font-bold mb-6 text-gray-200 flex items-center gap-2">
       <span class="w-2 h-2 rounded-full bg-green-400"></span>
@@ -116,7 +116,7 @@
   </footer>
 
   <script>
-    // --- CARREGAR API DE OFERTAS (Com Cotação USD -> BRL e 15% de Lucro simulado) ---
+    // --- CARREGAR API DE OFERTAS (Com Cotação USD -> BRL Sem Margem Adicional) ---
     async function loadProducts() {
       const container = document.getElementById('catalog');
       try {
@@ -133,8 +133,9 @@
         }
 
         container.innerHTML = products.map(item => {
-          const salePriceBRL = (parseFloat(item.salePrice) * dolarTaxa * 1.15).toFixed(2);
-          const normalPriceBRL = (parseFloat(item.normalPrice) * dolarTaxa * 1.15).toFixed(2);
+          // Conversão direta para Reais usando apenas a cotação oficial
+          const salePriceBRL = (parseFloat(item.salePrice) * dolarTaxa).toFixed(2);
+          const normalPriceBRL = (parseFloat(item.normalPrice) * dolarTaxa).toFixed(2);
 
           const saleFormatted = salePriceBRL.replace('.', ',');
           const normalFormatted = normalPriceBRL.replace('.', ',');
@@ -186,7 +187,7 @@
         }));
         renderizarJogosGrátis();
       } catch (e) {
-        document.getElementById('games-grid').innerHTML = "<p class='text-gray-400 col-span-full'>Erro ao carregar jogos gratuitos.</p>";
+        document.getElementById('games-grid').innerHTML = "<p class='text-red-400 col-span-full'>Erro ao carregar jogos gratuitos.</p>";
       }
     }
 
