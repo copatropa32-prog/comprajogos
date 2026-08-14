@@ -89,7 +89,8 @@
         const cotacaoData = await cotacaoRes.json();
         const dolarTaxa = parseFloat(cotacaoData.USDBRL.bid) || 5.50;
 
-        const res = await fetch('https://www.cheapshark.com/api/1.0/deals?storeID=1&upperPrice=50&pageSize=8');
+        // Aumentado para 60 ofertas da CheapShark
+        const res = await fetch('https://www.cheapshark.com/api/1.0/deals?storeID=1&upperPrice=50&pageSize=60');
         const products = await res.json();
 
         container.innerHTML = products.map(item => {
@@ -126,7 +127,8 @@
       try {
         const response = await fetch('https://www.freetogame.com/api/games');
         const data = await response.json();
-        todosJogosGratuitos = data.slice(0, 12).map(jogo => ({
+        // Aumentado para 60 jogos gratuitos da FreeToGame
+        todosJogosGratuitos = data.slice(0, 60).map(jogo => ({
           title: jogo.title, category: jogo.genre, image: jogo.thumbnail, url: jogo.game_url
         }));
         renderizarJogosGrátis();
