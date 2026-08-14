@@ -10,15 +10,24 @@
 <body class="bg-gray-950 text-white min-h-screen font-sans">
 
   <!-- Cabeçalho -->
-  <header class="border-b border-gray-800 bg-gray-900/80 backdrop-blur sticky top-0 z-50 p-4">
+  <header class="border-b border-gray-800 bg-gray-900/90 backdrop-blur sticky top-0 z-50 p-4">
     <div class="container mx-auto flex justify-between items-center">
       <h1 class="text-2xl font-black tracking-wider text-green-400">
         Compra<span class="text-white">Jogos</span><span class="text-xs text-gray-500 font-normal">.com.br</span>
       </h1>
-      <nav class="space-x-6 text-sm font-semibold">
-        <a href="#" class="text-green-400 border-b-2 border-green-400 pb-1">Ofertas</a>
-        <a href="#" class="text-gray-400 hover:text-white transition">Lojas</a>
-      </nav>
+      
+      <div class="flex items-center gap-4">
+        <!-- Botão de Login / Perfil -->
+        <button onclick="abrirModalLogin()" id="userBtn" class="bg-gray-800 hover:bg-gray-700 text-sm font-semibold px-4 py-2 rounded-lg transition">
+          Entrar
+        </button>
+
+        <!-- Botão do Carrinho -->
+        <button onclick="toggleCart()" class="relative bg-green-500 hover:bg-green-400 text-gray-950 font-bold px-4 py-2 rounded-lg text-sm transition flex items-center gap-2">
+          🛒 Carrinho
+          <span id="cartCount" class="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-black w-5 h-5 rounded-full flex items-center justify-center hidden">0</span>
+        </button>
+      </div>
     </div>
   </header>
 
@@ -42,22 +51,28 @@
       Setup Recomendado
     </h3>
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div class="bg-gray-900 p-6 rounded-xl border border-gray-800 hover:border-blue-500/50 transition">
-            <h4 class="font-bold text-white mb-2">Mouse Gamer Redragon</h4>
-            <p class="text-gray-400 text-xs mb-4">Ergonomia e precisão.</p>
-            <span class="text-green-400 font-bold block mb-4">R$ 89,99</span>
+        <div class="bg-gray-900 p-6 rounded-xl border border-gray-800 hover:border-blue-500/50 transition flex flex-col justify-between">
+            <div>
+              <h4 class="font-bold text-white mb-2">Mouse Gamer Redragon</h4>
+              <p class="text-gray-400 text-xs mb-4">Ergonomia e precisão.</p>
+              <span class="text-green-400 font-bold block mb-4">R$ 89,99</span>
+            </div>
             <a href="https://www.amazon.com.br/Mouse-Redragon-Chroma-12400DPI-Bot%C3%B5es/dp/B07Q437WXK?linkCode=ll2&tag=comprajogos-20" target="_blank" class="block w-full text-center bg-blue-600 hover:bg-blue-500 py-2 rounded-lg text-sm font-bold transition">Ver na Amazon</a>
         </div>
-        <div class="bg-gray-900 p-6 rounded-xl border border-gray-800 hover:border-blue-500/50 transition">
-            <h4 class="font-bold text-white mb-2">Teclado Mecânico Kumara</h4>
-            <p class="text-gray-400 text-xs mb-4">Layout ABNT2 e switch brown.</p>
-            <span class="text-green-400 font-bold block mb-4">R$ 169,00</span>
+        <div class="bg-gray-900 p-6 rounded-xl border border-gray-800 hover:border-blue-500/50 transition flex flex-col justify-between">
+            <div>
+              <h4 class="font-bold text-white mb-2">Teclado Mecânico Kumara</h4>
+              <p class="text-gray-400 text-xs mb-4">Layout ABNT2 e switch brown.</p>
+              <span class="text-green-400 font-bold block mb-4">R$ 169,00</span>
+            </div>
             <a href="https://www.amazon.com.br/Teclado-Redragon-Kumara-Mec%C3%A2nico-PT-Brown/dp/B08F6QCG19?linkCode=ll2&tag=comprajogos-20" target="_blank" class="block w-full text-center bg-blue-600 hover:bg-blue-500 py-2 rounded-lg text-sm font-bold transition">Ver na Amazon</a>
         </div>
-        <div class="bg-gray-900 p-6 rounded-xl border border-gray-800 hover:border-blue-500/50 transition">
-            <h4 class="font-bold text-white mb-2">Headset Gamer Redragon</h4>
-            <p class="text-gray-400 text-xs mb-4">Conforto para longas horas.</p>
-            <span class="text-green-400 font-bold block mb-4">R$ 142,36</span>
+        <div class="bg-gray-900 p-6 rounded-xl border border-gray-800 hover:border-blue-500/50 transition flex flex-col justify-between">
+            <div>
+              <h4 class="font-bold text-white mb-2">Headset Gamer Redragon</h4>
+              <p class="text-gray-400 text-xs mb-4">Conforto para longas horas.</p>
+              <span class="text-green-400 font-bold block mb-4">R$ 142,36</span>
+            </div>
             <a href="https://www.amazon.com.br/Headset-Gamer-Redragon-Preto-H510-LT/dp/B0F1C3MRMF?linkCode=ll2&tag=comprajogos-20" target="_blank" class="block w-full text-center bg-blue-600 hover:bg-blue-500 py-2 rounded-lg text-sm font-bold transition">Ver na Amazon</a>
         </div>
     </div>
@@ -77,7 +92,151 @@
     </div>
   </main>
 
+  <!-- Modal do Carrinho -->
+  <div id="cartModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 hidden flex justify-end">
+    <div class="bg-gray-900 w-full max-w-md h-full p-6 flex flex-col justify-between border-l border-gray-800">
+      <div>
+        <div class="flex justify-between items-center mb-6 border-b border-gray-800 pb-4">
+          <h3 class="text-xl font-black text-white">Seu Carrinho</h3>
+          <button onclick="toggleCart()" class="text-gray-400 hover:text-white text-lg font-bold">✕</button>
+        </div>
+        <div id="cartItems" class="space-y-4 overflow-y-auto max-h-[60vh]">
+          <p class="text-gray-500 text-sm">Seu carrinho está vazio.</p>
+        </div>
+      </div>
+      <div class="border-t border-gray-800 pt-4">
+        <div class="flex justify-between items-center mb-4 text-lg font-bold">
+          <span>Total:</span>
+          <span id="cartTotal" class="text-green-400">$ 0.00</span>
+        </div>
+        <button onclick="finalizarCompra()" class="w-full bg-green-500 hover:bg-green-400 text-gray-950 font-bold py-3 rounded-xl transition">
+          Finalizar Pedido
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de Login -->
+  <div id="loginModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-gray-900 w-full max-w-md p-6 rounded-2xl border border-gray-800 relative">
+      <button onclick="fecharModalLogin()" class="absolute top-4 right-4 text-gray-400 hover:text-white font-bold">✕</button>
+      <h3 class="text-xl font-black mb-4 text-white">Identificação do Cliente</h3>
+      <form onsubmit="fazerLogin(event)" class="space-y-4">
+        <div>
+          <label class="block text-xs text-gray-400 mb-1">Seu E-mail</label>
+          <input type="email" id="loginEmail" required class="w-full bg-gray-800 border border-gray-700 rounded-lg p-3 text-white text-sm outline-none focus:border-green-500" placeholder="seu@email.com">
+        </div>
+        <button type="submit" class="w-full bg-green-500 hover:bg-green-400 text-gray-950 font-bold py-3 rounded-xl transition">
+          Entrar / Cadastrar
+        </button>
+      </form>
+    </div>
+  </div>
+
   <script>
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    let currentUser = localStorage.getItem('currentUser') || null;
+
+    function atualizarInterfaceUsuario() {
+      const btn = document.getElementById('userBtn');
+      if (currentUser) {
+        btn.innerText = currentUser.split('@')[0];
+        btn.className = "bg-green-500/10 text-green-400 border border-green-500/20 text-sm font-semibold px-4 py-2 rounded-lg transition";
+      }
+    }
+    atualizarInterfaceUsuario();
+
+    function abrirModalLogin() {
+      document.getElementById('loginModal').classList.remove('hidden');
+    }
+    function fecharModalLogin() {
+      document.getElementById('loginModal').classList.add('hidden');
+    }
+
+    function fazerLogin(event) {
+      event.preventDefault();
+      const email = document.getElementById('loginEmail').value;
+      localStorage.setItem('currentUser', email);
+      currentUser = email;
+      atualizarInterfaceUsuario();
+      fecharModalLogin();
+    }
+
+    function toggleCart() {
+      const modal = document.getElementById('cartModal');
+      modal.classList.toggle('hidden');
+      renderizarCarrinho();
+    }
+
+    function adicionarAoCarrinho(title, price, id) {
+      cart.push({ title, price: parseFloat(price), id });
+      localStorage.setItem('cart', JSON.stringify(cart));
+      atualizarContadorCarrinho();
+      alert(`"${title}" foi adicionado ao carrinho!`);
+    }
+
+    function atualizarContadorCarrinho() {
+      const counter = document.getElementById('cartCount');
+      if (cart.length > 0) {
+        counter.innerText = cart.length;
+        counter.classList.remove('hidden');
+      } else {
+        counter.classList.add('hidden');
+      }
+    }
+    atualizarContadorCarrinho();
+
+    function renderizarCarrinho() {
+      const container = document.getElementById('cartItems');
+      const totalContainer = document.getElementById('cartTotal');
+      
+      if (cart.length === 0) {
+        container.innerHTML = `<p class="text-gray-500 text-sm">Seu carrinho está vazio.</p>`;
+        totalContainer.innerText = "$ 0.00";
+        return;
+      }
+
+      let total = 0;
+      container.innerHTML = cart.map((item, index) => {
+        total += item.price;
+        return `
+          <div class="bg-gray-800/50 p-3 rounded-xl flex justify-between items-center border border-gray-800">
+            <div>
+              <h4 class="text-sm font-bold text-white line-clamp-1">${item.title}</h4>
+              <span class="text-xs text-green-400 font-bold">$ ${item.price.toFixed(2)}</span>
+            </div>
+            <button onclick="removerDoCarrinho(${index})" class="text-red-400 hover:text-red-300 text-xs font-bold px-2 py-1">Remover</button>
+          </div>
+        `;
+      }).join('');
+
+      totalContainer.innerText = `$ ${total.toFixed(2)}`;
+    }
+
+    function removerDoCarrinho(index) {
+      cart.splice(index, 1);
+      localStorage.setItem('cart', JSON.stringify(cart));
+      atualizarContadorCarrinho();
+      renderizarCarrinho();
+    }
+
+    function finalizarCompra() {
+      if (!currentUser) {
+        alert("Por favor, faça login antes de finalizar o pedido.");
+        abrirModalLogin();
+        return;
+      }
+      if (cart.length === 0) {
+        alert("Seu carrinho está vazio.");
+        return;
+      }
+      alert(`Pedido finalizado com sucesso para ${currentUser}! Redirecionando para o pagamento...`);
+      cart = [];
+      localStorage.removeItem('cart');
+      atualizarContadorCarrinho();
+      toggleCart();
+    }
+
     async function loadProducts() {
       const container = document.getElementById('catalog');
       try {
@@ -116,13 +275,22 @@
                   <span class="text-xs text-gray-500 line-through block">$ ${item.normalPrice}</span>
                   <span class="text-xl font-extrabold text-green-400">$ ${item.salePrice}</span>
                 </div>
-                <a 
-                  href="https://www.cheapshark.com/redirect?dealID=${item.dealID}" 
-                  target="_blank" 
-                  class="bg-green-500 hover:bg-green-400 text-gray-950 font-bold px-3 py-2 rounded-lg text-xs transition"
-                >
-                  Ver Oferta
-                </a>
+                <div class="flex gap-2">
+                  <button 
+                    onclick="adicionarAoCarrinho('${item.title.replace(/'/g, "")}', '${item.salePrice}', '${item.dealID}')" 
+                    class="bg-gray-800 hover:bg-green-500 hover:text-gray-950 text-gray-200 font-bold px-3 py-2 rounded-lg text-xs transition"
+                    title="Adicionar ao Carrinho"
+                  >
+                    🛒
+                  </button>
+                  <a 
+                    href="https://www.cheapshark.com/redirect?dealID=${item.dealID}" 
+                    target="_blank" 
+                    class="bg-green-500 hover:bg-green-400 text-gray-950 font-bold px-3 py-2 rounded-lg text-xs transition"
+                  >
+                    Ver Oferta
+                  </a>
+                </div>
               </div>
             </div>
 
