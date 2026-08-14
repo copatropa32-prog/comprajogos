@@ -35,28 +35,25 @@
     </div>
   </section>
 
-  <!-- Nova Seção: Setup Recomendado -->
+  <!-- Setup Recomendado -->
   <section class="container mx-auto py-10 px-4">
     <h3 class="text-xl font-bold mb-6 text-gray-200 flex items-center gap-2">
       <span class="w-2 h-2 rounded-full bg-blue-400"></span>
       Setup Recomendado
     </h3>
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <!-- Produto 1 -->
         <div class="bg-gray-900 p-6 rounded-xl border border-gray-800 hover:border-blue-500/50 transition">
             <h4 class="font-bold text-white mb-2">Mouse Gamer Redragon</h4>
             <p class="text-gray-400 text-xs mb-4">Ergonomia e precisão.</p>
             <span class="text-green-400 font-bold block mb-4">R$ 89,99</span>
             <a href="https://www.amazon.com.br/Mouse-Redragon-Chroma-12400DPI-Bot%C3%B5es/dp/B07Q437WXK?linkCode=ll2&tag=comprajogos-20" target="_blank" class="block w-full text-center bg-blue-600 hover:bg-blue-500 py-2 rounded-lg text-sm font-bold transition">Ver na Amazon</a>
         </div>
-        <!-- Produto 2 -->
         <div class="bg-gray-900 p-6 rounded-xl border border-gray-800 hover:border-blue-500/50 transition">
             <h4 class="font-bold text-white mb-2">Teclado Mecânico Kumara</h4>
             <p class="text-gray-400 text-xs mb-4">Layout ABNT2 e switch brown.</p>
             <span class="text-green-400 font-bold block mb-4">R$ 169,00</span>
             <a href="https://www.amazon.com.br/Teclado-Redragon-Kumara-Mec%C3%A2nico-PT-Brown/dp/B08F6QCG19?linkCode=ll2&tag=comprajogos-20" target="_blank" class="block w-full text-center bg-blue-600 hover:bg-blue-500 py-2 rounded-lg text-sm font-bold transition">Ver na Amazon</a>
         </div>
-        <!-- Produto 3 -->
         <div class="bg-gray-900 p-6 rounded-xl border border-gray-800 hover:border-blue-500/50 transition">
             <h4 class="font-bold text-white mb-2">Headset Gamer Redragon</h4>
             <p class="text-gray-400 text-xs mb-4">Conforto para longas horas.</p>
@@ -66,7 +63,7 @@
     </div>
   </section>
 
-  <!-- Catálogo de Jogos -->
+  <!-- Destaques do Dia -->
   <main class="container mx-auto py-10 px-4">
     <h3 class="text-xl font-bold mb-6 text-gray-200 flex items-center gap-2">
       <span class="w-2 h-2 rounded-full bg-green-400"></span>
@@ -84,11 +81,11 @@
     async function loadProducts() {
       const container = document.getElementById('catalog');
       try {
-        const res = await fetch('/api/products');
+        const res = await fetch('https://www.cheapshark.com/api/1.0/deals?storeID=1&upperPrice=50&pageSize=12');
         const products = await res.json();
 
-        if (products.error) {
-          container.innerHTML = `<p class="text-red-400 col-span-full">Erro: ${products.error}</p>`;
+        if (!Array.isArray(products) || products.length === 0) {
+          container.innerHTML = `<p class="text-gray-400 col-span-full">Nenhuma oferta encontrada no momento.</p>`;
           return;
         }
 
@@ -97,9 +94,9 @@
             
             <div class="relative bg-gray-950 h-40 overflow-hidden flex items-center justify-center">
               <img src="${item.thumb}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" />
-              ${item.savings > 0 ? `
+              ${parseFloat(item.savings) > 0 ? `
                 <span class="absolute top-2 right-2 bg-green-500 text-gray-950 text-xs font-black px-2 py-1 rounded">
-                  -${item.savings}%
+                  -${Math.round(item.savings)}%
                 </span>
               ` : ''}
             </div>
@@ -109,8 +106,8 @@
                 <h4 class="font-bold text-base text-gray-100 line-clamp-2 mb-1 group-hover:text-green-400 transition">
                   ${item.title}
                 </h4>
-                ${item.rating ? `
-                  <p class="text-xs text-gray-400">👍 ${item.rating}% avaliações positivas</p>
+                ${item.steamRatingPercent ? `
+                  <p class="text-xs text-gray-400">👍 ${item.steamRatingPercent}% avaliações positivas</p>
                 ` : ''}
               </div>
 
@@ -120,7 +117,7 @@
                   <span class="text-xl font-extrabold text-green-400">$ ${item.salePrice}</span>
                 </div>
                 <a 
-                  href="https://www.cheapshark.com/redirect?dealID=${item.id}" 
+                  href="https://www.cheapshark.com/redirect?dealID=${item.dealID}" 
                   target="_blank" 
                   class="bg-green-500 hover:bg-green-400 text-gray-950 font-bold px-3 py-2 rounded-lg text-xs transition"
                 >
