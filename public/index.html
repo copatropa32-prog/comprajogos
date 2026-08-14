@@ -16,53 +16,54 @@
         Compra<span class="text-white">Jogos</span><span class="text-xs text-gray-500 font-normal">.com.br</span>
       </h1>
       
-      <!-- Busca de Jogos Grátis -->
+      <!-- Busca de Jogos -->
       <div class="w-full sm:w-auto">
-        <input type="text" id="searchInput" placeholder="Filtrar jogos gratuitos..." oninput="renderizarJogosGrátis()" class="bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 text-sm text-white w-full sm:w-64 focus:ring-2 focus:ring-green-500 outline-none">
+        <input type="text" id="searchInput" placeholder="Buscar por título..." oninput="filtrarEFiltrarJogos()" class="bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 text-sm text-white w-full sm:w-64 focus:ring-2 focus:ring-green-500 outline-none">
       </div>
     </div>
   </header>
 
   <!-- Banner -->
-  <section class="py-12 bg-gradient-to-b from-gray-900 to-gray-950 text-center border-b border-gray-800/50">
+  <section class="py-10 bg-gradient-to-b from-gray-900 to-gray-950 text-center border-b border-gray-800/50">
     <div class="container mx-auto px-4">
       <span class="bg-green-500/10 text-green-400 text-xs font-bold px-3 py-1 rounded-full border border-green-500/20 uppercase tracking-widest">
-        🔥 Ofertas em Tempo Real & Free-to-Play
+        🔥 Catálogo Unificado & Tempo Real
       </span>
       <h2 class="text-4xl sm:text-5xl font-black mt-4 mb-2 tracking-tight">As Melhores Keys e Jogos</h2>
       <p class="text-gray-400 max-w-xl mx-auto text-sm sm:text-base">
-        Sincronizado automaticamente com descontos do mercado e os melhores títulos gratuitos.
+        Explore mais de 120 ofertas e jogos gratuitos filtrados por tipo e gênero.
       </p>
     </div>
   </section>
 
-  <!-- Destaques do Dia (CheapShark API em Reais) -->
-  <main class="container mx-auto py-10 px-4">
-    <h3 class="text-xl font-bold mb-6 text-gray-200 flex items-center gap-2">
-      <span class="w-2 h-2 rounded-full bg-green-400"></span>
-      Destaques de Ofertas & Keys (Em Reais)
-    </h3>
-    
+  <!-- Filtros e Barra de Gêneros -->
+  <section class="container mx-auto px-4 py-6">
+    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-gray-900/60 p-4 rounded-xl border border-gray-800">
+      
+      <!-- Filtro Tipo (Pagos vs Gratuitos) -->
+      <div class="flex items-center gap-2 flex-wrap">
+        <span class="text-xs text-gray-400 font-bold uppercase tracking-wider mr-2">Tipo:</span>
+        <button onclick="mudarTipo('all', this)" class="tipo-btn px-3 py-1.5 rounded-lg text-xs font-bold transition bg-green-500 text-gray-950">Todos</button>
+        <button onclick="mudarTipo('paid', this)" class="tipo-btn px-3 py-1.5 rounded-lg text-xs font-bold transition bg-gray-800 text-gray-300 hover:bg-gray-700">Com Desconto / Pagos</button>
+        <button onclick="mudarTipo('free', this)" class="tipo-btn px-3 py-1.5 rounded-lg text-xs font-bold transition bg-gray-800 text-gray-300 hover:bg-gray-700">Gratuitos (F2P)</button>
+      </div>
+
+    </div>
+
+    <!-- Barra de Gêneros Horizontal -->
+    <div id="genre-bar" class="flex items-center gap-2 overflow-x-auto py-3 mt-3 scrollbar-thin scrollbar-thumb-gray-800">
+      <button onclick="mudarGenero('all', this)" class="genre-btn whitespace-nowrap px-3 py-1.5 rounded-lg text-xs font-semibold bg-green-500 text-gray-950 transition">Todos os Gêneros</button>
+    </div>
+  </section>
+
+  <!-- Grade de Jogos Unificada -->
+  <main class="container mx-auto py-6 px-4">
     <div id="catalog" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
       <div class="bg-gray-900 border border-gray-800 p-8 rounded-xl animate-pulse flex items-center justify-center text-gray-500 col-span-full">
-        Buscando cotação e melhores ofertas...
+        Sincronizando e carregando catálogo completo de 120 jogos...
       </div>
     </div>
   </main>
-
-  <!-- Jogos Gratuitos (FreeToGame API) -->
-  <section class="container mx-auto py-10 px-4 border-t border-gray-800/80">
-    <h3 class="text-xl font-bold mb-6 text-gray-200 flex items-center gap-2">
-      <span class="w-2 h-2 rounded-full bg-purple-400"></span>
-      Jogos Gratuitos Disponíveis (Free-to-Play)
-    </h3>
-    
-    <div id="games-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-      <div class="bg-gray-900 border border-gray-800 p-8 rounded-xl animate-pulse flex items-center justify-center text-gray-500 col-span-full">
-        Carregando catálogo gratuito...
-      </div>
-    </div>
-  </section>
 
   <!-- Rodapé -->
   <footer class="border-t border-gray-800 bg-gray-900 py-12 mt-12">
@@ -82,82 +83,149 @@
   </footer>
 
   <script>
-    async function loadProducts() {
+    let catalogoGlobal = [];
+    let tipoAtual = 'all';
+    let generoAtual = 'all';
+
+    async function carregarTudo() {
       const container = document.getElementById('catalog');
       try {
+        // 1. Cotação do Dólar
         const cotacaoRes = await fetch('https://economia.awesomeapi.com.br/json/last/USD-BRL');
         const cotacaoData = await cotacaoRes.json();
         const dolarTaxa = parseFloat(cotacaoData.USDBRL.bid) || 5.50;
 
-        // Aumentado para 60 ofertas da CheapShark
-        const res = await fetch('https://www.cheapshark.com/api/1.0/deals?storeID=1&upperPrice=50&pageSize=60');
-        const products = await res.json();
+        // 2. Buscar 60 Jogos Pagos/Com Desconto (CheapShark)
+        const resPaid = await fetch('https://www.cheapshark.com/api/1.0/deals?storeID=1&upperPrice=50&pageSize=60');
+        const paidData = await resPaid.json();
+        
+        const paidFormatted = paidData.map(item => {
+          const saleBRL = (parseFloat(item.salePrice) * dolarTaxa).toFixed(2);
+          const normalBRL = (parseFloat(item.normalPrice) * dolarTaxa).toFixed(2);
+          return {
+            title: item.title,
+            type: 'paid',
+            genre: 'PC Key / Oferta',
+            image: item.thumb,
+            salePrice: parseFloat(saleBRL),
+            normalPrice: parseFloat(normalBRL),
+            saleFormatted: `R$ ${saleBRL.replace('.', ',')}`,
+            normalFormatted: `R$ ${normalBRL.replace('.', ',')}`,
+            savings: Math.round(item.savings || 0),
+            url: `https://www.cheapshark.com/redirect?dealID=${item.dealID}`
+          };
+        });
 
-        container.innerHTML = products.map(item => {
-          const salePriceBRL = (parseFloat(item.salePrice) * dolarTaxa).toFixed(2);
-          const normalPriceBRL = (parseFloat(item.normalPrice) * dolarTaxa).toFixed(2);
-          return `
-            <div class="bg-gray-900 rounded-xl overflow-hidden border border-gray-800 hover:border-green-500/50 transition flex flex-col justify-between group">
-              <div class="relative bg-gray-950 h-40 overflow-hidden flex items-center justify-center">
-                <img src="${item.thumb}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" />
-                ${parseFloat(item.savings) > 0 ? `<span class="absolute top-2 right-2 bg-green-500 text-gray-950 text-xs font-black px-2 py-1 rounded">-${Math.round(item.savings)}%</span>` : ''}
-              </div>
-              <div class="p-4 flex-1 flex flex-col justify-between">
-                <div>
-                  <h4 class="font-bold text-base text-gray-100 line-clamp-2 mb-1 group-hover:text-green-400 transition">${item.title}</h4>
-                </div>
-                <div class="flex justify-between items-end mt-6 border-t border-gray-800/80 pt-3">
-                  <div>
-                    <span class="text-xs text-gray-500 line-through block">R$ ${normalPriceBRL.replace('.', ',')}</span>
-                    <span class="text-xl font-extrabold text-green-400">R$ ${salePriceBRL.replace('.', ',')}</span>
-                  </div>
-                  <a href="https://www.cheapshark.com/redirect?dealID=${item.dealID}" target="_blank" class="bg-green-500 hover:bg-green-400 text-gray-950 font-bold px-4 py-2 rounded-lg text-xs transition">Ver Oferta</a>
-                </div>
-              </div>
-            </div>
-          `;
-        }).join('');
-      } catch (err) {
-        container.innerHTML = `<p class="text-red-400 col-span-full">Erro ao carregar ofertas.</p>`;
-      }
-    }
-
-    let todosJogosGratuitos = [];
-    async function carregarJogosGratuitos() {
-      try {
-        const response = await fetch('https://www.freetogame.com/api/games');
-        const data = await response.json();
-        // Aumentado para 60 jogos gratuitos da FreeToGame
-        todosJogosGratuitos = data.slice(0, 60).map(jogo => ({
-          title: jogo.title, category: jogo.genre, image: jogo.thumbnail, url: jogo.game_url
+        // 3. Buscar 60 Jogos Gratuitos (FreeToGame)
+        const resFree = await fetch('https://www.freetogame.com/api/games');
+        const freeData = await resFree.json();
+        
+        const freeFormatted = freeData.slice(0, 60).map(item => ({
+          title: item.title,
+          type: 'free',
+          genre: item.genre || 'Free-to-Play',
+          image: item.thumbnail,
+          salePrice: 0,
+          normalPrice: 0,
+          saleFormatted: 'Gratuito',
+          normalFormatted: '',
+          savings: 100,
+          url: item.game_url
         }));
-        renderizarJogosGrátis();
-      } catch (e) {
-        document.getElementById('games-grid').innerHTML = "<p class='text-red-400 col-span-full'>Erro ao carregar jogos.</p>";
+
+        // Combinar os dois catálogos (~120 jogos)
+        catalogoGlobal = [...paidFormatted, ...freeFormatted];
+
+        // Montar a barra de gêneros dinamicamente
+        construirBarraGeneros();
+
+        // Renderizar inicial
+        filtrarEFiltrarJogos();
+
+      } catch (err) {
+        container.innerHTML = `<p class="text-red-400 col-span-full">Erro ao carregar o catálogo de jogos.</p>`;
       }
     }
 
-    function renderizarJogosGrátis() {
-      const busca = document.getElementById('searchInput').value.toLowerCase();
-      const grid = document.getElementById('games-grid');
-      grid.innerHTML = '';
-      todosJogosGratuitos.filter(j => j.title.toLowerCase().includes(busca)).forEach(jogo => {
-        const card = document.createElement('div');
-        card.className = "bg-gray-900 p-4 rounded-xl border border-gray-800 hover:border-purple-500 transition-all flex flex-col justify-between";
-        card.innerHTML = `
-          <div>
-            <img src="${jogo.image}" class="rounded-lg mb-3 w-full h-36 object-cover">
-            <h4 class="text-sm font-bold text-white mb-1">${jogo.title}</h4>
-            <span class="text-xs bg-purple-500/10 text-purple-400 px-2 py-0.5 rounded border border-purple-500/20">${jogo.category}</span>
-          </div>
-          <a href="${jogo.url}" target="_blank" class="block w-full text-center bg-purple-600 hover:bg-purple-500 py-2 rounded-lg text-xs font-bold transition mt-4">Jogar Grátis</a>
-        `;
-        grid.appendChild(card);
+    function construirBarraGeneros() {
+      const bar = document.getElementById('genre-bar');
+      const generosUnicos = [...new Set(catalogoGlobal.map(j => j.genre))].sort();
+
+      generosUnicos.forEach(g => {
+        const btn = document.createElement('button');
+        btn.className = "genre-btn whitespace-nowrap px-3 py-1.5 rounded-lg text-xs font-semibold bg-gray-800 text-gray-300 hover:bg-gray-700 transition";
+        btn.innerText = g;
+        btn.onclick = () => mudarGenero(g, btn);
+        bar.appendChild(btn);
       });
     }
 
-    loadProducts();
-    carregarJogosGratuitos();
+    function mudarTipo(tipo, el) {
+      tipoAtual = tipo;
+      document.querySelectorAll('.tipo-btn').forEach(b => {
+        b.className = "tipo-btn px-3 py-1.5 rounded-lg text-xs font-bold transition bg-gray-800 text-gray-300 hover:bg-gray-700";
+      });
+      el.className = "tipo-btn px-3 py-1.5 rounded-lg text-xs font-bold transition bg-green-500 text-gray-950";
+      filtrarEFiltrarJogos();
+    }
+
+    function mudarGenero(genero, el) {
+      generoAtual = genero;
+      document.querySelectorAll('.genre-btn').forEach(b => {
+        b.className = "genre-btn whitespace-nowrap px-3 py-1.5 rounded-lg text-xs font-semibold bg-gray-800 text-gray-300 hover:bg-gray-700 transition";
+      });
+      el.className = "genre-btn whitespace-nowrap px-3 py-1.5 rounded-lg text-xs font-semibold bg-green-500 text-gray-950 transition";
+      filtrarEFiltrarJogos();
+    }
+
+    function filtrarEFiltrarJogos() {
+      const busca = document.getElementById('searchInput').value.toLowerCase();
+      const container = document.getElementById('catalog');
+
+      const filtrados = catalogoGlobal.filter(jogo => {
+        const matchBusca = jogo.title.toLowerCase().includes(busca);
+        const matchTipo = tipoAtual === 'all' || jogo.type === tipoAtual;
+        const matchGenero = generoAtual === 'all' || jogo.genre === generoAtual;
+        return matchBusca && matchTipo && matchGenero;
+      });
+
+      if (filtrados.length === 0) {
+        container.innerHTML = `<div class="bg-gray-900 border border-gray-800 p-8 rounded-xl text-center text-gray-400 col-span-full">Nenhum jogo encontrado com esses filtros.</div>`;
+        return;
+      }
+
+      container.innerHTML = filtrados.map(item => `
+        <div class="bg-gray-900 rounded-xl overflow-hidden border border-gray-800 hover:border-green-500/50 transition flex flex-col justify-between group">
+          <div class="relative bg-gray-950 h-40 overflow-hidden flex items-center justify-center">
+            <img src="${item.image}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" />
+            <span class="absolute top-2 left-2 bg-black/70 backdrop-blur text-[10px] font-bold px-2 py-0.5 rounded text-gray-300 uppercase">${item.genre}</span>
+            ${item.savings > 0 && item.type === 'paid' ? `<span class="absolute top-2 right-2 bg-green-500 text-gray-950 text-xs font-black px-2 py-1 rounded">-${item.savings}%</span>` : ''}
+            ${item.type === 'free' ? `<span class="absolute top-2 right-2 bg-purple-500 text-white text-xs font-black px-2 py-1 rounded">Grátis</span>` : ''}
+          </div>
+          <div class="p-4 flex-1 flex flex-col justify-between">
+            <div>
+              <h4 class="font-bold text-base text-gray-100 line-clamp-2 mb-1 group-hover:text-green-400 transition">${item.title}</h4>
+            </div>
+            <div class="flex justify-between items-end mt-6 border-t border-gray-800/80 pt-3">
+              <div>
+                ${item.type === 'paid' ? `
+                  <span class="text-xs text-gray-500 line-through block">${item.normalFormatted}</span>
+                  <span class="text-xl font-extrabold text-green-400">${item.saleFormatted}</span>
+                ` : `
+                  <span class="text-xs text-gray-400 block">Jogue agora</span>
+                  <span class="text-lg font-extrabold text-purple-400">Free-to-Play</span>
+                `}
+              </div>
+              <a href="${item.url}" target="_blank" class="${item.type === 'paid' ? 'bg-green-500 hover:bg-green-400 text-gray-950' : 'bg-purple-600 hover:bg-purple-500 text-white'} font-bold px-4 py-2 rounded-lg text-xs transition">
+                ${item.type === 'paid' ? 'Ver Oferta' : 'Jogar Grátis'}
+              </a>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    carregarTudo();
   </script>
 </body>
 </html>
