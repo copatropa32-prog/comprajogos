@@ -99,20 +99,40 @@
 
   <!-- Rodapé -->
   <footer class="border-t border-slate-800/80 bg-[#07090f] py-12 mt-12">
-    <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-8">
+    <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8">
         <div>
             <h4 class="font-black text-white mb-3 uppercase text-xs tracking-widest text-emerald-400">Sobre o CompraJogos</h4>
-            <p class="text-slate-400 text-sm leading-relaxed max-w-md">
+            <p class="text-slate-400 text-sm leading-relaxed mb-4">
                 O CompraJogos é um portal especializado em curadoria de chaves de PC e jogos gratuitos com os melhores preços do mercado.
             </p>
+            <button onclick="abrirModal('sobre')" class="text-xs text-emerald-400 hover:underline font-bold">Ler mais sobre nós &rarr;</button>
         </div>
         <div>
-            <h4 class="font-black text-white mb-3 uppercase text-xs tracking-widest text-emerald-400">Contato & Parcerias</h4>
-            <p class="text-slate-400 text-sm mb-2">Dúvidas ou parcerias comerciais:</p>
-            <a href="mailto:contato@comprajogos.com.br" class="text-emerald-400 hover:underline font-bold text-sm">contato@comprajogos.com.br</a>
+            <h4 class="font-black text-white mb-3 uppercase text-xs tracking-widest text-emerald-400">Políticas e Termos</h4>
+            <ul class="space-y-2 text-sm">
+                <li><button onclick="abrirModal('privacidade')" class="text-slate-400 hover:text-emerald-400 transition">Política de Privacidade</button></li>
+                <li><button onclick="abrirModal('termos')" class="text-slate-400 hover:text-emerald-400 transition">Termos de Uso</button></li>
+            </ul>
+        </div>
+        <div>
+            <h4 class="font-black text-white mb-3 uppercase text-xs tracking-widest text-emerald-400">Contato & Afiliados</h4>
+            <p class="text-slate-400 text-sm mb-2">Suporte: <a href="mailto:contato@comprajogos.com.br" class="text-emerald-400 hover:underline font-bold">contato@comprajogos.com.br</a></p>
+            <p class="text-[11px] text-slate-500 leading-relaxed mt-4 border-t border-slate-800/80 pt-3">
+                <strong>Aviso de Isenção:</strong> O CompraJogos participa de programas de afiliados. Podemos receber comissões por compras realizadas através dos links indicados, sem custo adicional para você.
+            </p>
         </div>
     </div>
   </footer>
+
+  <!-- Modal Genérico -->
+  <div id="modalContainer" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="bg-[#0c0e17] border border-slate-800 rounded-2xl max-w-2xl w-full max-h-[85vh] overflow-y-auto p-6 sm:p-8 shadow-2xl relative">
+      <button onclick="fecharModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-xl font-bold bg-slate-800/50 hover:bg-slate-800 w-8 h-8 rounded-full flex items-center justify-center transition">&times;</button>
+      <div id="modalContent" class="text-slate-300 text-sm leading-relaxed space-y-4">
+        <!-- Conteúdo injetado via JS -->
+      </div>
+    </div>
+  </div>
 
   <script>
     let catalogoGlobal = [];
@@ -126,7 +146,6 @@
         const cotacaoData = await cotacaoRes.json();
         const dolarTaxa = parseFloat(cotacaoData.USDBRL.bid) || 5.50;
 
-        // Buscando 90 jogos pagos na API do CheapShark
         const resPaid = await fetch('https://www.cheapshark.com/api/1.0/deals?storeID=1&upperPrice=50&pageSize=90');
         const paidData = await resPaid.json();
         
@@ -147,7 +166,6 @@
           };
         });
 
-        // Buscando 90 jogos gratuitos na API FreeToGame
         const resFree = await fetch('https://www.freetogame.com/api/games');
         const freeData = await resFree.json();
         
@@ -219,7 +237,7 @@
       document.querySelectorAll('.genre-btn').forEach(b => {
         b.className = "genre-btn whitespace-nowrap px-3.5 py-1.5 rounded-xl text-xs font-semibold transition bg-slate-800/80 text-slate-300 hover:bg-slate-700 border border-slate-700/50";
       });
-      el.className = "genre-btn whitespace-nowrap px-3.5 py-1.5 rounded-xl text-xs font-semibold transition bg-emerald-500 text-slate-950 font-bold shadow-md shadow-emerald-500/20";
+      el.className = "genre-btn whitespace-nowrap px-3.5 py-1.5 rounded-xl text-xs font-bold transition bg-emerald-500 text-slate-950 font-bold shadow-md shadow-emerald-500/20";
       
       filtrarEFiltrarJogos();
     }
@@ -270,6 +288,50 @@
           </div>
         </div>
       `).join('');
+    }
+
+    // Controle de Modais Institucionais
+    const textosModais = {
+      sobre: `
+        <h3 class="text-xl font-bold text-white mb-2">Sobre o CompraJogos</h3>
+        <p>O <strong>CompraJogos.com.br</strong> é um portal especializado em curadoria e agregação de ofertas de chaves de jogos para PC (keys) e jogos gratuitos (Free-to-Play).</p>
+        <p><strong>Idealizadora:</strong> O projeto foi idealizado por <em>Beatriz Marcondes Cesar</em> com o propósito de conectar jogadores aos melhores preços e promoções do mercado digital de forma ágil, segura e centralizada.</p>
+        <p>Nosso objetivo principal é simplificar a busca por entretenimento digital de qualidade, permitindo que a comunidade encontre descontos expressivos e novidades sem complicações.</p>
+      `,
+      privacidade: `
+        <h3 class="text-xl font-bold text-white mb-2">Política de Privacidade</h3>
+        <p>A sua privacidade é importante para nós. O CompraJogos.com.br segue diretrizes rígidas de proteção de dados.</p>
+        <p><strong>Uso de Cookies e Anúncios:</strong> Utilizamos serviços de terceiros, como o Google AdSense, para exibir anúncios relevantes aos visitantes. O Google pode usar cookies (como o cookie DART) para exibir anúncios com base em suas visitas a este e a outros sites na internet.</p>
+        <p>Você pode desativar o uso do cookie DART visitando a política de privacidade da rede de conteúdo e dos anúncios do Google.</p>
+        <p>Não coletamos informações pessoais sensíveis diretamente em nosso banco de dados sem o seu consentimento explícito.</p>
+      `,
+      termos: `
+        <h3 class="text-xl font-bold text-white mb-2">Termos de Uso</h3>
+        <p>Ao acessar o site <strong>CompraJogos.com.br</strong>, você concorda em cumprir estes termos de serviço, todas as leis e regulamentos aplicáveis.</p>
+        <p><strong>Isenção de Responsabilidade sobre Preços e Links:</strong> Os preços, descontos e disponibilidades dos jogos exibidos em nosso catálogo são obtidos em tempo real através de APIs parceiras e podem sofrer alterações por parte das lojas oficiais a qualquer momento. O CompraJogos atua como agregador e redirecionador, não realizando a venda direta dos produtos digitais.</p>
+      `
+    };
+
+    function abrirModal(tipo) {
+      const modal = document.getElementById('modalContainer');
+      const content = document.getElementById('modalContent');
+      content.innerHTML = textosModais[tipo] || '<p>Conteúdo não encontrado.</p>';
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function fecharModal() {
+      const modal = document.getElementById('modalContainer');
+      modal.classList.remove('flex');
+      modal.classList.add('hidden');
+    }
+
+    // Fechar ao clicar fora do modal
+    window.onclick = function(event) {
+      const modal = document.getElementById('modalContainer');
+      if (event.target === modal) {
+        fecharModal();
+      }
     }
 
     carregarTudo();
